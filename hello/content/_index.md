@@ -17,6 +17,12 @@ You can learn more about me here. I sometimes share my new learnings here and [m
 * Achieved 13% improvement in overall response times by leveraging customized parsing algorithms.
 * Designed & Developed architecture for the high scale real-time ad targeting.
 
+{{< experience company="Simpl" position="Software Engineer II" period="Jan 2022 – Present" >}}
+* {{< highlight >}}Developed sub-second{{</highlight>}} user segmentation solution for high-scale; high-performance targeted campaigns.
+* Identified and established foundational frameworks to streamline project kick-off times, facilitating faster development cycles across teams.
+* Achieved 13% improvement in overall response times by leveraging customized parsing algorithms.
+* Designed & Developed architecture for the high scale real-time ad targeting.
+
 # A match made in heaven
 
 There is a website obesity crisis. Bloated websites full of scripts, ads, and trackers are slowing your readers down every time they try to read your well-crafted content.
