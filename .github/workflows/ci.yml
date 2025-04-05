@@ -15,9 +15,11 @@ jobs:
       uses: peaceiris/actions-hugo@v3
       with:
         hugo-version: 'latest'
-
+    - name: ls
+      run: ls
+    
     - name: 🛠️ Build Hugo site
-      run: hugo --minify --gc --source ./hello --destination ./hello/public --baseURL https://goyal-aman.github.io/hello/
+      run: hugo --minify --gc --source ./hello 
 
     - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
