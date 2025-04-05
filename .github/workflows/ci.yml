@@ -1,54 +1,27 @@
-name: CI
-
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Change if your default branch is not main
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3.0.0
-        with:
-          hugo-version: latest
+    - name: 📦 Setup Hugo
+      uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: 'latest'
 
-      - name: Build site
-        run: hugo --minify --gc --destination ./hello/public --source ./hello --baseURL https://janraasch.github.io/hugo-bearblog/
+    - name: 🛠️ Build Hugo site
+      run: hugo --minify --gc --source ./hello --destination ./hello/public --baseURL https://goyal-aman.github.io/hello/
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: ./hello/public
-
-  deploy:
-    needs: build
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: ./hello/public
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4.0.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./hello/public
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./hello/public
+        publish_branch: gh-pages
