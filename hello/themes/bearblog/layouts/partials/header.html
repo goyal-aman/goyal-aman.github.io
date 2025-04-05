@@ -1,4 +1,17 @@
-<a href="{{ "" | relURL }}" class="title">
-  <h2>{{ .Site.Title }}</h2>
-</a>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+  <a href="{{ "" | relURL }}" class="title">
+    <h2>{{ .Site.Title }}</h2>
+  </a>
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://medium.com/@YOUR_MEDIUM" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+  </div>
+</header>
 <nav>{{- partial "nav.html" . -}}</nav>
