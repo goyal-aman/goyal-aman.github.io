@@ -37,5 +37,12 @@
       <guid>http://localhost:1313/load-balancer-vs.-api-gateway-understanding-the-differences/</guid>
       <description>TLDR; API Gateway can provide caching, logging auth and load balancer distributes traffic between 2 or more servers for high-availability and horizontal scaling.&#xA;Both load balancer and Api gateways are used between web clients and web servers. But they have served different purpose, that is to say, they are not interchangeable.&#xA;Load Balancers Core function of load balancer is to distribute traffic. They receive traffic from web client’s and distribute them between 2 or more web servers.</description>
     </item>
+    <item>
+      <title>Storing Values within Index</title>
+      <link>http://localhost:1313/storing-values-within-index/</link>
+      <pubDate>Mon, 09 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/storing-values-within-index/</guid>
+      <description>Relational databases can have one primary index and any number of secondary indexes. When queries uses indexes they use keys in the index to find values. There are two ways to have values&#xA;Store actual row in index Store reference to rows in index Storing references to rows in index is a good when there are any secondary indexes. In this way when a value needs to be updated in row, it can be updated in one place and all the indexes can refer to that one value.</description>
+    </item>
   </channel>
 </rss>
