@@ -6,6 +6,7 @@ tags = [
     "Distributed Locks",
     "Locks"
 ]
+cover = "/images/distributed_lock_2.png"
 +++
 ---
 

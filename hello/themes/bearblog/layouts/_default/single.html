@@ -9,6 +9,12 @@
   </i>
 </p>
 {{ end }}{{ end }}
+
+{{ if .Params.cover }}
+  <img class="cover" src="{{ .Params.cover }}" alt="" />
+{{ end }}
+
+
 <content>
   {{ .Content }}
 </content>
