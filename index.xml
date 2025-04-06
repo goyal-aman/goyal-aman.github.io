@@ -7,4 +7,9 @@
 &lt;p>Imagine scenario of an admin is updating an email group by uploading a file. The process works like this:&lt;/p>
 &lt;p>All existing users in the group are removed.
 New users listed in the file are added in batches (e.g., 10,000 at a time).
-Seems straightforward, right? But now, consider what happens if another file is uploaded while the first one is still being processed.&lt;/p></description></item></channel></rss>
+Seems straightforward, right? But now, consider what happens if another file is uploaded while the first one is still being processed.&lt;/p></description></item><item><title>Understanding OLAP and OLTP</title><link>https://goyal-aman.github.io/understanding-olap-and-oltp/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/understanding-olap-and-oltp/</guid><description>&lt;hr>
+&lt;h1 id="tldr">TLDR;&lt;/h1>
+&lt;p>Any database falls into one of two category OLAP or OLTP — depending on the access pattern for which it is optimised&lt;/p>
+&lt;h1 id="key-differences-olap-vs-oltp">Key differences: OLAP vs. OLTP&lt;/h1>
+&lt;p>The primary purpose of online analytical processing (OLAP) is to analyse aggregated data, while the primary purpose of online transaction processing (OLTP) is to process database transactions.&lt;/p>
+&lt;p>You use OLAP systems to generate reports, perform complex data analysis, and identify trends. In contrast, you use OLTP systems to process orders, update inventory, and manage customer accounts.&lt;/p></description></item></channel></rss>
