@@ -52,3 +52,10 @@ ignoreErrors = ["error-disable-taxonomy"]
   # dateFormat = "2006-01-02"
 
 relativeURLs = true
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "monokai"  # or 'github', 'dracula', etc.
+[markup.goldmark.renderer]
+  unsafe = true

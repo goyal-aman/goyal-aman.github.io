@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Distributed Locks on Aman Goyal</title>
+    <link>http://localhost:1313/blog/distributed-locks/</link>
+    <description>Recent content in Distributed Locks on Aman Goyal</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Mon, 30 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/distributed-locks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distributed Locks - Naive</title>
+      <link>http://localhost:1313/distributed-locks-naive/</link>
+      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/distributed-locks-naive/</guid>
+      <description>Locks are used by processes to acquire exclusive access to resource which are shared among many processes. Exclusive access is required to prevent race conditions which hard debug and nightmare to detect.&#xA;Imagine scenario of an admin is updating an email group by uploading a file. The process works like this:&#xA;All existing users in the group are removed. New users listed in the file are added in batches (e.</description>
+    </item>
+  </channel>
+</rss>
