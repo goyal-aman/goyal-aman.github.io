@@ -2,4 +2,9 @@
 &lt;h1 id="tldr">TL;DR&lt;/h1>
 &lt;p>Amazon DocumentDB load-balances traffic at the TCP connection level rather than at the request level. This can lead to unexpected resource distribution issues, particularly when scaling read replicas under high load. The solution? Restarting application pods to establish new TCP connections that are evenly distributed across replicas.&lt;/p>
 &lt;h1 id="understanding-the-load-balancing-issue">Understanding the Load Balancing Issue&lt;/h1>
-&lt;p>In a typical Amazon DocumentDB cluster, there is a primary node that handles all write operations and one or more read replicas to distribute read traffic. During our load testing, we observed that a single read replica was hitting over 90% CPU utilization due to high read requests.&lt;/p></description></item></channel></rss>
+&lt;p>In a typical Amazon DocumentDB cluster, there is a primary node that handles all write operations and one or more read replicas to distribute read traffic. During our load testing, we observed that a single read replica was hitting over 90% CPU utilization due to high read requests.&lt;/p></description></item><item><title>Distributed Locks - Naive</title><link>https://goyal-aman.github.io/distributed-locks-naive/</link><pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/distributed-locks-naive/</guid><description>&lt;hr>
+&lt;p>Locks are used by processes to acquire exclusive access to resource which are shared among many processes. Exclusive access is required to prevent race conditions which hard debug and nightmare to detect.&lt;/p>
+&lt;p>Imagine scenario of an admin is updating an email group by uploading a file. The process works like this:&lt;/p>
+&lt;p>All existing users in the group are removed.
+New users listed in the file are added in batches (e.g., 10,000 at a time).
+Seems straightforward, right? But now, consider what happens if another file is uploaded while the first one is still being processed.&lt;/p></description></item></channel></rss>
