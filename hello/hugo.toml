@@ -53,6 +53,9 @@ ignoreErrors = ["error-disable-taxonomy"]
 
 relativeURLs = true
 
+# controls number of latest blogs visible on home page.
+latestPostCount = 15
+
 [markup]
   [markup.highlight]
     noClasses = false

@@ -1,6 +1,7 @@
 <h2>Latest Posts</h2>
 <ul>
-  {{ range first 15 (where .Site.RegularPages "Section" "blog") }}
+  {{ $count := .Site.Params.latestPostCount }}
+  {{ range first $count (where .Site.RegularPages "Section" "blog") }}
     <li>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
       <small> — {{ .Date.Format "Jan 2, 2006" }}</small>
