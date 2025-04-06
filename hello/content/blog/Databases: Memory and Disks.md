@@ -7,6 +7,7 @@ tags = [
     "Disk",
     "Memory"
 ]
+cover = "/images/database_disk_and_memory.png"
 +++
 ---
 
