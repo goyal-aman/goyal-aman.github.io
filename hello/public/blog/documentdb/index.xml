@@ -14,7 +14,7 @@
       <link>http://localhost:1313/documentdb-load-balancing-a-key-learning-from-our-load-testing/</link>
       <pubDate>Wed, 26 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/documentdb-load-balancing-a-key-learning-from-our-load-testing/</guid>
-      <description>TL;DR Amazon DocumentDB load-balances traffic at the TCP connection level rather than at the request level. This can lead to unexpected resource distribution issues, particularly when scaling read replicas under high load. The solution? Restarting application pods to establish new TCP connections that are evenly distributed across replicas.&#xA;Understanding the Load Balancing Issue In a typical Amazon DocumentDB cluster, there is a primary node that handles all write operations and one or more read replicas to distribute read traffic.</description>
+      <description>TLDR; API Gateway can provide caching, logging auth and load balancer distributes traffic between 2 or more servers for high-availability and horizontal scaling.&#xA;Both load balancer and Api gateways are used between web clients and web servers. But they have served different purpose, that is to say, they are not interchangeable.&#xA;Load Balancers Core function of load balancer is to distribute traffic. They receive traffic from web client’s and distribute them between 2 or more web servers.</description>
     </item>
   </channel>
 </rss>

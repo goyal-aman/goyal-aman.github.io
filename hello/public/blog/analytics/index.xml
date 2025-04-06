@@ -14,7 +14,7 @@
       <link>http://localhost:1313/understanding-olap-and-oltp/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/understanding-olap-and-oltp/</guid>
-      <description>TL;DR Amazon DocumentDB load-balances traffic at the TCP connection level rather than at the request level. This can lead to unexpected resource distribution issues, particularly when scaling read replicas under high load. The solution? Restarting application pods to establish new TCP connections that are evenly distributed across replicas.&#xA;Understanding the Load Balancing Issue In a typical Amazon DocumentDB cluster, there is a primary node that handles all write operations and one or more read replicas to distribute read traffic.</description>
+      <description>TLDR; Any database falls into one of two category OLAP or OLTP — depending on the access pattern for which it is optimised&#xA;Key differences: OLAP vs. OLTP The primary purpose of online analytical processing (OLAP) is to analyse aggregated data, while the primary purpose of online transaction processing (OLTP) is to process database transactions.&#xA;You use OLAP systems to generate reports, perform complex data analysis, and identify trends. In contrast, you use OLTP systems to process orders, update inventory, and manage customer accounts.</description>
     </item>
   </channel>
 </rss>

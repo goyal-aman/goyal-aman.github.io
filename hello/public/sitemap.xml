@@ -17,10 +17,10 @@
     <loc>http://localhost:1313/</loc>
     <lastmod>2025-03-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/load-balancing/</loc>
+    <loc>http://localhost:1313/blog/load-balancer/</loc>
     <lastmod>2025-03-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/distributed-locks/</loc>
+    <loc>http://localhost:1313/blog/distributed-lock/</loc>
     <lastmod>2024-12-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/distributed-locks-naive/</loc>
@@ -28,5 +28,44 @@
   </url><url>
     <loc>http://localhost:1313/blog/locks/</loc>
     <lastmod>2024-12-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/analytics/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/database/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/olap/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/oltp/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/understanding-olap-and-oltp/</loc>
+    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/api-gateway/</loc>
+    <lastmod>2024-12-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/load-balancer-vs.-api-gateway-understanding-the-differences/</loc>
+    <lastmod>2024-12-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/network/</loc>
+    <lastmod>2024-12-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/index/</loc>
+    <lastmod>2024-12-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/storing-values-within-index/</loc>
+    <lastmod>2024-12-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/databases-memory-and-disks/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/disk/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/memory/</loc>
+    <lastmod>2024-12-02T00:00:00+00:00</lastmod>
   </url>
 </urlset>
