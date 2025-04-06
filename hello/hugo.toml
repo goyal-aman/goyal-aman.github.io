@@ -55,6 +55,7 @@ relativeURLs = true
 
 # controls number of latest blogs visible on home page.
 latestPostCount = 15
+email = "amangoyal8110@gmail.com"
 
 [markup]
   [markup.highlight]

@@ -11,6 +11,12 @@
         <i class="fab fa-medium fa-lg"></i>
       </a>
     </div>
+    {{ with .Site.Params.email }}
+    <p>
+      📫 Reach me at <a href="mailto:{{ . }}">{{ . }}</a>
+    </p>
+   {{ end }}
+
     <p>
       © {{ now.Year }} Aman Goyal. Built with ❤️ using
       <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
