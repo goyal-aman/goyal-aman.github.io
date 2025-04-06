@@ -3,7 +3,7 @@ title = "Distributed Locks - Naive"
 date = "2024-12-30"
 description = "Use unique and TTL indexes on databases to enable exclusive access to resources."
 tags = [
-    "Distributed Locks",
+    "Distributed Lock",
     "Locks"
 ]
 cover = "/images/distributed_lock_2.png"

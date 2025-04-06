@@ -3,7 +3,7 @@ title = "Understanding OLAP and OLTP"
 date = "2024-12-23"
 description = "Any database falls into one of two category OLAP or OLTP — depending on the access pattern for which it is optimised"
 tags = [
-    "Databases",
+    "Database",
     "OLAP",
     "OLTP",
     "Analytics"
