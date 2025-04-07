@@ -35,7 +35,7 @@ Despite this, the core requirement remained: **keep cold-start times near 50ms**
 
 When a user invokes a Lambda function, the request eventually lands on a **Lambda worker**.
 
-![image.png](on_demand_container_loading_on_aws.png)
+![image.png](/images/on_demand_container_loading_on_aws.png)
 
 Each Lambda worker can host multiple functions. A **local agent** process runs on the worker and communicates with the Firecracker VM via **virtio**, a standard virtual device interface. Inside the VM, this local agent appears as a **block device** (like a virtual hard disk).
 
