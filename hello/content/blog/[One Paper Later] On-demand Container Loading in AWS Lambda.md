@@ -6,13 +6,18 @@ tags = [
     "AWS",
     "Lambda",
     "Serverless",
-    "Container"
+    "Container",
+    "One Page Later Pod"
 ]
 cover = "/images/on_demand_container_loading_on_aws.png"
 +++
 ---
 
-AI Improved Version
+You can also listen to AI generated discussion 
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/0IxfiKRMdnSIcDIMxChsd7?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+---
 
 This paper discusses how AWS rearchitected AWS Lambda to support container images up to **10 GiB**, compared to the original **250 MiB** ZIP-based functions.
 
