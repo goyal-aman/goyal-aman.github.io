@@ -93,3 +93,8 @@ AWS Lambda’s evolution from small ZIP files to massive 10GB container images i
 - A root-based, alarmed GC system
 
 AWS was able to maintain low cold start times while scaling Lambda to support modern containerized workflows. This architecture not only optimizes performance and resource usage but also preserves tenant isolation and security, all without disrupting the user experience.
+
+---
+Source
+* [On-demand Container Loading in AWS Lambda](https://www.usenix.org/system/files/atc23-brooker.pdf)
+* [Usenix Talk on On-demand Container Loading in AWS Lambda](https://www.youtube.com/watch?v=Wden61jKWvs&embeds_referring_euri=goyal-aman.github.io)
