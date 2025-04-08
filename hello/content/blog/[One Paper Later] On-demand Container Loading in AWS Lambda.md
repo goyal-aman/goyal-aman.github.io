@@ -18,8 +18,8 @@ You can also listen to AI generated discussion
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/0IxfiKRMdnSIcDIMxChsd7?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 ---
-
-This paper discusses how AWS rearchitected AWS Lambda to support container images up to **10 GiB**, compared to the original **250 MiB** ZIP-based functions.
+# Overview
+AWS released this paper [On-demand Container Loading in AWS Lambda](https://www.usenix.org/system/files/atc23-brooker.pdf) which discusses how they were able to scale their Lambda offering to support container images upto **10 GiB** from originail **250 Mib**.
 
 Originally, users had to ZIP their code and upload it to S3 to run on Lambda. For each new invocation (especially after a cold start), AWS would spin up a new lightweight VM, pull the ZIP file, and execute it. This worked well because AWS’s global backbone network is fast and 250 MiB is relatively small, keeping cold-start times low (typically ~50ms).
 
@@ -28,9 +28,7 @@ With the move to supporting **container images** — and large ones, up to 10 
 - **Network bandwidth**: Servicing such large images could overwhelm network capacity.
 - **Cold start time**: Pulling multi-GB images could drastically increase latency.
 
-Despite this, the core requirement remained: **keep cold-start times near 50ms**. This required significant engineering effort and innovation.
-
-## Key Container Image Characteristics Exploited
+Despite this, the core requirement remained: **keep cold-start times near 50ms**. This required significant engineering effort and innovation. For this they exploited three core properties of container images
 
 1. **Cacheability**: The majority of workloads come from a small number of unique images.
 2. **Commonality**: Many popular images are based on common base layers (e.g., Alpine, Ubuntu).
@@ -46,7 +44,7 @@ Each Lambda worker can host multiple functions. A **local agent** process runs o
 
 ### Filesystem Preparation
 
-- When a container image is used for Lambda, its layers are flattened into a single **ext4 filesystem**.
+- When a container image is used for Lambda, at the time of Lambda function creation, its layers are flattened into a single **ext4 filesystem**.
 - This filesystem is split into **512 KiB blocks** in a **deterministic** way — meaning the same input always results in the same set of blocks.
 - Each block is **individually encrypted** using **convergent encryption**:
     - A **cryptographic hash (AES-256)** of the block is computed (with a salt).
