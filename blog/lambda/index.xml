@@ -2,5 +2,6 @@
 &lt;p>You can also listen to AI generated discussion&lt;/p>
 &lt;iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/0IxfiKRMdnSIcDIMxChsd7?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">&lt;/iframe>
 &lt;hr>
-&lt;p>This paper discusses how AWS rearchitected AWS Lambda to support container images up to &lt;strong>10 GiB&lt;/strong>, compared to the original &lt;strong>250 MiB&lt;/strong> ZIP-based functions.&lt;/p>
+&lt;h1 id="overview">Overview&lt;/h1>
+&lt;p>AWS released this paper &lt;a href="https://www.usenix.org/system/files/atc23-brooker.pdf">On-demand Container Loading in AWS Lambda&lt;/a> which discusses how they were able to scale their Lambda offering to support container images upto &lt;strong>10 GiB&lt;/strong> from originail &lt;strong>250 Mib&lt;/strong>.&lt;/p>
 &lt;p>Originally, users had to ZIP their code and upload it to S3 to run on Lambda. For each new invocation (especially after a cold start), AWS would spin up a new lightweight VM, pull the ZIP file, and execute it. This worked well because AWS’s global backbone network is fast and 250 MiB is relatively small, keeping cold-start times low (typically ~50ms).&lt;/p></description></item></channel></rss>
