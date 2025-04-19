@@ -12,10 +12,10 @@ You can learn more about me here. I sometimes share my new learnings here and [m
 # Experience
 
 {{< experience company="Angel One" position="Software Engineer II" period="May 2024 — Present" >}}
-* {{< highlight >}}Developed sub-second{{</highlight>}} user segmentation solution for high-scale; high-performance targeted campaigns.
-* Identified and established foundational frameworks to streamline project kick-off times, facilitating faster development cycles across teams.
-* Achieved 13% improvement in overall response times by leveraging customized parsing algorithms.
-* Designed & Developed architecture for the high scale real-time ad targeting.
+* {{< highlight >}}Developed sub-second{{</highlight>}} User Segmentation solution for high-scale targeted campaigns.
+* Designed & {{< highlight >}}Developed Zero-cost, Zero-ops Real-Time Analytics Pipeline,{{</highlight >}} processing over 2.3 billion events daily.
+* Leveraged {{< highlight >}}Perf Profiling{{</highlight >}} to {{<bold_underline>}}improved API response times by 79%{{</bold_underline>}} by identifying CPU and memory bottlenecks.
+* Leveraged {{< highlight >}}Latency Aware Request Hedging{{< /highlight >}} to {{<bold_underline>}}Improve P99s by over 8%{{</bold_underline>}}
 
 {{< experience company="Simpl" position="Software Engineer" period="Jan 2024 — May 2024" >}}
 * {{< highlight >}}Amplified throughput by 70%{{</highlight>}} in high-scale scam detection system by leveraging AWS Kinesis & Lambdas.
