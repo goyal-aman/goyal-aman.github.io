@@ -13,6 +13,7 @@ You can learn more about me here. I sometimes share my new learnings here and [m
 {{< experience company="Angel One" position="Software Engineer III" period="April 2025 — Present" >}}
 * {{< highlight >}}Developed sub-second{{</highlight>}} User Segmentation solution for high-scale targeted campaigns.
 * Leveraged {{< highlight >}}Perf Profiling{{</highlight >}} to {{<bold_underline>}}improved API response times by 79%{{</bold_underline>}} by identifying CPU and memory bottlenecks.
+
 {{< experience company="Angel One" position="Software Engineer II" period="May 2024 — March 2025" >}}
 * Designed & {{< highlight >}}Developed Zero-cost, Zero-ops Real-Time Analytics Pipeline,{{</highlight >}} processing over 2.3 billion events daily.
 * Leveraged {{< highlight >}}Latency Aware Request Hedging{{< /highlight >}} to {{<bold_underline>}}Improve P99s by over 8%{{</bold_underline>}}
