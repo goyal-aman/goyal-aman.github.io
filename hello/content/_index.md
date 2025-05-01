@@ -10,11 +10,11 @@ Aman is Software Engineer at Angel One, leading initiatives to design and develo
 You can learn more about me here. I sometimes share my new learnings here and [medium](https://medium.com/@aman-goyal). Sometimes when I am curious I build POCs which you can find [here](https://pocs.com)
 
 # Experience
-
-{{< experience company="Angel One" position="Software Engineer III" period="May 2024 — Present" >}}
+{{< experience company="Angel One" position="Software Engineer III" period="April 2025 — Present" >}}
 * {{< highlight >}}Developed sub-second{{</highlight>}} User Segmentation solution for high-scale targeted campaigns.
-* Designed & {{< highlight >}}Developed Zero-cost, Zero-ops Real-Time Analytics Pipeline,{{</highlight >}} processing over 2.3 billion events daily.
 * Leveraged {{< highlight >}}Perf Profiling{{</highlight >}} to {{<bold_underline>}}improved API response times by 79%{{</bold_underline>}} by identifying CPU and memory bottlenecks.
+{{< experience company="Angel One" position="Software Engineer II" period="May 2024 — March 2025" >}}
+* Designed & {{< highlight >}}Developed Zero-cost, Zero-ops Real-Time Analytics Pipeline,{{</highlight >}} processing over 2.3 billion events daily.
 * Leveraged {{< highlight >}}Latency Aware Request Hedging{{< /highlight >}} to {{<bold_underline>}}Improve P99s by over 8%{{</bold_underline>}}
 
 {{< experience company="Simpl" position="Software Engineer" period="Jan 2024 — May 2024" >}}
