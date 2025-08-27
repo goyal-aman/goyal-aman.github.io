@@ -4,11 +4,18 @@
     <title>Home on Aman Goyal</title>
     <link>http://localhost:1313/</link>
     <description>Recent content in Home on Aman Goyal</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Wed, 26 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[One Paper Later] On-demand Container Loading in AWS Lambda</title>
+      <link>http://localhost:1313/one-paper-later-on-demand-container-loading-in-aws-lambda/</link>
+      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/one-paper-later-on-demand-container-loading-in-aws-lambda/</guid>
+      <description>You can also listen to AI generated discussion&#xA;Overview AWS released this paper On-demand Container Loading in AWS Lambda which discusses how they were able to scale their Lambda offering to support container images upto 10 GiB from originail 250 Mib.&#xA;Originally, users had to ZIP their code and upload it to S3 to run on Lambda. For each new invocation (especially after a cold start), AWS would spin up a new lightweight VM, pull the ZIP file, and execute it.</description>
+    </item>
     <item>
       <title>DocumentDB Load Balancing: A Key Learning from Our Load Testing</title>
       <link>http://localhost:1313/documentdb-load-balancing-a-key-learning-from-our-load-testing/</link>
