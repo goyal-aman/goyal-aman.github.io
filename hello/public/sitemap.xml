@@ -2,25 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/blog/analytics/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/athena/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws-athena/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws-firehose/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws-msk/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws-quicksight/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/aws-s3/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/firehose/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/lambda/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/msk/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/one-page-later-pod/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/quicksight/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blog/s3/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/one-paper-later-on-demand-container-loading-in-aws-lambda/</loc>
     <lastmod>2025-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/blog/aws/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/blog/container/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/lambda/</loc>
-    <lastmod>2025-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/one-page-later-pod/</loc>
     <lastmod>2025-04-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/serverless/</loc>
@@ -43,9 +79,6 @@
   </url><url>
     <loc>http://localhost:1313/blog/locks/</loc>
     <lastmod>2024-12-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blog/analytics/</loc>
-    <lastmod>2024-12-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/blog/database/</loc>
     <lastmod>2024-12-23T00:00:00+00:00</lastmod>

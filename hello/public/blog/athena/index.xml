@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lambda on Aman Goyal</title>
-    <link>http://localhost:1313/blog/lambda/</link>
-    <description>Recent content in Lambda on Aman Goyal</description>
+    <title>Athena on Aman Goyal</title>
+    <link>http://localhost:1313/blog/athena/</link>
+    <description>Recent content in Athena on Aman Goyal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2025, Aman Goyal.</copyright>
     <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/lambda/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/athena/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale</title>
       <link>http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/</guid>
       <description>One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.&#xA;We’re a small, independent team inside Angel One exploring new initiatives and moving fast. While we operate autonomously, all security standards and org-level policies still apply to us.</description>
-    </item>
-    <item>
-      <title>[One Paper Later] On-demand Container Loading in AWS Lambda</title>
-      <link>http://localhost:1313/one-paper-later-on-demand-container-loading-in-aws-lambda/</link>
-      <pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/one-paper-later-on-demand-container-loading-in-aws-lambda/</guid>
-      <description>You can also listen to AI generated discussion&#xA;Overview AWS released this paper On-demand Container Loading in AWS Lambda which discusses how they were able to scale their Lambda offering to support container images upto 10 GiB from originail 250 Mib.&#xA;Originally, users had to ZIP their code and upload it to S3 to run on Lambda. For each new invocation (especially after a cold start), AWS would spin up a new lightweight VM, pull the ZIP file, and execute it.</description>
     </item>
   </channel>
 </rss>
