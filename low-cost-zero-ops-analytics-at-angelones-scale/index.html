@@ -1,25 +1,343 @@
-<!doctype html><html lang=en-US><head><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.15.4/css/all.css crossorigin=anonymous><meta http-equiv=X-Clacks-Overhead content="GNU Terry Pratchett"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=https://goyal-aman.github.io/images/favicon.png><title>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale | Aman Goyal</title><meta name=title content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"><meta name=description content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."><meta name=keywords content="AWS,Lambda,Firehose,AWS Firehose,AWS MSK,MSK,Analytics,S3,AWS S3,Athena,AWS Athena,QuickSight,AWS QuickSight,One Page Later Pod,"><meta property="og:url" content="https://goyal-aman.github.io/low-cost-zero-ops-analytics-at-angelones-scale/"><meta property="og:site_name" content="Aman Goyal"><meta property="og:title" content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"><meta property="og:description" content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2025-10-01T00:00:00+00:00"><meta property="article:modified_time" content="2025-10-01T00:00:00+00:00"><meta property="article:tag" content="AWS"><meta property="article:tag" content="Lambda"><meta property="article:tag" content="Firehose"><meta property="article:tag" content="AWS Firehose"><meta property="article:tag" content="AWS MSK"><meta property="article:tag" content="MSK"><meta property="og:image" content="https://goyal-aman.github.io/images/share.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://goyal-aman.github.io/images/share.png"><meta name=twitter:title content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"><meta name=twitter:description content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."><meta itemprop=name content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"><meta itemprop=description content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."><meta itemprop=datePublished content="2025-10-01T00:00:00+00:00"><meta itemprop=dateModified content="2025-10-01T00:00:00+00:00"><meta itemprop=wordCount content="525"><meta itemprop=image content="https://goyal-aman.github.io/images/share.png"><meta itemprop=keywords content="AWS,Lambda,Firehose,AWS Firehose,AWS MSK,MSK,Analytics,S3,AWS S3,Athena,AWS Athena,QuickSight,AWS QuickSight,One Page Later Pod"><meta name=referrer content="no-referrer-when-downgrade"><style>:root{--width:720px;--font-main:Verdana, sans-serif;--font-secondary:Verdana, sans-serif;--font-scale:1em;--background-color:#fff;--heading-color:#222;--text-color:#444;--link-color:#3273dc;--visited-color:#8b6fcb;--code-background-color:#f2f2f2;--code-color:#222;--blockquote-color:#222}@media(prefers-color-scheme:dark){:root{--background-color:#01242e;--heading-color:#eee;--text-color:#ddd;--link-color:#8cc2dd;--visited-color:#8b6fcb;--code-background-color:#000;--code-color:#ddd;--blockquote-color:#ccc}}body{font-family:var(--font-secondary);font-size:var(--font-scale);margin:auto;padding:20px;max-width:var(--width);text-align:left;background-color:var(--background-color);word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:var(--text-color)}h1,h2,h3,h4,h5,h6{font-family:var(--font-main);color:var(--heading-color)}a{color:var(--link-color);cursor:pointer;text-decoration:none}a:hover{text-decoration:underline}nav a{margin-right:8px}strong,b{color:var(--heading-color)}button{margin:0;cursor:pointer}time{font-family:monospace;font-style:normal;font-size:15px}main{line-height:1.6}table{width:100%}hr{border:0;border-top:1px dashed}img{max-width:100%}code{font-family:monospace;padding:2px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px}blockquote{border-left:1px solid #999;color:var(--code-color);padding-left:20px;font-style:italic}footer{padding:25px 0;text-align:center}.title:hover{text-decoration:none}.title h1{font-size:1.5em}.inline{width:auto!important}.highlight,.code{padding:1px 15px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px;margin-block-start:1em;margin-block-end:1em;overflow-x:auto}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:var(--visited-color)}</style><header style="display:flex;justify-content:space-between;align-items:center;padding:1rem 0"><a href=/ class=title><h2>Aman Goyal</h2></a><div><a href=https://github.com/goyal-aman target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-github fa-lg"></i>
-</a><a href=https://www.linkedin.com/in/ln-amangoyal target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-linkedin fa-lg"></i>
-</a><a href=https://aman-goyal.medium.com/ target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-medium fa-lg"></i>
-</a><a href=https://leetcode.com/sichern target=_blank style="margin:0 10px;color:inherit"><img src=/images/leetcode.svg alt=LeetCode style=height:20px;vertical-align:middle>
-</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div></header><nav><a href=/>Home</a>
-<a href=/blog>Blog</a></nav></head><body><header></header><main><h1>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale</h1><p><i><time datetime=2025-10-01>01 Oct, 2025</time></i></p><content><hr><p>One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.</p><p>We’re a small, independent team inside Angel One exploring new initiatives and moving fast. While we operate autonomously, all security standards and org-level policies still apply to us. This means we get the freedom to experiment, but the solution has to be secure and compliant from day one.</p><p>With a small team, a growing backlog, and limited bandwidth, we needed something simple and self-sustaining not another system to maintain. Our requirements were clear:</p><ol><li>Give visibility into user journeys (our core need)</li><li>Require almost zero maintenance. We don’t have the bandwidth to manage infra</li><li>Avoid new third-party vendors (since onboarding one takes months)</li><li>Keep costs low, focus on impact, not infrastructure</li></ol><h1 id=finding-the-right-fit>Finding the Right Fit</h1><p>We looked at Apache Flink and Apache Spark — both powerful, both capable of solving the problem. But managed versions were expensive, and self-hosting meant dedicating bandwidth for maintenance and handling failures which is not ideal for our team size or priorities.</p><p>We parked them as “maybe later” and kept searching. That’s when we came across AWS Firehose (Kinesis Data Firehose).</p><h1 id=aws-firehose--athena--the-simpler-route>AWS Firehose + Athena — The Simpler Route</h1><p>Firehose can take streaming data from multiple sources, do lightweight transformations, and push it directly to S3 — fully managed, no servers, no ops. Around the same time, we explored Amazon Athena, a serverless SQL engine that lets you query data in S3 using plain SQL.
-This combination made perfect sense for us. Our clickstream data was already flowing into Amazon MSK (Managed Kafka from AWS). From there, we connected Firehose to send data into S3. AWS Glue managed schemas, and Athena enabled product teams to run SQL queries directly on the data.</p><p>This setup checked all boxes:</p><ul><li>Product teams could query data easily via Athena</li><li>The entire pipeline was fully managed by AWS — zero ops</li><li>No third-party vendors involved</li><li>Cost remained low — we already had MSK and S3, and Athena charges only per query</li></ul><h1 id=the-outcome>The Outcome</h1><p>The pipeline handled ~300K events per second, consistently and without manual intervention. We tested and deployed it in just under few days, and by the end, it was already helping product teams answer key questions.</p><p>A week later, we integrated dashboards using Amazon QuickSight, giving everyone instant visibility into user journeys and metrics, again, without additional maintenance.</p><h1 id=6-months-later>6 Months Later</h1><p>It’s been over six months since launch. Our traffic has grown by more than 100%, and the same setup continues to work smoothly with zero human hours spent on maintenance.</p><p>Given its stability, low cost, and scalability, this solution can easily support our growth for the next few years.</p><h1 id=in-short>In Short</h1><p>We wanted something low-cost, reliable, and simple and we got exactly that. Using MSK, Firehose, S3, Glue, Athena, and QuickSight, we built a fully managed, zero-ops analytics pipeline that provides complete visibility into user behavior.</p><p>It’s secure, compliant, scales effortlessly — and has required no ongoing maintenance since day one.</p></content><p><a href=https://goyal-aman.github.io/blog/aws/>#AWS</a>
-<a href=https://goyal-aman.github.io/blog/lambda/>#Lambda</a>
-<a href=https://goyal-aman.github.io/blog/firehose/>#Firehose</a>
-<a href=https://goyal-aman.github.io/blog/aws-firehose/>#AWS Firehose</a>
-<a href=https://goyal-aman.github.io/blog/aws-msk/>#AWS MSK</a>
-<a href=https://goyal-aman.github.io/blog/msk/>#MSK</a>
-<a href=https://goyal-aman.github.io/blog/analytics/>#Analytics</a>
-<a href=https://goyal-aman.github.io/blog/s3/>#S3</a>
-<a href=https://goyal-aman.github.io/blog/aws-s3/>#AWS S3</a>
-<a href=https://goyal-aman.github.io/blog/athena/>#Athena</a>
-<a href=https://goyal-aman.github.io/blog/aws-athena/>#AWS Athena</a>
-<a href=https://goyal-aman.github.io/blog/quicksight/>#QuickSight</a>
-<a href=https://goyal-aman.github.io/blog/aws-quicksight/>#AWS QuickSight</a>
-<a href=https://goyal-aman.github.io/blog/one-page-later-pod/>#One Page Later Pod</a></p></main><footer><footer style="text-align:center;padding:1.5rem 0;font-size:.9rem;color:#777"><div><a href=https://github.com/goyal-aman target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-github fa-lg"></i>
-</a><a href=https://www.linkedin.com/in/ln-amangoyal target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-linkedin fa-lg"></i>
-</a><a href=https://aman-goyal.medium.com/ target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-medium fa-lg"></i>
-</a><a href=https://leetcode.com/sichern target=_blank style="margin:0 10px;color:inherit"><img src=/images/leetcode.svg alt=LeetCode style=height:20px;vertical-align:middle>
-</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div><p>© 2025 Aman Goyal. Built with ❤️ using
-<a href=https://gohugo.io target=_blank style=color:inherit;text-decoration:underline>Hugo</a>.</p></footer></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale | Aman Goyal</title>
+<meta name="title" content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale" />
+<meta name="description" content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since." />
+<meta name="keywords" content="AWS,Lambda,Firehose,AWS Firehose,AWS MSK,MSK,Analytics,S3,AWS S3,Athena,AWS Athena,QuickSight,AWS QuickSight,One Page Later Pod," />
+
+
+<meta property="og:title" content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale" />
+<meta property="og:description" content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-10-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-10-01T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"/>
+<meta name="twitter:description" content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."/>
+
+
+
+<meta itemprop="name" content="Low-Cost, Zero-Ops Analytics at AngelOne’s Scale">
+<meta itemprop="description" content="A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."><meta itemprop="datePublished" content="2025-10-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2025-10-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="525"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
+<meta itemprop="keywords" content="AWS,Lambda,Firehose,AWS Firehose,AWS MSK,MSK,Analytics,S3,AWS S3,Athena,AWS Athena,QuickSight,AWS QuickSight,One Page Later Pod," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+  <a href="/" class="title">
+    <h2>Aman Goyal</h2>
+  </a>
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+</header>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</head>
+
+<body>
+  <header></header>
+  <main>
+
+<h1>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale</h1>
+<p>
+  <i>
+    <time datetime='2025-10-01'>
+      01 Oct, 2025
+    </time>
+  </i>
+</p>
+
+
+
+
+
+<content>
+  <hr>
+<p>One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.</p>
+<p>We’re a small, independent team inside Angel One exploring new initiatives and moving fast. While we operate autonomously, all security standards and org-level policies still apply to us. This means we get the freedom to experiment, but the solution has to be secure and compliant from day one.</p>
+<p>With a small team, a growing backlog, and limited bandwidth, we needed something simple and self-sustaining not another system to maintain. Our requirements were clear:</p>
+<ol>
+<li>Give visibility into user journeys (our core need)</li>
+<li>Require almost zero maintenance. We don’t have the bandwidth to manage infra</li>
+<li>Avoid new third-party vendors (since onboarding one takes months)</li>
+<li>Keep costs low, focus on impact, not infrastructure</li>
+</ol>
+<h1 id="finding-the-right-fit">Finding the Right Fit</h1>
+<p>We looked at Apache Flink and Apache Spark — both powerful, both capable of solving the problem. But managed versions were expensive, and self-hosting meant dedicating bandwidth for maintenance and handling failures which is not ideal for our team size or priorities.</p>
+<p>We parked them as “maybe later” and kept searching. That’s when we came across AWS Firehose (Kinesis Data Firehose).</p>
+<h1 id="aws-firehose--athena--the-simpler-route">AWS Firehose + Athena — The Simpler Route</h1>
+<p>Firehose can take streaming data from multiple sources, do lightweight transformations, and push it directly to S3 — fully managed, no servers, no ops. Around the same time, we explored Amazon Athena, a serverless SQL engine that lets you query data in S3 using plain SQL.
+This combination made perfect sense for us. Our clickstream data was already flowing into Amazon MSK (Managed Kafka from AWS). From there, we connected Firehose to send data into S3. AWS Glue managed schemas, and Athena enabled product teams to run SQL queries directly on the data.</p>
+<p>This setup checked all boxes:</p>
+<ul>
+<li>Product teams could query data easily via Athena</li>
+<li>The entire pipeline was fully managed by AWS — zero ops</li>
+<li>No third-party vendors involved</li>
+<li>Cost remained low — we already had MSK and S3, and Athena charges only per query</li>
+</ul>
+<h1 id="the-outcome">The Outcome</h1>
+<p>The pipeline handled ~300K events per second, consistently and without manual intervention. We tested and deployed it in just under few days, and by the end, it was already helping product teams answer key questions.</p>
+<p>A week later, we integrated dashboards using Amazon QuickSight, giving everyone instant visibility into user journeys and metrics, again, without additional maintenance.</p>
+<h1 id="6-months-later">6 Months Later</h1>
+<p>It’s been over six months since launch. Our traffic has grown by more than 100%, and the same setup continues to work smoothly with zero human hours spent on maintenance.</p>
+<p>Given its stability, low cost, and scalability, this solution can easily support our growth for the next few years.</p>
+<h1 id="in-short">In Short</h1>
+<p>We wanted something low-cost, reliable, and simple  and we got exactly that. Using MSK, Firehose, S3, Glue, Athena, and QuickSight, we built a fully managed, zero-ops analytics pipeline that provides complete visibility into user behavior.</p>
+<p>It’s secure, compliant, scales effortlessly — and has required no ongoing maintenance since day one.</p>
+
+</content>
+<p>
+  
+  <a href="http://localhost:1313/blog/aws/">#AWS</a>
+  
+  <a href="http://localhost:1313/blog/lambda/">#Lambda</a>
+  
+  <a href="http://localhost:1313/blog/firehose/">#Firehose</a>
+  
+  <a href="http://localhost:1313/blog/aws-firehose/">#AWS Firehose</a>
+  
+  <a href="http://localhost:1313/blog/aws-msk/">#AWS MSK</a>
+  
+  <a href="http://localhost:1313/blog/msk/">#MSK</a>
+  
+  <a href="http://localhost:1313/blog/analytics/">#Analytics</a>
+  
+  <a href="http://localhost:1313/blog/s3/">#S3</a>
+  
+  <a href="http://localhost:1313/blog/aws-s3/">#AWS S3</a>
+  
+  <a href="http://localhost:1313/blog/athena/">#Athena</a>
+  
+  <a href="http://localhost:1313/blog/aws-athena/">#AWS Athena</a>
+  
+  <a href="http://localhost:1313/blog/quicksight/">#QuickSight</a>
+  
+  <a href="http://localhost:1313/blog/aws-quicksight/">#AWS QuickSight</a>
+  
+  <a href="http://localhost:1313/blog/one-page-later-pod/">#One Page Later Pod</a>
+  
+</p>
+
+  </main>
+  <footer>
+<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+
+    <p>
+      © 2025 Aman Goyal. Built with ❤️ using
+      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
+    </p>
+  </footer>
+  </footer>
+
+    
+</body>
+
+</html>
