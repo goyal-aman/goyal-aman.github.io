@@ -1,5 +1,5 @@
 +++
-title = "Low-Cost, Zero-Ops Analytics at AngelOne’s Scale"
+title = "Low-Cost, Zero-Ops Analytics at Scale"
 date = "2025-10-01"
 description = "A small team developed a low-cost, zero-ops analytics pipeline on AWS that delivers full user journey visibility at scale built in a week, running ever since."
 tags = [
@@ -24,7 +24,7 @@ tags = [
 
 One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.
 
-We’re a small, independent team inside Angel One exploring new initiatives and moving fast. While we operate autonomously, all security standards and org-level policies still apply to us. This means we get the freedom to experiment, but the solution has to be secure and compliant from day one.
+We’re a small, independent team within a fast-growing financial technology arm of a large enterprise exploring new initiatives. While we operate autonomously, all security standards and org-level policies still apply to us. This means we get the freedom to experiment, but the solution has to be secure and compliant from day one.
 
 With a small team, a growing backlog, and limited bandwidth, we needed something simple and self-sustaining not another system to maintain. Our requirements were clear:
 1. Give visibility into user journeys (our core need)

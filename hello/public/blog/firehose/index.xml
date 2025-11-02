@@ -10,11 +10,11 @@
     <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/firehose/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Low-Cost, Zero-Ops Analytics at AngelOne’s Scale</title>
-      <link>http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/</link>
+      <title>Low-Cost, Zero-Ops Analytics at Scale</title>
+      <link>http://localhost:1313/low-cost-zero-ops-analytics-at-scale/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/low-cost-zero-ops-analytics-at-angelones-scale/</guid>
-      <description>One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.&#xA;We’re a small, independent team inside Angel One exploring new initiatives and moving fast. While we operate autonomously, all security standards and org-level policies still apply to us.</description>
+      <guid>http://localhost:1313/low-cost-zero-ops-analytics-at-scale/</guid>
+      <description>One of the early challenges our product teams had was visibility — not having a clear view of how users interact with our product or what their experience looks like. This made it hard for them to plan what to improve next.&#xA;We’re a small, independent team within a fast-growing financial technology arm of a large enterprise exploring new initiatives. While we operate autonomously, all security standards and org-level policies still apply to us.</description>
     </item>
   </channel>
 </rss>
