@@ -1,6 +1,6 @@
 +++
 title = "Why Relational Databases Struggle with Long-Tail Data"
-date = "2024-12-23"
+date = "205-11-11"
 description = "Short writeup on why relational databases when data access pattern has long tail"
 tags = [
     "Databases",
