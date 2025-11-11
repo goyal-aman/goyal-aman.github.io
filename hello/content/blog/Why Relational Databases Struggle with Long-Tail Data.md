@@ -1,12 +1,23 @@
 +++
-title = "Understanding OLAP and OLTP"
+title = "Why Relational Databases Struggle with Long-Tail Data"
 date = "2024-12-23"
-description = "Any database falls into one of two category OLAP or OLTP — depending on the access pattern for which it is optimised"
+description = "Short writeup on why relational databases when data access pattern has long tail"
 tags = [
-    "Database",
-    "OLAP",
-    "OLTP",
-    "Analytics"
+    "Databases",
+    "System Design",
+    "Relational Databases",
+    "Long Tail Data",
+    "Database Indexing",
+    "Performance Optimization",
+    "Scalability",
+    "Data Architecture",
+    "Cache Efficiency",
+    "NoSQL vs SQL",
+    "Data Access Patterns",
+    "Query Performance",
+    "Index Tuning",
+    "Storage Systems",
+    "Backend Engineering"
 ]
 cover = "/images/long-tail-power-distribution.png"
 +++
