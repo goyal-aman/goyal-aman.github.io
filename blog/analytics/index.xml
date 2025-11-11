@@ -5,17 +5,4 @@
 &lt;p&gt;Any database falls into one of two category OLAP or OLTP — depending on the access pattern for which it is optimised&lt;/p&gt;
 &lt;h1 id="key-differences-olap-vs-oltp"&gt;Key differences: OLAP vs. OLTP&lt;/h1&gt;
 &lt;p&gt;The primary purpose of online analytical processing (OLAP) is to analyse aggregated data, while the primary purpose of online transaction processing (OLTP) is to process database transactions.&lt;/p&gt;
-&lt;p&gt;You use OLAP systems to generate reports, perform complex data analysis, and identify trends. In contrast, you use OLTP systems to process orders, update inventory, and manage customer accounts.&lt;/p&gt;</description></item><item><title>Understanding OLAP and OLTP</title><link>https://goyal-aman.github.io/understanding-olap-and-oltp/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/understanding-olap-and-oltp/</guid><description>&lt;hr&gt;
-&lt;h1 id="why-relational-databases-struggle-with-long-tail-data"&gt;Why Relational Databases Struggle with Long-Tail Data&lt;/h1&gt;
-&lt;p&gt;Most systems have a few popular records that get accessed all the time — and millions of others that are rarely touched. This pattern is called the &lt;strong&gt;long tail&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Popularity
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│&lt;span class="se"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;│ &lt;span class="p"&gt;|&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="p"&gt;|&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="p"&gt;|&lt;/span&gt;____________________
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└───────────────────────────────▶
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Head &lt;span class="o"&gt;(&lt;/span&gt;popular&lt;span class="o"&gt;)&lt;/span&gt; Tail &lt;span class="o"&gt;(&lt;/span&gt;rare&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Relational databases (like MySQL or PostgreSQL) use &lt;strong&gt;B-tree indexes&lt;/strong&gt; to find rows quickly.&lt;br&gt;
-They work great when most queries hit the same small set of data — the “head.”&lt;br&gt;
-But when the dataset grows huge and queries become random, indexes get so large that they no longer fit in memory.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;You use OLAP systems to generate reports, perform complex data analysis, and identify trends. In contrast, you use OLTP systems to process orders, update inventory, and manage customer accounts.&lt;/p&gt;</description></item></channel></rss>

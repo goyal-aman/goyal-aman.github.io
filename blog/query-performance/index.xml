@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Query Performance on Aman Goyal</title><link>https://goyal-aman.github.io/blog/query-performance/</link><description>Recent content in Query Performance on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/query-performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Why Relational Databases Struggle with Long-Tail Data</title><link>https://goyal-aman.github.io/why-relational-databases-struggle-with-long-tail-data/</link><pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/why-relational-databases-struggle-with-long-tail-data/</guid><description>&lt;hr&gt;
+&lt;h1 id="why-relational-databases-struggle-with-long-tail-data"&gt;Why Relational Databases Struggle with Long-Tail Data&lt;/h1&gt;
+&lt;p&gt;Most systems have a few popular records that get accessed all the time — and millions of others that are rarely touched. This pattern is called the &lt;strong&gt;long tail&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Popularity
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│&lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt;│ &lt;span class="p"&gt;|&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="p"&gt;|&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="p"&gt;|&lt;/span&gt;____________________
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└───────────────────────────────▶
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Head &lt;span class="o"&gt;(&lt;/span&gt;popular&lt;span class="o"&gt;)&lt;/span&gt; Tail &lt;span class="o"&gt;(&lt;/span&gt;rare&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Relational databases (like MySQL or PostgreSQL) use &lt;strong&gt;B-tree indexes&lt;/strong&gt; to find rows quickly.&lt;br&gt;
+They work great when most queries hit the same small set of data — the “head.”&lt;br&gt;
+But when the dataset grows huge and queries become random, indexes get so large that they no longer fit in memory.&lt;/p&gt;</description></item></channel></rss>
