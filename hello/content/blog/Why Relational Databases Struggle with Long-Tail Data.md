@@ -68,5 +68,5 @@ To handle long-tail workloads better:
 > Relational databases shine for structured, frequently accessed data —  
 > but stumble when every query explores a new corner of the dataset.
 
-**Inspiration***
+**Inspiration**
 1. https://portable.io/learn/long-tail-data
