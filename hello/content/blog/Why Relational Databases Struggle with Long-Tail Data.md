@@ -20,7 +20,7 @@ tags = [
     "Backend Engineering"
 ]
 
-images = ['https://cdn-icons-png.flaticon.com/512/25/25231.png']
+images = ['/images/long-tail-power-distribution.png']
 cover = "/images/long-tail-power-distribution.png"
 +++
 ---
