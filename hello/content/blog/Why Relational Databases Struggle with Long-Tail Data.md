@@ -1,5 +1,5 @@
 +++
-title = "Why Relational Databases Struggle with Long-Tail Data"
+title = "The Long-Tail Problem: Where Relational Databases Start to Creak"
 date = "2025-11-10"
 description = "Short writeup on why relational databases when data access pattern has long tail"
 tags = [    
@@ -19,11 +19,12 @@ tags = [
     "Storage Systems",
     "Backend Engineering"
 ]
+meta_image = "/images/long-tail-power-distribution.png"
 cover = "/images/long-tail-power-distribution.png"
 +++
 ---
 
-# Why Relational Databases Struggle with Long-Tail Data
+### Why Relational Databases Struggle with Long-Tail Data?
 
 Most systems have a few popular records that get accessed all the time — and millions of others that are rarely touched.   This pattern is called the **long tail**.
 

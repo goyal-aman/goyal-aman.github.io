@@ -1,0 +1,25 @@
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+    <a href="{{ "" | relURL }}" class="title">
+      <h2>{{ .Site.Title }}</h2>
+    </a>
+    <div>
+      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-medium fa-lg"></i>
+      </a>
+      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      {{ with .Site.Params.email }}
+        <a href="mailto:{{ . }}" style="margin: 0 10px; color: inherit;" title="Email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
+      {{ end }}
+    </div>
+  </header>
+  <nav>{{- partial "nav.html" . -}}</nav>

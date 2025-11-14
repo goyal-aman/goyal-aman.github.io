@@ -6,6 +6,7 @@ tags = [
     "Distributed Lock",
     "Locks"
 ]
+meta_image = "/images/distributed_lock_2.png"
 cover = "/images/distributed_lock_2.png"
 +++
 ---

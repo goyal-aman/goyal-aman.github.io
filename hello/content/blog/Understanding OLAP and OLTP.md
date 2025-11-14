@@ -8,6 +8,7 @@ tags = [
     "OLTP",
     "Analytics"
 ]
+meta_image = "/images/olap_vs_olt.png"
 cover = "/images/olap_vs_olt.png"
 +++
 ---

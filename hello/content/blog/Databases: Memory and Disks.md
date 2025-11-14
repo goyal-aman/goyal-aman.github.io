@@ -7,6 +7,7 @@ tags = [
     "Disk",
     "Memory"
 ]
+meta_image = "/images/database_disk_and_memory.png"
 cover = "/images/database_disk_and_memory.png"
 +++
 ---

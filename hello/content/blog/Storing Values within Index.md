@@ -7,6 +7,7 @@ tags = [
     "Index"
     
 ]
+meta_image = "/images/storing_values_in_index.png"
 cover = "/images/storing_values_in_index.png"
 +++
 ---

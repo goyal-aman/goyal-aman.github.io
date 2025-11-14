@@ -9,6 +9,7 @@ tags = [
     "Container",
     "One Page Later Pod"
 ]
+meta_image = "/images/on_demand_container_loading_on_aws.png"
 cover = "/images/on_demand_container_loading_on_aws.png"
 +++
 ---
