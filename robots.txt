@@ -1,2 +1,3 @@
 User-Agent: *
+Allow: /
 Sitemap: https://goyal-aman.github.io/sitemap.xml
