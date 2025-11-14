@@ -19,7 +19,8 @@ tags = [
     "Storage Systems",
     "Backend Engineering"
 ]
-meta_image = "/images/long-tail-power-distribution.png"
+
+meta_image = "https://cdn-icons-png.flaticon.com/512/25/25231.png"
 cover = "/images/long-tail-power-distribution.png"
 +++
 ---
