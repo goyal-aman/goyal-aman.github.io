@@ -19,6 +19,8 @@ tags = [
     "One Page Later Pod"
 ]
 
+images = ["/images/analytics-architecture-v2.svg"]
+cover = "/images/analytics-architecture-v2.svg"
 +++
 ---
 
