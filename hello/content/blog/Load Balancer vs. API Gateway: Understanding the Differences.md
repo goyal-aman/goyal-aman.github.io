@@ -7,7 +7,7 @@ tags = [
     "API Gateway",
     "Network"
 ]
-meta_image = "/images/api_gateway_and_load_balancer.png"
+images = ["/images/api_gateway_and_load_balancer.png"]
 cover = "/images/api_gateway_and_load_balancer.png"
 +++
 ---
