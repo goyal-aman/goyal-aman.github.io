@@ -20,8 +20,8 @@ tags = [
     "Backend Engineering"
 ]
 
-images = ['/images/long-tail-power-distribution.png']
-cover = "/images/long-tail-power-distribution.png"
+images = ['/images/long_tail_diagram.svg']
+cover = "/images/long_tail_diagram.svg"
 +++
 ---
 
