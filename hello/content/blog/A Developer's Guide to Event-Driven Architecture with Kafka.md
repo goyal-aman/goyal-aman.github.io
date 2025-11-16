@@ -1,8 +1,8 @@
 +++
 title = "A Developer's Guide to Event-Driven Architecture with Kafka"
-date = "2024-12-23"
+date = "2025-11-16"
 description = "Key take aways from Design Event Driven Systems."
-tags = ['Event-Driven Systems', 'Kafka', 'Microservices', 'System Design', 'Orchestration', 'Choreography', 'Distributed Systems', 'Software Architecture',  'Confluent']
+tags = ['Designing Event Driven Systems', 'Event-Driven Systems', 'Kafka', 'Microservices', 'System Design', 'Orchestration', 'Choreography', 'Distributed Systems', 'Software Architecture',  'Confluent']
 images = ["/images/Orchestration_vs_Choreography.png"]
 cover = "/images/Orchestration_vs_Choreography.png.png"
 +++
