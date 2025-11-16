@@ -57,13 +57,13 @@ Events are the key enabler of this. Let's see how.
 
 Imagine a traditional e-commerce system. When a user places an order, the `Order Service` is responsible for everything that happens next. It has to call the `Inventory Service` to reserve stock, the `Notification Service` to send an email, and the `Shipping Service` to prepare for delivery.
 
-![Traditional Request/Response Model](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.06.25_PM.png)
+![Traditional Request/Response Model](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.06.25_PM.png)
 
 What happens when a new `Dynamic Pricing Service` needs to know when an order is placed? You have to go back and modify the `Order Service` to add another call.
 
 In an event-driven model, this responsibility is reversed. The `Order Service` simply publishes an `OrderPlaced` event to a Kafka topic. It doesn't know or care who is listening.
 
-![Event-Driven Notification](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.34.53_PM.png)
+![Event-Driven Notification](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.34.53_PM.png)
 
 Now, the Inventory, Notification, and Shipping services simply subscribe to this event stream and react accordingly. When the new `Dynamic Pricing Service` comes along, it can just plug into the existing stream without anyone having to change the `Order Service`. This "pluggability" is a superpower for large, evolving systems.
 
@@ -71,7 +71,7 @@ Now, the Inventory, Notification, and Shipping services simply subscribe to this
 
 Another powerful use of events is to replicate state between services. Instead of the `Shipping Service` making a direct RPC call to the `Customer Service` every time it needs a customer's address, it can subscribe to a stream of `CustomerUpdated` events.
 
-![Event-Driven State Transfer](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.39.15_PM.png)
+![Event-Driven State Transfer](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.39.15_PM.png)
 
 The `Shipping Service` can then maintain its own local copy of customer data, in a format that is optimized for its own needs. This makes the `Shipping Service` more resilient (it can function even if the `Customer Service` is down) and more performant (it's reading from its own database).
 
@@ -83,7 +83,7 @@ This leads us to two overarching patterns for managing workflows that span multi
 
 In an orchestrated system, a single, central service acts as a conductor. It controls the entire workflow, telling each service what to do and when.
 
-![Orchestrated System](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.13.18_PM.png)
+![Orchestrated System](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.13.18_PM.png)
 
 *   **Pros:** The entire workflow is defined in one place. This makes it easy to understand, reason about, and debug. The logic is explicit.
 *   **Cons:** The orchestrator can become a central bottleneck and a single point of failure. It creates tight coupling; the orchestrator needs to know about every service it commands.
@@ -92,7 +92,7 @@ In an orchestrated system, a single, central service acts as a conductor. It con
 
 In a choreographed system, there is no central conductor. Each service knows its own small part of the process. It listens for events from other services, does its work, and then emits its own events.
 
-![Choreographed System](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.56.12_PM.png)
+![Choreographed System](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.56.12_PM.png)
 
 *   **Pros:** This is the epitome of loose coupling and pluggability. Services are independent and can be developed, deployed, and scaled separately. The system is highly resilient.
 *   **Cons:** The overall workflow is not defined in any single place. It's an emergent property of the system, which can make it difficult to understand and monitor the end-to-end process.
@@ -103,7 +103,7 @@ No system is purely one or the other. The reality is that most complex systems u
 
 Within a single team or a bounded context, services might use a mix of request/response and event-driven communication. However, when communicating *between* different teams or departments working on independent domains, event-driven communication becomes the standard.
 
-![Hybrid Approach](Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.14.41_PM.png)
+![Hybrid Approach](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.14.41_PM.png)
 
 This allows each department to evolve its internal services freely while maintaining a stable, loosely coupled contract with the rest of the organization.
 
