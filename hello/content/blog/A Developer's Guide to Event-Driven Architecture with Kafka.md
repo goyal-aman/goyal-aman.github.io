@@ -4,7 +4,7 @@ date = "2025-11-16"
 description = "Key take aways from Design Event Driven Systems."
 tags = ['Designing Event Driven Systems', 'Event-Driven Systems', 'Kafka', 'Microservices', 'System Design', 'Orchestration', 'Choreography', 'Distributed Systems', 'Software Architecture',  'Confluent']
 images = ["/images/Orchestration_vs_Choreography.png"]
-cover = "/images/Orchestration_vs_Choreography.png.png"
+cover = "/images/Orchestration_vs_Choreography.png"
 +++
 ---
 # Unpacking Event-Driven Systems: A Journey Through Kafka, Coupling, and Collaboration
