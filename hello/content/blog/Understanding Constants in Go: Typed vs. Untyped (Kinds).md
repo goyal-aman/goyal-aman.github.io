@@ -32,7 +32,7 @@ cover = "/images/type_literal.svg"
 ​}
 ```
 ​
-## Typed Constants
+## 2. Typed Constants
 
 ​A constant becomes  **typed**  when you explicitly assign a type during its declaration. Typed constants are strictly bound by the Go type system rules from the moment they are declared.
 
