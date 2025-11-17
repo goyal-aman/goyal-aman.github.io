@@ -1,13 +1,8 @@
 +++
 title = "Understanding Constants in Go: Typed vs. Untyped (Kinds)"
-date = "2025-11-18"
+date = "2025-11-17"
 description = "Quick note on go constants"
-tags = [
-    "Database",
-    "OLAP",
-    "OLTP",
-    "Analytics"
-]
+tags = ['Go', 'Programming', 'Constants', 'Typed Constants', 'Untyped Constants', 'Go Language', 'Software Engineering']
 images = ["/images/type_literal.svg"]
 cover = "/images/type_literal.svg"
 +++
@@ -26,7 +21,7 @@ cover = "/images/type_literal.svg"
 ​*   **Arbitrary Precision:** Untyped numeric constants are calculated with very high precision (at least 256 bits) during compilation. They do not overflow until assigned to a variable of limited precision.
 ​*   **Flexibility (Implicit Conversion):** An untyped constant can be used wherever a concrete type is expected, as long as the value fits. The compiler implicitly converts it to the required type.
 
-​```go
+​```
 ​const SpeedOfLight = 299792458 // Untyped integer kind
 
 ​func main() {
@@ -35,13 +30,16 @@ cover = "/images/type_literal.svg"
 ​	var f64 float64 = SpeedOfLight // OK: Value fits in float64
 ​}
 ​```
+
 ​## Typed Constants
 
 ​A constant becomes  **typed**  when you explicitly assign a type during its declaration. Typed constants are strictly bound by the Go type system rules from the moment they are declared.
 
 ​-   **Strict Typing:**  They follow the same rigorous type-matching rules as variables.
 ​-   **Requires Explicit Conversion:**  You cannot use a typed constant with a variable of a different type without an explicit cast.
-​```go
+
+​```
+
 ​const TypedSpeed int = 299792458 // Now has type 'int'
 
 ​func main() {
@@ -49,7 +47,9 @@ cover = "/images/type_literal.svg"
 ​	// var i32 int32 = TypedSpeed  // ERROR: Cannot use type 'int' as type 'int32'
 ​	var i32 int32 = int32(TypedSpeed) // OK: Explicit conversion required
 ​}
+
 ​```
+
 ​## Summary for Advanced Usage
 
 ​The "untyped constant kind" is a powerful language feature that simplifies numeric code. It allows you to define universal numeric values (like 𝜋 or physical constants) that can be reused across different numeric types (`float32`, `float64`, `int`, etc.) without type errors or messy conversions.
