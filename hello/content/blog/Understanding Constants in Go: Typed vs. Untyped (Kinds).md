@@ -1,6 +1,6 @@
 +++
 title = "Understanding Constants in Go: Typed vs. Untyped (Kinds)"
-date = "2025-11-17"
+date = "2025-11-18"
 description = "Quick note on go constants"
 tags = ['Go', 'Programming', 'Constants', 'Typed Constants', 'Untyped Constants', 'Go Language', 'Software Engineering']
 images = ["/images/type_literal.svg"]
