@@ -70,8 +70,7 @@ If you have questions before booking, you can message me there as well.
 > He goes deep but keeps it simple.”**  
 > — *U. T., MTS2 Salesforce*
 
-> **“The mock interviews helped me become more confident.  
-> I could clearly see the improvement from the first session to the third.”**  
+> **“ I could clearly see the improvement from the first session to the third**  
 > — *A., Developer transitioning to backend*
 
 > **“I came with a specific doubt related to my project. Aman broke it down quickly and gave me a clear direction.  
