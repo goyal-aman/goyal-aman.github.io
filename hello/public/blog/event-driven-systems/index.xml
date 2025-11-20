@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event-Driven Systems on Aman Goyal</title>
+    <link>http://localhost:1313/blog/event-driven-systems/</link>
+    <description>Recent content in Event-Driven Systems on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/event-driven-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Developer&#39;s Guide to Event-Driven Architecture with Kafka</title>
+      <link>http://localhost:1313/a-developers-guide-to-event-driven-architecture-with-kafka/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/a-developers-guide-to-event-driven-architecture-with-kafka/</guid>
+      <description># Unpacking Event-Driven Systems: A Journey Through Kafka, Coupling, and Collaboration I&#39;ve recently been reading &amp;quot;Designing Event-Driven Systems&amp;quot; by Ben Stopford (a book from Confluent), and it has crystallized many concepts about how modern, scalable systems are built. This post is a summary of my key takeaways, exploring what Kafka truly is, how services communicate, and the powerful patterns that emerge in an event-driven world. ## What is Kafka? (And What It Isn&#39;t) It&#39;s easy to pigeonhole new technology by comparing it to what we already know.</description>
+    </item>
+  </channel>
+</rss>

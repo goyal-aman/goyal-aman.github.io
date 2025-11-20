@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Constants on Aman Goyal</title>
+    <link>http://localhost:1313/blog/constants/</link>
+    <description>Recent content in Constants on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Tue, 18 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/constants/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding Constants in Go: Typed vs. Untyped (Kinds)</title>
+      <link>http://localhost:1313/understanding-constants-in-go-typed-vs.-untyped-kinds/</link>
+      <pubDate>Tue, 18 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/understanding-constants-in-go-typed-vs.-untyped-kinds/</guid>
+      <description>Understanding Constants in Go: Typed vs. Untyped (Kinds) ​In Go, constants are immutable values evaluated entirely at compile time. A crucial concept for moving from beginner to intermediate Go programmer is understanding the difference between typed and untyped constants.&#xA;1. Untyped Constants (The Default &amp;ldquo;Kind&amp;rdquo;) ​By default, any constant you declare without an explicit type is untyped. These constants don&amp;rsquo;t adhere to Go&amp;rsquo;s strict type system initially; instead, they possess a generic classification known as a &amp;ldquo;kind&amp;rdquo; (e.</description>
+    </item>
+  </channel>
+</rss>

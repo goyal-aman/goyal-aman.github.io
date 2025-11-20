@@ -12,7 +12,7 @@
 <title>Blog | Aman Goyal</title>
 <meta name="title" content="Blog" />
 <meta name="description" content="Aman goyal is software engineer with experience in developing segmentation solutions" />
-<meta name="keywords" content="analytics,api gateway,athena,aws,aws athena,aws firehose,aws msk,aws quicksight,aws s3,backend engineering,cache efficiency,container,data access patterns,data architecture,database,database indexing,databases,disk,distributed lock,documentdb,firehose,index,index tuning,lambda,load balancer,locks,long tail data,memory,msk,network,nosql vs sql,olap,oltp,one page later pod,performance optimization,query performance,quicksight,relational databases,s3,scalability,serverless,storage systems,system design," />
+<meta name="keywords" content="analytics,api gateway,athena,aws,aws athena,aws firehose,aws msk,aws quicksight,aws s3,backend engineering,cache efficiency,choreography,confluent,constants,container,data access patterns,data architecture,database,database indexing,databases,designing event driven systems,disk,distributed lock,distributed systems,documentdb,event-driven systems,firehose,go,go language,index,index tuning,kafka,lambda,load balancer,locks,long tail data,memory,microservices,msk,network,nosql vs sql,olap,oltp,one page later pod,orchestration,performance optimization,programming,query performance,quicksight,relational databases,s3,scalability,serverless,software architecture,software engineering,storage systems,system design,typed constants,untyped constants," />
 
 
 <meta property="og:title" content="Blog" />
@@ -204,6 +204,9 @@
       <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
         <i class="fab fa-medium fa-lg"></i>
       </a>
+      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
       <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
         <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
       </a>
@@ -214,17 +217,44 @@
       
     </div>
   </header>
-  <nav><a href="/">Home</a>
+  <nav>
+
+<a href="/">Home</a>
+
+<a href="/blog/">Blog</a>
+
+<a href="/coaching">Coaching</a>
 
 
-<a href="/blog">Blog</a>
-
+    
 </nav>
 </header>
   <main>
 <content>
   
   <ul class="blog-posts">
+    
+    <li>
+      <span>
+        <i>
+          <time datetime='2025-11-18'>
+            18 Nov, 2025
+          </time>
+        </i>
+      </span>
+      <a href="http://localhost:1313/understanding-constants-in-go-typed-vs.-untyped-kinds/">Understanding Constants in Go: Typed vs. Untyped (Kinds)</a>
+    </li>
+    
+    <li>
+      <span>
+        <i>
+          <time datetime='2025-11-16'>
+            16 Nov, 2025
+          </time>
+        </i>
+      </span>
+      <a href="http://localhost:1313/a-developers-guide-to-event-driven-architecture-with-kafka/">A Developer&#39;s Guide to Event-Driven Architecture with Kafka</a>
+    </li>
     
     <li>
       <span>
@@ -352,6 +382,12 @@
         
         <a href="http://localhost:1313/blog/cache-efficiency/">#Cache Efficiency</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/choreography/">#Choreography</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/confluent/">#Confluent</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/constants/">#Constants</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/container/">#Container</a>&nbsp;
         
         <a href="http://localhost:1313/blog/data-access-patterns/">#Data Access Patterns</a>&nbsp;
@@ -364,17 +400,29 @@
         
         <a href="http://localhost:1313/blog/databases/">#Databases</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/designing-event-driven-systems/">#Designing Event Driven Systems</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/disk/">#Disk</a>&nbsp;
         
         <a href="http://localhost:1313/blog/distributed-lock/">#Distributed Lock</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/documentdb/">#DocumentDB</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/event-driven-systems/">#Event-Driven Systems</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/firehose/">#Firehose</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/go/">#Go</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/go-language/">#Go Language</a>&nbsp;
         
         <a href="http://localhost:1313/blog/index/">#Index</a>&nbsp;
         
         <a href="http://localhost:1313/blog/index-tuning/">#Index Tuning</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/kafka/">#Kafka</a>&nbsp;
         
         <a href="http://localhost:1313/blog/lambda/">#Lambda</a>&nbsp;
         
@@ -385,6 +433,8 @@
         <a href="http://localhost:1313/blog/long-tail-data/">#Long Tail Data</a>&nbsp;
         
         <a href="http://localhost:1313/blog/memory/">#Memory</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/microservices/">#Microservices</a>&nbsp;
         
         <a href="http://localhost:1313/blog/msk/">#MSK</a>&nbsp;
         
@@ -398,7 +448,11 @@
         
         <a href="http://localhost:1313/blog/one-page-later-pod/">#One Page Later Pod</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/orchestration/">#Orchestration</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/performance-optimization/">#Performance Optimization</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/programming/">#Programming</a>&nbsp;
         
         <a href="http://localhost:1313/blog/query-performance/">#Query Performance</a>&nbsp;
         
@@ -412,9 +466,17 @@
         
         <a href="http://localhost:1313/blog/serverless/">#Serverless</a>&nbsp;
         
+        <a href="http://localhost:1313/blog/software-architecture/">#Software Architecture</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/software-engineering/">#Software Engineering</a>&nbsp;
+        
         <a href="http://localhost:1313/blog/storage-systems/">#Storage Systems</a>&nbsp;
         
         <a href="http://localhost:1313/blog/system-design/">#System Design</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/typed-constants/">#Typed Constants</a>&nbsp;
+        
+        <a href="http://localhost:1313/blog/untyped-constants/">#Untyped Constants</a>&nbsp;
         
       </div>
     </small>

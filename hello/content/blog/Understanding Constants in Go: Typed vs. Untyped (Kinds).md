@@ -9,7 +9,7 @@ cover = "/images/type_literal.svg"
 ---
 
 # Understanding Constants in Go: Typed vs. Untyped (Kinds)
-
+    
 ​In Go, constants are immutable values evaluated entirely at compile time. A crucial concept for moving from beginner to intermediate Go programmer is understanding the difference between *typed* and *untyped* constants.
 
 
