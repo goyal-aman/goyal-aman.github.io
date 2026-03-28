@@ -1,20 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Failure Patterns on Aman Goyal</title>
-    <link>http://localhost:1313/blog/failure-patterns/</link>
-    <description>Recent content in Failure Patterns on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/failure-patterns/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Common Failure Patterns in Distributed Systems: What Not to Do</title>
-      <link>http://localhost:1313/common-failure-patterns-in-distributed-systems-what-not-to-do/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/common-failure-patterns-in-distributed-systems-what-not-to-do/</guid>
-      <description>Core Idea This chapter is about what NOT to do Distributed systems fail in predictable patterns Learn them → prevent repeated mistakes Major Failure Patterns 1. Thundering Herd (VERY IMPORTANT) What happens: System overload → failures Clients retry → even more load Load amplifies exponentially Example:&#xA;X requests → fail → retries → 2X → 4X → crash Solutions: Exponential backoff Jitter (random delay) Circuit breaker Gradual recovery (don&amp;rsquo;t flood system) 2.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Failure Patterns on Aman Goyal</title><link>https://goyal-aman.github.io/blog/failure-patterns/</link><description>Recent content in Failure Patterns on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/failure-patterns/index.xml" rel="self" type="application/rss+xml"/><item><title>Common Failure Patterns in Distributed Systems: What Not to Do</title><link>https://goyal-aman.github.io/common-failure-patterns-in-distributed-systems-what-not-to-do/</link><pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/common-failure-patterns-in-distributed-systems-what-not-to-do/</guid><description>&lt;h2 id="core-idea"&gt;Core Idea&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This chapter is about &lt;strong&gt;what NOT to do&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Distributed systems fail in &lt;strong&gt;predictable patterns&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Learn them → &lt;strong&gt;prevent repeated mistakes&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="major-failure-patterns"&gt;Major Failure Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-thundering-herd-very-important"&gt;1. Thundering Herd (VERY IMPORTANT)&lt;/h3&gt;
+&lt;h4 id="what-happens"&gt;What happens:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;System overload → failures&lt;/li&gt;
+&lt;li&gt;Clients retry → even more load&lt;/li&gt;
+&lt;li&gt;Load amplifies exponentially&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X requests → fail → retries → 2X → 4X → crash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="solutions"&gt;Solutions:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exponential backoff&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Jitter&lt;/strong&gt; (random delay)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Circuit breaker&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Gradual recovery (don&amp;rsquo;t flood system)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-no-errors-is-also-an-error"&gt;2. &amp;ldquo;No Errors&amp;rdquo; Is Also an Error&lt;/h3&gt;
+&lt;h4 id="problem"&gt;Problem:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Zero errors ≠ healthy system&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;</description></item></channel></rss>

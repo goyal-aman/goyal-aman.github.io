@@ -1,20 +1,71 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Aggregation on Aman Goyal</title>
-    <link>http://localhost:1313/blog/aggregation/</link>
-    <description>Recent content in Aggregation on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/aggregation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title>
-      <link>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link>
-      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid>
-      <description>Core Concept Focus: bringing parallel work back together Opposite of earlier chapters (which split work) Used for: Aggregation Synchronization Final results Think:&#xA;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&#xA;Why Coordination Is Needed Previous patterns: Sharding → split work Work queues → process independently But:&#xA;Some tasks need complete dataset Some need aggregation (sum, stats) Need coordination primitives&#xA;Core Patterns 1. Join (Barrier Synchronization) What it does: Waits until ALL parallel work is done Then releases results Example: Video rendering: Need all frames before creating video Key properties: Ensures completeness Blocks until everything finishes Trade-off: Slower (less parallelism) Correct &amp;amp; complete results 2.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aggregation on Aman Goyal</title><link>https://goyal-aman.github.io/blog/aggregation/</link><description>Recent content in Aggregation on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/aggregation/index.xml" rel="self" type="application/rss+xml"/><item><title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title><link>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Focus: &lt;strong&gt;bringing parallel work back together&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Opposite of earlier chapters (which split work)&lt;/li&gt;
+&lt;li&gt;Used for:
+&lt;ul&gt;
+&lt;li&gt;Aggregation&lt;/li&gt;
+&lt;li&gt;Synchronization&lt;/li&gt;
+&lt;li&gt;Final results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-coordination-is-needed"&gt;Why Coordination Is Needed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous patterns:
+&lt;ul&gt;
+&lt;li&gt;Sharding → split work&lt;/li&gt;
+&lt;li&gt;Work queues → process independently&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Some tasks need &lt;strong&gt;complete dataset&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Some need &lt;strong&gt;aggregation (sum, stats)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need coordination primitives&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-join-barrier-synchronization"&gt;1. Join (Barrier Synchronization)&lt;/h3&gt;
+&lt;h4 id="what-it-does"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Waits until &lt;strong&gt;ALL parallel work is done&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Then releases results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="example"&gt;Example:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Video rendering:
+&lt;ul&gt;
+&lt;li&gt;Need all frames before creating video&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="key-properties"&gt;Key properties:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensures &lt;strong&gt;completeness&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Blocks until everything finishes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="trade-off"&gt;Trade-off:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Slower (less parallelism)&lt;/li&gt;
+&lt;li&gt;Correct &amp;amp; complete results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-reduce-very-important"&gt;2. Reduce (VERY IMPORTANT)&lt;/h3&gt;
+&lt;h4 id="what-it-does-1"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Incrementally combines outputs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Reduces many → one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="example-word-count"&gt;Example: Word Count&lt;/h4&gt;
+&lt;p&gt;Input:&lt;/p&gt;</description></item></channel></rss>

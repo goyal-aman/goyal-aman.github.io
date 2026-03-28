@@ -1,20 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>AI on Aman Goyal</title>
-    <link>http://localhost:1313/blog/ai/</link>
-    <description>Recent content in AI on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/ai/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>AI Inference and Serving: Integrating Machine Learning into Distributed Systems</title>
-      <link>http://localhost:1313/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</link>
-      <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</guid>
-      <description>Core Concept AI systems revolve around: Model (trained weights) Inference (runtime prediction) Inference is typically exposed as a REST API Think:&#xA;Model = learned function, Inference = using it in production&#xA;Key Building Blocks 1. Model vs Training vs Inference Training Learn from data (expensive, offline) Fine-tuning Adapt existing model (cheaper) Inference Run model on real user input (online) Most systems:&#xA;Don&amp;rsquo;t train → just use pretrained models 2. Prompt Engineering (VERY IMPORTANT) Input is wrapped inside a prompt Prompt adds: Context Instructions Personalization Better prompt → better output</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on Aman Goyal</title><link>https://goyal-aman.github.io/blog/ai/</link><description>Recent content in AI on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Inference and Serving: Integrating Machine Learning into Distributed Systems</title><link>https://goyal-aman.github.io/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</link><pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AI systems revolve around:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Model (trained weights)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inference (runtime prediction)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Inference is typically exposed as a &lt;strong&gt;REST API&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Model = learned function, Inference = using it in production&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="key-building-blocks"&gt;Key Building Blocks&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-model-vs-training-vs-inference"&gt;1. Model vs Training vs Inference&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Training&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Learn from data (expensive, offline)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fine-tuning&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Adapt existing model (cheaper)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inference&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Run model on real user input (online)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most systems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t train → just use pretrained models&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-prompt-engineering-very-important"&gt;2. Prompt Engineering (VERY IMPORTANT)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Input is wrapped inside a &lt;strong&gt;prompt&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Prompt adds:
+&lt;ul&gt;
+&lt;li&gt;Context&lt;/li&gt;
+&lt;li&gt;Instructions&lt;/li&gt;
+&lt;li&gt;Personalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Better prompt → better output&lt;/p&gt;</description></item></channel></rss>

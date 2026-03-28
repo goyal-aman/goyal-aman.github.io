@@ -1,27 +1,87 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Scaling on Aman Goyal</title>
-    <link>http://localhost:1313/blog/scaling/</link>
-    <description>Recent content in Scaling on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 24 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/scaling/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Sharded Services: Scaling Data Beyond a Single Machine</title>
-      <link>http://localhost:1313/sharded-services-scaling-data-beyond-a-single-machine/</link>
-      <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/sharded-services-scaling-data-beyond-a-single-machine/</guid>
-      <description>Core Concept Sharding = splitting data/work across multiple machines (shards) Each shard handles only a subset of requests A router/load balancer decides which shard handles each request Sharding vs Replication Feature Replication Sharding Data Same everywhere Split across nodes Use case Stateless services Stateful / large data Goal Availability + scaling Data size + scaling Replication = copy&#xA;Sharding = divide&#xA;Why Sharding Is Needed 1. Scale beyond a single machine Data too large → cannot fit in one server Sharding distributes storage across nodes 2.</description>
-    </item>
-    <item>
-      <title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title>
-      <link>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link>
-      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid>
-      <description>Core Concept Replicated load-balanced service = multiple identical servers + load balancer Any instance can handle any request Load balancer distributes traffic (round-robin or sticky sessions) Why Replication Matters 1. High availability (HA) Single instance = downtime during: Deployments Crashes Minimum 2 replicas needed for reliability 2. Horizontal scaling Handle more users by adding replicas Scale out instead of scaling up Stateless Services (Ideal Case) No dependency on stored state Any request → any replica Examples: APIs Web servers Middleware Makes load balancing simple and efficient</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Scaling on Aman Goyal</title><link>https://goyal-aman.github.io/blog/scaling/</link><description>Recent content in Scaling on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 24 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/scaling/index.xml" rel="self" type="application/rss+xml"/><item><title>Sharded Services: Scaling Data Beyond a Single Machine</title><link>https://goyal-aman.github.io/sharded-services-scaling-data-beyond-a-single-machine/</link><pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/sharded-services-scaling-data-beyond-a-single-machine/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sharding = splitting data/work across multiple machines (shards)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Each shard handles &lt;strong&gt;only a subset of requests&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;A router/load balancer decides &lt;strong&gt;which shard handles each request&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="sharding-vs-replication"&gt;Sharding vs Replication&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Feature&lt;/th&gt;
+ &lt;th&gt;Replication&lt;/th&gt;
+ &lt;th&gt;Sharding&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Data&lt;/td&gt;
+ &lt;td&gt;Same everywhere&lt;/td&gt;
+ &lt;td&gt;Split across nodes&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Use case&lt;/td&gt;
+ &lt;td&gt;Stateless services&lt;/td&gt;
+ &lt;td&gt;Stateful / large data&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Goal&lt;/td&gt;
+ &lt;td&gt;Availability + scaling&lt;/td&gt;
+ &lt;td&gt;Data size + scaling&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Replication = copy&lt;/p&gt;
+&lt;p&gt;Sharding = divide&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="why-sharding-is-needed"&gt;Why Sharding Is Needed&lt;/h2&gt;
+&lt;h3 id="1-scale-beyond-a-single-machine"&gt;1. Scale beyond a single machine&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Data too large → cannot fit in one server&lt;/li&gt;
+&lt;li&gt;Sharding distributes storage across nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-better-resource-utilization"&gt;2. Better resource utilization&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Each shard stores &lt;strong&gt;unique data&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Avoids duplication seen in replicated caches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;</description></item><item><title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title><link>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link><pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Replicated load-balanced service = multiple identical servers + load balancer&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Any instance can handle any request&lt;/li&gt;
+&lt;li&gt;Load balancer distributes traffic (round-robin or sticky sessions)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-replication-matters"&gt;Why Replication Matters&lt;/h2&gt;
+&lt;h3 id="1-high-availability-ha"&gt;1. High availability (HA)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Single instance = downtime during:
+&lt;ul&gt;
+&lt;li&gt;Deployments&lt;/li&gt;
+&lt;li&gt;Crashes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Minimum &lt;strong&gt;2 replicas&lt;/strong&gt; needed for reliability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-horizontal-scaling"&gt;2. Horizontal scaling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Handle more users by &lt;strong&gt;adding replicas&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Scale out instead of scaling up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="stateless-services-ideal-case"&gt;Stateless Services (Ideal Case)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;No dependency on stored state&lt;/li&gt;
+&lt;li&gt;Any request → any replica&lt;/li&gt;
+&lt;li&gt;Examples:
+&lt;ul&gt;
+&lt;li&gt;APIs&lt;/li&gt;
+&lt;li&gt;Web servers&lt;/li&gt;
+&lt;li&gt;Middleware&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Makes load balancing simple and efficient&lt;/p&gt;</description></item></channel></rss>

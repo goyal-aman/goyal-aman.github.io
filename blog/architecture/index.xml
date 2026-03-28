@@ -1,20 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Architecture on Aman Goyal</title>
-    <link>http://localhost:1313/blog/architecture/</link>
-    <description>Recent content in Architecture on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/architecture/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>From Monoliths to Microservices: An Introduction to Serving Patterns</title>
-      <link>http://localhost:1313/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</link>
-      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</guid>
-      <description>Big Picture Shift Moving from single-node patterns → multi-node distributed systems Systems are now: Loosely coupled Communicating over network APIs Coordinated with parallel + asynchronous calls Monolith vs Microservices Monolith Everything in one application/container Tightly coupled Hard to scale selectively Microservices App split into many small services Each service: Runs independently Communicates via APIs Why Microservices Are Useful 1. Better team ownership Small services → owned by small teams (&amp;ldquo;two-pizza teams&amp;rdquo;) Less coordination overhead 2.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Architecture on Aman Goyal</title><link>https://goyal-aman.github.io/blog/architecture/</link><description>Recent content in Architecture on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/architecture/index.xml" rel="self" type="application/rss+xml"/><item><title>From Monoliths to Microservices: An Introduction to Serving Patterns</title><link>https://goyal-aman.github.io/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</link><pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</guid><description>&lt;h2 id="big-picture-shift"&gt;Big Picture Shift&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Moving from &lt;strong&gt;single-node patterns&lt;/strong&gt; → &lt;strong&gt;multi-node distributed systems&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Systems are now:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Loosely coupled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Communicating over &lt;strong&gt;network APIs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Coordinated with &lt;strong&gt;parallel + asynchronous calls&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="monolith-vs-microservices"&gt;Monolith vs Microservices&lt;/h2&gt;
+&lt;h3 id="monolith"&gt;Monolith&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Everything in &lt;strong&gt;one application/container&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Tightly coupled&lt;/li&gt;
+&lt;li&gt;Hard to scale selectively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="microservices"&gt;Microservices&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App split into &lt;strong&gt;many small services&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Each service:
+&lt;ul&gt;
+&lt;li&gt;Runs independently&lt;/li&gt;
+&lt;li&gt;Communicates via APIs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-microservices-are-useful"&gt;Why Microservices Are Useful&lt;/h2&gt;
+&lt;h3 id="1-better-team-ownership"&gt;1. Better team ownership&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Small services → owned by small teams (&amp;ldquo;two-pizza teams&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;Less coordination overhead&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-decoupling-via-apis"&gt;2. Decoupling via APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Services interact through &lt;strong&gt;stable contracts&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Teams can:
+&lt;ul&gt;
+&lt;li&gt;Develop independently&lt;/li&gt;
+&lt;li&gt;Deploy independently&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-abstraction--encapsulation"&gt;3. Abstraction + Encapsulation&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Abstraction&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a service without knowing how it works&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Encapsulation&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Hide implementation details&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Together:&lt;/p&gt;</description></item></channel></rss>

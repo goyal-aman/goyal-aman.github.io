@@ -1,20 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Work Queues on Aman Goyal</title>
-    <link>http://localhost:1313/blog/work-queues/</link>
-    <description>Recent content in Work Queues on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/work-queues/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title>
-      <link>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link>
-      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid>
-      <description>Core Concept Work queue = batch processing pattern Work is: Broken into independent tasks Processed by workers in parallel Goal: Process all items within acceptable time Architecture Overview Three main components: Work Queue Manager (generic logic) Source (Ambassador) → provides work items Worker → processes each item Strong separation:&#xA;Infra = reusable Business logic = pluggable Two Key Interfaces 1. Source Interface (HTTP) GET http://localhost/api/v1/items GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt; Response format { kind: ItemList, apiVersion: v1, items: [ &amp;#34;item-1&amp;#34;, &amp;#34;item-2&amp;#34; ] } Important:</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Work Queues on Aman Goyal</title><link>https://goyal-aman.github.io/blog/work-queues/</link><description>Recent content in Work Queues on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/work-queues/index.xml" rel="self" type="application/rss+xml"/><item><title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title><link>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link><pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Work queue = batch processing pattern&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Work is:
+&lt;ul&gt;
+&lt;li&gt;Broken into &lt;strong&gt;independent tasks&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Processed by &lt;strong&gt;workers in parallel&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Goal:
+&lt;ul&gt;
+&lt;li&gt;Process all items within acceptable time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="architecture-overview"&gt;Architecture Overview&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Three main components:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Work Queue Manager&lt;/strong&gt; (generic logic)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Source (Ambassador)&lt;/strong&gt; → provides work items&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker&lt;/strong&gt; → processes each item&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Strong separation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Infra = reusable&lt;/li&gt;
+&lt;li&gt;Business logic = pluggable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="two-key-interfaces"&gt;Two Key Interfaces&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-source-interface-http"&gt;1. Source Interface (HTTP)&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;GET http://localhost/api/v1/items
+GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id="response-format"&gt;Response format&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;kind:&lt;/span&gt; &lt;span class="err"&gt;ItemList,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;apiVersion:&lt;/span&gt; &lt;span class="err"&gt;v1,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;items:&lt;/span&gt; &lt;span class="err"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;Important:&lt;/p&gt;</description></item></channel></rss>

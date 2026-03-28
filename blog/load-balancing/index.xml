@@ -1,20 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Load Balancing on Aman Goyal</title>
-    <link>http://localhost:1313/blog/load-balancing/</link>
-    <description>Recent content in Load Balancing on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/load-balancing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title>
-      <link>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link>
-      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid>
-      <description>Core Concept Replicated load-balanced service = multiple identical servers + load balancer Any instance can handle any request Load balancer distributes traffic (round-robin or sticky sessions) Why Replication Matters 1. High availability (HA) Single instance = downtime during: Deployments Crashes Minimum 2 replicas needed for reliability 2. Horizontal scaling Handle more users by adding replicas Scale out instead of scaling up Stateless Services (Ideal Case) No dependency on stored state Any request → any replica Examples: APIs Web servers Middleware Makes load balancing simple and efficient</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Load Balancing on Aman Goyal</title><link>https://goyal-aman.github.io/blog/load-balancing/</link><description>Recent content in Load Balancing on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/load-balancing/index.xml" rel="self" type="application/rss+xml"/><item><title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title><link>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link><pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Replicated load-balanced service = multiple identical servers + load balancer&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Any instance can handle any request&lt;/li&gt;
+&lt;li&gt;Load balancer distributes traffic (round-robin or sticky sessions)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-replication-matters"&gt;Why Replication Matters&lt;/h2&gt;
+&lt;h3 id="1-high-availability-ha"&gt;1. High availability (HA)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Single instance = downtime during:
+&lt;ul&gt;
+&lt;li&gt;Deployments&lt;/li&gt;
+&lt;li&gt;Crashes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Minimum &lt;strong&gt;2 replicas&lt;/strong&gt; needed for reliability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-horizontal-scaling"&gt;2. Horizontal scaling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Handle more users by &lt;strong&gt;adding replicas&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Scale out instead of scaling up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="stateless-services-ideal-case"&gt;Stateless Services (Ideal Case)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;No dependency on stored state&lt;/li&gt;
+&lt;li&gt;Any request → any replica&lt;/li&gt;
+&lt;li&gt;Examples:
+&lt;ul&gt;
+&lt;li&gt;APIs&lt;/li&gt;
+&lt;li&gt;Web servers&lt;/li&gt;
+&lt;li&gt;Middleware&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Makes load balancing simple and efficient&lt;/p&gt;</description></item></channel></rss>

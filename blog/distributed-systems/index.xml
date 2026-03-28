@@ -1,5 +1,847 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Distributed Systems on Aman Goyal</title><link>https://goyal-aman.github.io/blog/distributed-systems/</link><description>Recent content in Distributed Systems on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/distributed-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>A Developer's Guide to Event-Driven Architecture with Kafka</title><link>https://goyal-aman.github.io/a-developers-guide-to-event-driven-architecture-with-kafka/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/a-developers-guide-to-event-driven-architecture-with-kafka/</guid><description>&lt;hr&gt;
-&lt;h1 id="unpacking-event-driven-systems-a-journey-through-kafka-coupling-and-collaboration"&gt;Unpacking Event-Driven Systems: A Journey Through Kafka, Coupling, and Collaboration&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;ve recently been reading &amp;ldquo;Designing Event-Driven Systems&amp;rdquo; by Ben Stopford (a book from Confluent), and it has crystallized many concepts about how modern, scalable systems are built. This post is a summary of my key takeaways, exploring what Kafka truly is, how services communicate, and the powerful patterns that emerge in an event-driven world.&lt;/p&gt;
-&lt;h2 id="what-is-kafka-and-what-it-isnt"&gt;What is Kafka? (And What It Isn&amp;rsquo;t)&lt;/h2&gt;
-&lt;p&gt;It&amp;rsquo;s easy to pigeonhole new technology by comparing it to what we already know. Kafka often gets compared to two familiar tools: Enterprise Service Buses (ESBs) and Databases. While it shares some characteristics with both, Kafka is fundamentally a &lt;strong&gt;streaming platform&lt;/strong&gt;, a different beast altogether.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Distributed Systems on Aman Goyal</title><link>https://goyal-aman.github.io/blog/distributed-systems/</link><description>Recent content in Distributed Systems on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/distributed-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>Common Failure Patterns in Distributed Systems: What Not to Do</title><link>https://goyal-aman.github.io/common-failure-patterns-in-distributed-systems-what-not-to-do/</link><pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/common-failure-patterns-in-distributed-systems-what-not-to-do/</guid><description>&lt;h2 id="core-idea"&gt;Core Idea&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This chapter is about &lt;strong&gt;what NOT to do&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Distributed systems fail in &lt;strong&gt;predictable patterns&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Learn them → &lt;strong&gt;prevent repeated mistakes&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="major-failure-patterns"&gt;Major Failure Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-thundering-herd-very-important"&gt;1. Thundering Herd (VERY IMPORTANT)&lt;/h3&gt;
+&lt;h4 id="what-happens"&gt;What happens:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;System overload → failures&lt;/li&gt;
+&lt;li&gt;Clients retry → even more load&lt;/li&gt;
+&lt;li&gt;Load amplifies exponentially&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X requests → fail → retries → 2X → 4X → crash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="solutions"&gt;Solutions:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exponential backoff&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Jitter&lt;/strong&gt; (random delay)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Circuit breaker&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Gradual recovery (don&amp;rsquo;t flood system)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-no-errors-is-also-an-error"&gt;2. &amp;ldquo;No Errors&amp;rdquo; Is Also an Error&lt;/h3&gt;
+&lt;h4 id="problem"&gt;Problem:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Zero errors ≠ healthy system&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;</description></item><item><title>AI Inference and Serving: Integrating Machine Learning into Distributed Systems</title><link>https://goyal-aman.github.io/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</link><pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;AI systems revolve around:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Model (trained weights)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inference (runtime prediction)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Inference is typically exposed as a &lt;strong&gt;REST API&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Model = learned function, Inference = using it in production&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="key-building-blocks"&gt;Key Building Blocks&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-model-vs-training-vs-inference"&gt;1. Model vs Training vs Inference&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Training&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Learn from data (expensive, offline)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fine-tuning&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Adapt existing model (cheaper)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inference&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Run model on real user input (online)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most systems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t train → just use pretrained models&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-prompt-engineering-very-important"&gt;2. Prompt Engineering (VERY IMPORTANT)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Input is wrapped inside a &lt;strong&gt;prompt&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Prompt adds:
+&lt;ul&gt;
+&lt;li&gt;Context&lt;/li&gt;
+&lt;li&gt;Instructions&lt;/li&gt;
+&lt;li&gt;Personalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Better prompt → better output&lt;/p&gt;</description></item><item><title>Monitoring and Observability: Logs, Metrics, Alerts, and Tracing</title><link>https://goyal-aman.github.io/monitoring-and-observability-logs-metrics-alerts-and-tracing/</link><pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/monitoring-and-observability-logs-metrics-alerts-and-tracing/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Distributed systems run &lt;strong&gt;24/7 → failures are inevitable&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;You must:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Detect problems before users&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Understand system behavior quickly&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Observability = ability to &lt;strong&gt;debug from outside&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="four-pillars-very-important"&gt;Four Pillars (VERY IMPORTANT)&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-logging"&gt;1. Logging&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Records &lt;strong&gt;individual events&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Helps debug &lt;strong&gt;specific requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="key-practices"&gt;Key practices:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Include:
+&lt;ul&gt;
+&lt;li&gt;Timestamp&lt;/li&gt;
+&lt;li&gt;Request ID / user ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;strong&gt;log levels&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Debug, Info, Warning, Error, Fatal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Insight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log &lt;strong&gt;errors + unusual behavior&lt;/strong&gt;, not everything&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-metrics"&gt;2. Metrics&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Aggregate view of system over time&lt;/li&gt;
+&lt;li&gt;Stored as &lt;strong&gt;time series data&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="types"&gt;Types:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Counts&lt;/strong&gt; → total requests&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rates&lt;/strong&gt; → requests/sec&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Histograms&lt;/strong&gt; → latency distribution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Values&lt;/strong&gt; → CPU, memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most important metrics:&lt;/p&gt;</description></item><item><title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title><link>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Focus: &lt;strong&gt;bringing parallel work back together&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Opposite of earlier chapters (which split work)&lt;/li&gt;
+&lt;li&gt;Used for:
+&lt;ul&gt;
+&lt;li&gt;Aggregation&lt;/li&gt;
+&lt;li&gt;Synchronization&lt;/li&gt;
+&lt;li&gt;Final results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-coordination-is-needed"&gt;Why Coordination Is Needed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous patterns:
+&lt;ul&gt;
+&lt;li&gt;Sharding → split work&lt;/li&gt;
+&lt;li&gt;Work queues → process independently&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Some tasks need &lt;strong&gt;complete dataset&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Some need &lt;strong&gt;aggregation (sum, stats)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need coordination primitives&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-join-barrier-synchronization"&gt;1. Join (Barrier Synchronization)&lt;/h3&gt;
+&lt;h4 id="what-it-does"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Waits until &lt;strong&gt;ALL parallel work is done&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Then releases results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="example"&gt;Example:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Video rendering:
+&lt;ul&gt;
+&lt;li&gt;Need all frames before creating video&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="key-properties"&gt;Key properties:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensures &lt;strong&gt;completeness&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Blocks until everything finishes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="trade-off"&gt;Trade-off:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Slower (less parallelism)&lt;/li&gt;
+&lt;li&gt;Correct &amp;amp; complete results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-reduce-very-important"&gt;2. Reduce (VERY IMPORTANT)&lt;/h3&gt;
+&lt;h4 id="what-it-does-1"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Incrementally combines outputs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Reduces many → one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="example-word-count"&gt;Example: Word Count&lt;/h4&gt;
+&lt;p&gt;Input:&lt;/p&gt;</description></item><item><title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title><link>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Extend work queues into &lt;strong&gt;workflows (DAGs)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Output of one stage → input to next stage&lt;/li&gt;
+&lt;li&gt;Entire system becomes &lt;strong&gt;event-driven pipeline&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Multiple work queues connected together by events&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-this-pattern-exists"&gt;Why This Pattern Exists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Work queues (Chapter 11) → 1 input → 1 output&lt;/li&gt;
+&lt;li&gt;Real systems:
+&lt;ul&gt;
+&lt;li&gt;Multiple outputs&lt;/li&gt;
+&lt;li&gt;Multiple steps&lt;/li&gt;
+&lt;li&gt;Parallel + conditional flows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need &lt;strong&gt;workflow orchestration&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-copier"&gt;1. Copier&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Duplicate work into multiple queues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use case:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Video → multiple formats (4K, 1080p, GIF)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also improves:&lt;/p&gt;</description></item><item><title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title><link>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link><pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Work queue = batch processing pattern&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Work is:
+&lt;ul&gt;
+&lt;li&gt;Broken into &lt;strong&gt;independent tasks&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Processed by &lt;strong&gt;workers in parallel&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Goal:
+&lt;ul&gt;
+&lt;li&gt;Process all items within acceptable time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="architecture-overview"&gt;Architecture Overview&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Three main components:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Work Queue Manager&lt;/strong&gt; (generic logic)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Source (Ambassador)&lt;/strong&gt; → provides work items&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker&lt;/strong&gt; → processes each item&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Strong separation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Infra = reusable&lt;/li&gt;
+&lt;li&gt;Business logic = pluggable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="two-key-interfaces"&gt;Two Key Interfaces&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-source-interface-http"&gt;1. Source Interface (HTTP)&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;GET http://localhost/api/v1/items
+GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id="response-format"&gt;Response format&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;kind:&lt;/span&gt; &lt;span class="err"&gt;ItemList,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;apiVersion:&lt;/span&gt; &lt;span class="err"&gt;v1,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;items:&lt;/span&gt; &lt;span class="err"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;Important:&lt;/p&gt;</description></item><item><title>Leader Election: Ensuring a Single Owner in a Distributed System</title><link>https://goyal-aman.github.io/leader-election-ensuring-a-single-owner-in-a-distributed-system/</link><pubDate>Sat, 14 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/leader-election-ensuring-a-single-owner-in-a-distributed-system/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ownership / Leader election = only one replica owns a task at a time&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Needed for:
+&lt;ul&gt;
+&lt;li&gt;Scheduling&lt;/li&gt;
+&lt;li&gt;Shard ownership&lt;/li&gt;
+&lt;li&gt;Background jobs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Implemented via:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Distributed locks over KV stores (etcd, ZooKeeper, Consul)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="do-you-even-need-leader-election"&gt;Do You Even Need Leader Election?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Singleton approach&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple&lt;/li&gt;
+&lt;li&gt;Downtime during failures or deploys&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use leader election only when:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You need &lt;strong&gt;high availability (4+ nines)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="core-primitive-compare-and-swap"&gt;Core Primitive: Compare-And-Swap&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;lock&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;sync&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Mutex&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;compareAndSwap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nextValue&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;currentValue&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Lock&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;defer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Unlock&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;containsKey&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;containsKey&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;currentValue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nextValue&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Errorf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Expected value %s for key %s, but found empty&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;currentValue&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;currentValue&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;store&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nextValue&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Foundation of distributed locking&lt;/p&gt;</description></item><item><title>Functions and Event-Driven Processing: Going Serverless</title><link>https://goyal-aman.github.io/functions-and-event-driven-processing-going-serverless/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/functions-and-event-driven-processing-going-serverless/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;FaaS (Functions-as-a-Service) = event-driven, short-lived compute&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Functions:
+&lt;ul&gt;
+&lt;li&gt;Run &lt;strong&gt;on-demand&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Are &lt;strong&gt;stateless&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Triggered by &lt;strong&gt;events or requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Often called &lt;strong&gt;serverless&lt;/strong&gt; (but not exactly the same)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="when-to-use-faas"&gt;When to Use FaaS&lt;/h2&gt;
+&lt;p&gt;Best for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Event-driven tasks&lt;/li&gt;
+&lt;li&gt;Short-lived processing&lt;/li&gt;
+&lt;li&gt;Low/variable traffic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sending emails&lt;/li&gt;
+&lt;li&gt;Notifications&lt;/li&gt;
+&lt;li&gt;API transformations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="benefits"&gt;Benefits&lt;/h2&gt;
+&lt;h3 id="1-extremely-simple-deployment"&gt;1. Extremely simple deployment&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Just write code → no infra management&lt;/li&gt;
+&lt;li&gt;Faster &lt;strong&gt;time to production&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-auto-scaling"&gt;2. Auto-scaling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatically scales with traffic&lt;/li&gt;
+&lt;li&gt;Handles failures automatically&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-strong-decoupling"&gt;3. Strong decoupling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Each function is independent&lt;/li&gt;
+&lt;li&gt;Encourages modular systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="4-cost-efficient-for-low-traffic"&gt;4. Cost efficient (for low traffic)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Pay &lt;strong&gt;per request&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;No idle cost&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="challenges"&gt;Challenges&lt;/h2&gt;
+&lt;h3 id="1-hard-to-debug--observe"&gt;1. Hard to debug &amp;amp; observe&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No clear system view&lt;/li&gt;
+&lt;li&gt;Complex interactions between functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-no-local-state"&gt;2. No local state&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Must use external storage&lt;/li&gt;
+&lt;li&gt;Adds latency + complexity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-risk-of-hidden-loops"&gt;3. Risk of hidden loops&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Functions calling each other → infinite loops&lt;/li&gt;
+&lt;li&gt;Hard to detect due to decoupling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="4-monitoring-is-critical"&gt;4. Monitoring is critical&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Need strong:
+&lt;ul&gt;
+&lt;li&gt;Logging&lt;/li&gt;
+&lt;li&gt;Alerting&lt;/li&gt;
+&lt;li&gt;Observability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="when-not-to-use-faas"&gt;When NOT to Use FaaS&lt;/h2&gt;
+&lt;h3 id="1-long-running-tasks"&gt;1. Long-running tasks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Video processing&lt;/li&gt;
+&lt;li&gt;Batch jobs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;FaaS has execution time limits&lt;/p&gt;</description></item><item><title>Scatter/Gather: Reducing Latency with Parallel Distributed Processing</title><link>https://goyal-aman.github.io/scatter/gather-reducing-latency-with-parallel-distributed-processing/</link><pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/scatter/gather-reducing-latency-with-parallel-distributed-processing/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Scatter/Gather = parallel processing pattern&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Request is:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Scattered&lt;/strong&gt; → sent to multiple nodes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gathered&lt;/strong&gt; → results combined into one response&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Goal: &lt;strong&gt;reduce latency (faster responses)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="what-it-solves"&gt;What It Solves&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous patterns:
+&lt;ul&gt;
+&lt;li&gt;Replication → scale requests&lt;/li&gt;
+&lt;li&gt;Sharding → scale data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scatter/Gather → scale computation speed (time)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="how-it-works"&gt;How It Works&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[ Client ]
+ ↓
+[ Root / Coordinator ]
+ ↓↓↓
+[ Leaf 1 ] [ Leaf 2 ] [ Leaf 3 ]
+ ↓↓↓
+[ Partial results ]
+ ↓
+[ Root combines → Final result ]
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Each leaf does &lt;strong&gt;partial work&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Root merges results and returns response&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="when-to-use"&gt;When to Use&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Problems that are:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Independent&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Parallelizable&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Search queries&lt;/li&gt;
+&lt;li&gt;Data aggregation&lt;/li&gt;
+&lt;li&gt;Analytics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also called &lt;strong&gt;&amp;ldquo;embarrassingly parallel&amp;rdquo; problems&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Sharded Services: Scaling Data Beyond a Single Machine</title><link>https://goyal-aman.github.io/sharded-services-scaling-data-beyond-a-single-machine/</link><pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/sharded-services-scaling-data-beyond-a-single-machine/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sharding = splitting data/work across multiple machines (shards)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Each shard handles &lt;strong&gt;only a subset of requests&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;A router/load balancer decides &lt;strong&gt;which shard handles each request&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="sharding-vs-replication"&gt;Sharding vs Replication&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;Feature&lt;/th&gt;
+ &lt;th&gt;Replication&lt;/th&gt;
+ &lt;th&gt;Sharding&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Data&lt;/td&gt;
+ &lt;td&gt;Same everywhere&lt;/td&gt;
+ &lt;td&gt;Split across nodes&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Use case&lt;/td&gt;
+ &lt;td&gt;Stateless services&lt;/td&gt;
+ &lt;td&gt;Stateful / large data&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Goal&lt;/td&gt;
+ &lt;td&gt;Availability + scaling&lt;/td&gt;
+ &lt;td&gt;Data size + scaling&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Replication = copy&lt;/p&gt;
+&lt;p&gt;Sharding = divide&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="why-sharding-is-needed"&gt;Why Sharding Is Needed&lt;/h2&gt;
+&lt;h3 id="1-scale-beyond-a-single-machine"&gt;1. Scale beyond a single machine&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Data too large → cannot fit in one server&lt;/li&gt;
+&lt;li&gt;Sharding distributes storage across nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-better-resource-utilization"&gt;2. Better resource utilization&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Each shard stores &lt;strong&gt;unique data&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Avoids duplication seen in replicated caches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example:&lt;/p&gt;</description></item><item><title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title><link>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link><pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Replicated load-balanced service = multiple identical servers + load balancer&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Any instance can handle any request&lt;/li&gt;
+&lt;li&gt;Load balancer distributes traffic (round-robin or sticky sessions)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-replication-matters"&gt;Why Replication Matters&lt;/h2&gt;
+&lt;h3 id="1-high-availability-ha"&gt;1. High availability (HA)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Single instance = downtime during:
+&lt;ul&gt;
+&lt;li&gt;Deployments&lt;/li&gt;
+&lt;li&gt;Crashes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Minimum &lt;strong&gt;2 replicas&lt;/strong&gt; needed for reliability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-horizontal-scaling"&gt;2. Horizontal scaling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Handle more users by &lt;strong&gt;adding replicas&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Scale out instead of scaling up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="stateless-services-ideal-case"&gt;Stateless Services (Ideal Case)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;No dependency on stored state&lt;/li&gt;
+&lt;li&gt;Any request → any replica&lt;/li&gt;
+&lt;li&gt;Examples:
+&lt;ul&gt;
+&lt;li&gt;APIs&lt;/li&gt;
+&lt;li&gt;Web servers&lt;/li&gt;
+&lt;li&gt;Middleware&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Makes load balancing simple and efficient&lt;/p&gt;</description></item><item><title>From Monoliths to Microservices: An Introduction to Serving Patterns</title><link>https://goyal-aman.github.io/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</link><pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</guid><description>&lt;h2 id="big-picture-shift"&gt;Big Picture Shift&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Moving from &lt;strong&gt;single-node patterns&lt;/strong&gt; → &lt;strong&gt;multi-node distributed systems&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Systems are now:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Loosely coupled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Communicating over &lt;strong&gt;network APIs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Coordinated with &lt;strong&gt;parallel + asynchronous calls&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="monolith-vs-microservices"&gt;Monolith vs Microservices&lt;/h2&gt;
+&lt;h3 id="monolith"&gt;Monolith&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Everything in &lt;strong&gt;one application/container&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Tightly coupled&lt;/li&gt;
+&lt;li&gt;Hard to scale selectively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="microservices"&gt;Microservices&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App split into &lt;strong&gt;many small services&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Each service:
+&lt;ul&gt;
+&lt;li&gt;Runs independently&lt;/li&gt;
+&lt;li&gt;Communicates via APIs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-microservices-are-useful"&gt;Why Microservices Are Useful&lt;/h2&gt;
+&lt;h3 id="1-better-team-ownership"&gt;1. Better team ownership&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Small services → owned by small teams (&amp;ldquo;two-pizza teams&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;Less coordination overhead&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-decoupling-via-apis"&gt;2. Decoupling via APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Services interact through &lt;strong&gt;stable contracts&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Teams can:
+&lt;ul&gt;
+&lt;li&gt;Develop independently&lt;/li&gt;
+&lt;li&gt;Deploy independently&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-abstraction--encapsulation"&gt;3. Abstraction + Encapsulation&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Abstraction&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a service without knowing how it works&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Encapsulation&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Hide implementation details&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Together:&lt;/p&gt;</description></item><item><title>The Adapter Pattern: Standardizing Application Interfaces</title><link>https://goyal-aman.github.io/the-adapter-pattern-standardizing-application-interfaces/</link><pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-adapter-pattern-standardizing-application-interfaces/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adapter pattern = modify interface of an application (without changing it)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Implemented as a &lt;strong&gt;side container&lt;/strong&gt; that:
+&lt;ul&gt;
+&lt;li&gt;Transforms outputs/inputs&lt;/li&gt;
+&lt;li&gt;Makes app conform to a &lt;strong&gt;standard interface&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Wrap your app so it speaks the standard language&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-adapters-are-needed"&gt;Why Adapters Are Needed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Real systems are &lt;strong&gt;heterogeneous&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Different languages&lt;/li&gt;
+&lt;li&gt;Different logging formats&lt;/li&gt;
+&lt;li&gt;Different monitoring interfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But ops needs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unified interfaces&lt;/strong&gt; for:
+&lt;ul&gt;
+&lt;li&gt;Monitoring&lt;/li&gt;
+&lt;li&gt;Logging&lt;/li&gt;
+&lt;li&gt;Health checks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="key-benefits"&gt;Key Benefits&lt;/h2&gt;
+&lt;h3 id="1-standardization"&gt;1. Standardization&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Converts different formats → one common format&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Redis metrics → Prometheus format&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-decoupling"&gt;2. Decoupling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App code remains unchanged&lt;/li&gt;
+&lt;li&gt;Adapter handles integration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No need to modify third-party images&lt;/p&gt;</description></item><item><title>The Ambassador Pattern: Decoupling Application Logic from Infrastructure</title><link>https://goyal-aman.github.io/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</link><pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ambassador pattern = proxy container alongside your app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;It &lt;strong&gt;handles communication between the app and external services&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;The app talks only to &lt;strong&gt;localhost&lt;/strong&gt;, and the ambassador handles the rest&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think of it as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A smart proxy sitting next to your app&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="main-purpose"&gt;Main Purpose&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Decouple application logic from networking/infrastructure complexity&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;App stays simple → ambassador handles:
+&lt;ul&gt;
+&lt;li&gt;Routing&lt;/li&gt;
+&lt;li&gt;Discovery&lt;/li&gt;
+&lt;li&gt;Failover&lt;/li&gt;
+&lt;li&gt;External communication&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="key-benefits"&gt;Key Benefits&lt;/h2&gt;
+&lt;h3 id="1-separation-of-concerns"&gt;1. Separation of concerns&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App → business logic&lt;/li&gt;
+&lt;li&gt;Ambassador → networking + infra logic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cleaner architecture, easier maintenance&lt;/p&gt;</description></item><item><title>The Sidecar Pattern: Extending Applications Without Modifying Them</title><link>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</link><pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</guid><description>&lt;hr&gt;
+&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar pattern = 2 containers in one unit (pod)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Main container&lt;/strong&gt; → core application&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar container&lt;/strong&gt; → adds/extends functionality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both run &lt;strong&gt;together on the same node&lt;/strong&gt; and share:
+&lt;ul&gt;
+&lt;li&gt;Network (same localhost)&lt;/li&gt;
+&lt;li&gt;Filesystem (shared volumes)&lt;/li&gt;
+&lt;li&gt;Namespaces (PID, hostname, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-sidecars-are-powerful"&gt;Why Sidecars Are Powerful&lt;/h2&gt;
+&lt;h3 id="1-extend-apps-without-modifying-them"&gt;1. Extend apps &lt;em&gt;without modifying them&lt;/em&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add features externally instead of changing legacy code&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Add HTTPS using &lt;strong&gt;nginx sidecar&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Legacy app still runs HTTP internally&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Huge for &lt;strong&gt;legacy systems you can&amp;rsquo;t rebuild&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>A Developer's Guide to Event-Driven Architecture with Kafka</title><link>https://goyal-aman.github.io/a-developers-guide-to-event-driven-architecture-with-kafka/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/a-developers-guide-to-event-driven-architecture-with-kafka/</guid><description>&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;# Unpacking Event-Driven Systems: A Journey Through Kafka, Coupling, and Collaboration
+
+I've recently been reading &amp;quot;Designing Event-Driven Systems&amp;quot; by Ben Stopford (a book from Confluent), and it has crystallized many concepts about how modern, scalable systems are built. This post is a summary of my key takeaways, exploring what Kafka truly is, how services communicate, and the powerful patterns that emerge in an event-driven world.
+
+## What is Kafka? (And What It Isn't)
+
+It's easy to pigeonhole new technology by comparing it to what we already know. Kafka often gets compared to two familiar tools: Enterprise Service Buses (ESBs) and Databases. While it shares some characteristics with both, Kafka is fundamentally a **streaming platform**, a different beast altogether.
+
+### Kafka vs. Enterprise Service Bus (ESB)
+
+Like an ESB, Kafka is great at moving data between different systems. It can pull from a wide variety of sources, transform data, and push it to many destinations. But the similarities end there.
+
+* **Architecture:** Traditional ESBs are often centralized, monolithic systems. Scaling them beyond a single machine is difficult and often not a core design feature. Kafka, on the other hand, is decentralized and designed for horizontal scalability from the ground up.
+* **Philosophy:** ESBs often follow a &amp;quot;smart pipes, dumb endpoints&amp;quot; model. The central bus contains all the business logic, and a central team manages it. This creates a bottleneck, slowing down changes. Kafka flips this to &amp;quot;dumb pipes, smart endpoints.&amp;quot; Kafka itself is just a resilient, scalable log. The business logic lives in the services that produce and consume data, allowing for decentralized ownership and faster development cycles.
+
+### Kafka vs. Database
+
+Like a database, Kafka offers durable storage, a query language (KSQL), and even support for transactions. But its purpose is different.
+
+Databases are optimized for storing **data at rest**. They excel at complex queries and managing the current state of information. Kafka is optimized for **data in motion**. It's designed to handle continuous, high-volume streams of events, making it the backbone for real-time applications.
+
+## The Core of Kafka: The Distributed Log
+
+So, what makes Kafka so powerful? It all comes down to its core abstraction: a partitioned, replayable, append-only log.
+
+1. **Append-Only Log:** Kafka stores messages sequentially in what it calls a &amp;quot;topic.&amp;quot; Because both reads and writes are sequential disk operations, they are incredibly fast and efficient, allowing for batching, caching, and prefetching.
+2. **Scalability:** A topic is broken down into partitions. These partitions can be distributed and replicated across many machines. Need more throughput? Just add more machines to the cluster and rebalance the partitions. This architecture makes it virtually impossible to hit a scaling limit.
+3. **Ordering Guarantees:** Kafka provides a strict ordering guarantee for messages *within a single partition*. If you need global ordering across all messages (which is rare), you can use a topic with a single partition, but this will limit your throughput to what a single machine can handle.
+4. **Data Retention &amp;amp; Compacted Topics:** By default, Kafka topics retain data for a set period (e.g., two weeks). But what if you want to keep the latest value for every key indefinitely? For this, Kafka has **Compacted Topics**. In a compacted topic, each message has a key. When a new message arrives with an existing key, the old version is eventually removed. This gives you a powerful pattern: a regular topic can serve as a complete, auditable changelog (every version of an event), while a compacted topic can provide a snapshot of the latest state.
+
+## The Language of Services: Commands, Queries, and Events
+
+In any distributed system, services need to talk to each other. This communication generally falls into three categories:
+
+* **Commands:** A request for another service to perform an action that changes the system's state. Think of it as a direct order: &amp;quot;Process this payment!&amp;quot; This is your classic request/response model.
+* **Queries:** A request to look something up without changing any state. For example, &amp;quot;Get user details for ID 123.&amp;quot;
+* **Events:** These are notifications or facts about something that has already happened. They are one-way messages, like an announcement: &amp;quot;An order was placed.&amp;quot; Events are the foundation of loosely coupled systems.
+
+## The Power of Loose Coupling
+
+&amp;quot;Loose coupling&amp;quot; is a term we hear a lot, but what does it mean in practice? It's a measure of how much a change in one service will impact another.
+
+Loosely coupled systems are not a silver bullet. Tightly coupled communication (like a direct request/response call) is perfectly fine for services where the contract is stable and changes are rare. But for systems that need to evolve, loose coupling is essential. It shields services from the ripple effect of changes in their dependencies.
+
+Events are the key enabler of this. Let's see how.
+
+### Events for Notification: Reversing the Burden of Responsibility
+
+Imagine a traditional e-commerce system. When a user places an order, the `Order Service` is responsible for everything that happens next. It has to call the `Inventory Service` to reserve stock, the `Notification Service` to send an email, and the `Shipping Service` to prepare for delivery.
+
+![Traditional Request/Response Model](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.06.25_PM.png)
+
+What happens when a new `Dynamic Pricing Service` needs to know when an order is placed? You have to go back and modify the `Order Service` to add another call.
+
+In an event-driven model, this responsibility is reversed. The `Order Service` simply publishes an `OrderPlaced` event to a Kafka topic. It doesn't know or care who is listening.
+
+![Event-Driven Notification](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.34.53_PM.png)
+
+Now, the Inventory, Notification, and Shipping services simply subscribe to this event stream and react accordingly. When the new `Dynamic Pricing Service` comes along, it can just plug into the existing stream without anyone having to change the `Order Service`. This &amp;quot;pluggability&amp;quot; is a superpower for large, evolving systems.
+
+### Events for State Transfer
+
+Another powerful use of events is to replicate state between services. Instead of the `Shipping Service` making a direct RPC call to the `Customer Service` every time it needs a customer's address, it can subscribe to a stream of `CustomerUpdated` events.
+
+![Event-Driven State Transfer](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.39.15_PM.png)
+
+The `Shipping Service` can then maintain its own local copy of customer data, in a format that is optimized for its own needs. This makes the `Shipping Service` more resilient (it can function even if the `Customer Service` is down) and more performant (it's reading from its own database).
+
+## Orchestration vs. Choreography: Who's in Charge?
+
+This leads us to two overarching patterns for managing workflows that span multiple services: Orchestration and Choreography.
+
+### Orchestration: The Conductor
+
+In an orchestrated system, a single, central service acts as a conductor. It controls the entire workflow, telling each service what to do and when.
+
+![Orchestrated System](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.13.18_PM.png)
+
+* **Pros:** The entire workflow is defined in one place. This makes it easy to understand, reason about, and debug. The logic is explicit.
+* **Cons:** The orchestrator can become a central bottleneck and a single point of failure. It creates tight coupling; the orchestrator needs to know about every service it commands.
+
+### Choreography: The Dancers
+
+In a choreographed system, there is no central conductor. Each service knows its own small part of the process. It listens for events from other services, does its work, and then emits its own events.
+
+![Choreographed System](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_2.56.12_PM.png)
+
+* **Pros:** This is the epitome of loose coupling and pluggability. Services are independent and can be developed, deployed, and scaled separately. The system is highly resilient.
+* **Cons:** The overall workflow is not defined in any single place. It's an emergent property of the system, which can make it difficult to understand and monitor the end-to-end process.
+
+## Finding the Right Balance
+
+No system is purely one or the other. The reality is that most complex systems use a mix of approaches.
+
+Within a single team or a bounded context, services might use a mix of request/response and event-driven communication. However, when communicating *between* different teams or departments working on independent domains, event-driven communication becomes the standard.
+
+![Hybrid Approach](/images/Designing%20Event%20Driven%20System/Screenshot_2025-11-16_at_3.14.41_PM.png)
+
+This allows each department to evolve its internal services freely while maintaining a stable, loosely coupled contract with the rest of the organization.
+
+By understanding these fundamental patterns, we can make more informed decisions about how to design systems that are not only powerful and scalable but also resilient and adaptable to the inevitable changes of the future.
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

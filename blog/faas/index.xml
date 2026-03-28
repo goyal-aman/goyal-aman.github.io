@@ -1,20 +1,93 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>FaaS on Aman Goyal</title>
-    <link>http://localhost:1313/blog/faas/</link>
-    <description>Recent content in FaaS on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 07 Feb 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/faas/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Functions and Event-Driven Processing: Going Serverless</title>
-      <link>http://localhost:1313/functions-and-event-driven-processing-going-serverless/</link>
-      <pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/functions-and-event-driven-processing-going-serverless/</guid>
-      <description>Core Concept FaaS (Functions-as-a-Service) = event-driven, short-lived compute Functions: Run on-demand Are stateless Triggered by events or requests Often called serverless (but not exactly the same)&#xA;When to Use FaaS Best for:&#xA;Event-driven tasks Short-lived processing Low/variable traffic Examples:&#xA;Sending emails Notifications API transformations Benefits 1. Extremely simple deployment Just write code → no infra management Faster time to production 2. Auto-scaling Automatically scales with traffic Handles failures automatically 3. Strong decoupling Each function is independent Encourages modular systems 4.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FaaS on Aman Goyal</title><link>https://goyal-aman.github.io/blog/faas/</link><description>Recent content in FaaS on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 07 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/faas/index.xml" rel="self" type="application/rss+xml"/><item><title>Functions and Event-Driven Processing: Going Serverless</title><link>https://goyal-aman.github.io/functions-and-event-driven-processing-going-serverless/</link><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/functions-and-event-driven-processing-going-serverless/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;FaaS (Functions-as-a-Service) = event-driven, short-lived compute&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Functions:
+&lt;ul&gt;
+&lt;li&gt;Run &lt;strong&gt;on-demand&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Are &lt;strong&gt;stateless&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Triggered by &lt;strong&gt;events or requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Often called &lt;strong&gt;serverless&lt;/strong&gt; (but not exactly the same)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="when-to-use-faas"&gt;When to Use FaaS&lt;/h2&gt;
+&lt;p&gt;Best for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Event-driven tasks&lt;/li&gt;
+&lt;li&gt;Short-lived processing&lt;/li&gt;
+&lt;li&gt;Low/variable traffic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sending emails&lt;/li&gt;
+&lt;li&gt;Notifications&lt;/li&gt;
+&lt;li&gt;API transformations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="benefits"&gt;Benefits&lt;/h2&gt;
+&lt;h3 id="1-extremely-simple-deployment"&gt;1. Extremely simple deployment&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Just write code → no infra management&lt;/li&gt;
+&lt;li&gt;Faster &lt;strong&gt;time to production&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-auto-scaling"&gt;2. Auto-scaling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatically scales with traffic&lt;/li&gt;
+&lt;li&gt;Handles failures automatically&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-strong-decoupling"&gt;3. Strong decoupling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Each function is independent&lt;/li&gt;
+&lt;li&gt;Encourages modular systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="4-cost-efficient-for-low-traffic"&gt;4. Cost efficient (for low traffic)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Pay &lt;strong&gt;per request&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;No idle cost&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="challenges"&gt;Challenges&lt;/h2&gt;
+&lt;h3 id="1-hard-to-debug--observe"&gt;1. Hard to debug &amp;amp; observe&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No clear system view&lt;/li&gt;
+&lt;li&gt;Complex interactions between functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-no-local-state"&gt;2. No local state&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Must use external storage&lt;/li&gt;
+&lt;li&gt;Adds latency + complexity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="3-risk-of-hidden-loops"&gt;3. Risk of hidden loops&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Functions calling each other → infinite loops&lt;/li&gt;
+&lt;li&gt;Hard to detect due to decoupling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="4-monitoring-is-critical"&gt;4. Monitoring is critical&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Need strong:
+&lt;ul&gt;
+&lt;li&gt;Logging&lt;/li&gt;
+&lt;li&gt;Alerting&lt;/li&gt;
+&lt;li&gt;Observability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="when-not-to-use-faas"&gt;When NOT to Use FaaS&lt;/h2&gt;
+&lt;h3 id="1-long-running-tasks"&gt;1. Long-running tasks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Video processing&lt;/li&gt;
+&lt;li&gt;Batch jobs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;FaaS has execution time limits&lt;/p&gt;</description></item></channel></rss>

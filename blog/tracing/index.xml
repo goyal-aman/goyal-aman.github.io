@@ -1,20 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tracing on Aman Goyal</title>
-    <link>http://localhost:1313/blog/tracing/</link>
-    <description>Recent content in Tracing on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 14 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/tracing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Monitoring and Observability: Logs, Metrics, Alerts, and Tracing</title>
-      <link>http://localhost:1313/monitoring-and-observability-logs-metrics-alerts-and-tracing/</link>
-      <pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/monitoring-and-observability-logs-metrics-alerts-and-tracing/</guid>
-      <description>Core Concept Distributed systems run 24/7 → failures are inevitable You must: Detect problems before users Understand system behavior quickly Observability = ability to debug from outside&#xA;Four Pillars (VERY IMPORTANT) 1. Logging Records individual events Helps debug specific requests Key practices: Include: Timestamp Request ID / user ID Use log levels: Debug, Info, Warning, Error, Fatal Insight:&#xA;Log errors + unusual behavior, not everything 2. Metrics Aggregate view of system over time Stored as time series data Types: Counts → total requests Rates → requests/sec Histograms → latency distribution Values → CPU, memory Most important metrics:</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tracing on Aman Goyal</title><link>https://goyal-aman.github.io/blog/tracing/</link><description>Recent content in Tracing on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 14 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/tracing/index.xml" rel="self" type="application/rss+xml"/><item><title>Monitoring and Observability: Logs, Metrics, Alerts, and Tracing</title><link>https://goyal-aman.github.io/monitoring-and-observability-logs-metrics-alerts-and-tracing/</link><pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/monitoring-and-observability-logs-metrics-alerts-and-tracing/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Distributed systems run &lt;strong&gt;24/7 → failures are inevitable&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;You must:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Detect problems before users&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Understand system behavior quickly&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Observability = ability to &lt;strong&gt;debug from outside&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="four-pillars-very-important"&gt;Four Pillars (VERY IMPORTANT)&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-logging"&gt;1. Logging&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Records &lt;strong&gt;individual events&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Helps debug &lt;strong&gt;specific requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="key-practices"&gt;Key practices:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Include:
+&lt;ul&gt;
+&lt;li&gt;Timestamp&lt;/li&gt;
+&lt;li&gt;Request ID / user ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;strong&gt;log levels&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Debug, Info, Warning, Error, Fatal&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Insight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log &lt;strong&gt;errors + unusual behavior&lt;/strong&gt;, not everything&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-metrics"&gt;2. Metrics&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Aggregate view of system over time&lt;/li&gt;
+&lt;li&gt;Stored as &lt;strong&gt;time series data&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="types"&gt;Types:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Counts&lt;/strong&gt; → total requests&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rates&lt;/strong&gt; → requests/sec&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Histograms&lt;/strong&gt; → latency distribution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Values&lt;/strong&gt; → CPU, memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most important metrics:&lt;/p&gt;</description></item></channel></rss>

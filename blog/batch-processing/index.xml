@@ -1,34 +1,153 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Batch Processing on Aman Goyal</title>
-    <link>http://localhost:1313/blog/batch-processing/</link>
-    <description>Recent content in Batch Processing on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/batch-processing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title>
-      <link>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link>
-      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid>
-      <description>Core Concept Focus: bringing parallel work back together Opposite of earlier chapters (which split work) Used for: Aggregation Synchronization Final results Think:&#xA;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&#xA;Why Coordination Is Needed Previous patterns: Sharding → split work Work queues → process independently But:&#xA;Some tasks need complete dataset Some need aggregation (sum, stats) Need coordination primitives&#xA;Core Patterns 1. Join (Barrier Synchronization) What it does: Waits until ALL parallel work is done Then releases results Example: Video rendering: Need all frames before creating video Key properties: Ensures completeness Blocks until everything finishes Trade-off: Slower (less parallelism) Correct &amp;amp; complete results 2.</description>
-    </item>
-    <item>
-      <title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title>
-      <link>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</link>
-      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid>
-      <description>Core Concept Extend work queues into workflows (DAGs) Output of one stage → input to next stage Entire system becomes event-driven pipeline Think:&#xA;Multiple work queues connected together by events&#xA;Why This Pattern Exists Work queues (Chapter 11) → 1 input → 1 output Real systems: Multiple outputs Multiple steps Parallel + conditional flows Need workflow orchestration&#xA;Core Patterns 1. Copier Duplicate work into multiple queues Use case:&#xA;Video → multiple formats (4K, 1080p, GIF) Also improves:</description>
-    </item>
-    <item>
-      <title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title>
-      <link>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link>
-      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid>
-      <description>Core Concept Work queue = batch processing pattern Work is: Broken into independent tasks Processed by workers in parallel Goal: Process all items within acceptable time Architecture Overview Three main components: Work Queue Manager (generic logic) Source (Ambassador) → provides work items Worker → processes each item Strong separation:&#xA;Infra = reusable Business logic = pluggable Two Key Interfaces 1. Source Interface (HTTP) GET http://localhost/api/v1/items GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt; Response format { kind: ItemList, apiVersion: v1, items: [ &amp;#34;item-1&amp;#34;, &amp;#34;item-2&amp;#34; ] } Important:</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Batch Processing on Aman Goyal</title><link>https://goyal-aman.github.io/blog/batch-processing/</link><description>Recent content in Batch Processing on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/batch-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title><link>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link><pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Focus: &lt;strong&gt;bringing parallel work back together&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Opposite of earlier chapters (which split work)&lt;/li&gt;
+&lt;li&gt;Used for:
+&lt;ul&gt;
+&lt;li&gt;Aggregation&lt;/li&gt;
+&lt;li&gt;Synchronization&lt;/li&gt;
+&lt;li&gt;Final results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-coordination-is-needed"&gt;Why Coordination Is Needed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous patterns:
+&lt;ul&gt;
+&lt;li&gt;Sharding → split work&lt;/li&gt;
+&lt;li&gt;Work queues → process independently&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Some tasks need &lt;strong&gt;complete dataset&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Some need &lt;strong&gt;aggregation (sum, stats)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need coordination primitives&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-join-barrier-synchronization"&gt;1. Join (Barrier Synchronization)&lt;/h3&gt;
+&lt;h4 id="what-it-does"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Waits until &lt;strong&gt;ALL parallel work is done&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Then releases results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="example"&gt;Example:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Video rendering:
+&lt;ul&gt;
+&lt;li&gt;Need all frames before creating video&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="key-properties"&gt;Key properties:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensures &lt;strong&gt;completeness&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Blocks until everything finishes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="trade-off"&gt;Trade-off:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Slower (less parallelism)&lt;/li&gt;
+&lt;li&gt;Correct &amp;amp; complete results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-reduce-very-important"&gt;2. Reduce (VERY IMPORTANT)&lt;/h3&gt;
+&lt;h4 id="what-it-does-1"&gt;What it does:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Incrementally combines outputs&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Reduces many → one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id="example-word-count"&gt;Example: Word Count&lt;/h4&gt;
+&lt;p&gt;Input:&lt;/p&gt;</description></item><item><title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title><link>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Extend work queues into &lt;strong&gt;workflows (DAGs)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Output of one stage → input to next stage&lt;/li&gt;
+&lt;li&gt;Entire system becomes &lt;strong&gt;event-driven pipeline&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Multiple work queues connected together by events&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-this-pattern-exists"&gt;Why This Pattern Exists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Work queues (Chapter 11) → 1 input → 1 output&lt;/li&gt;
+&lt;li&gt;Real systems:
+&lt;ul&gt;
+&lt;li&gt;Multiple outputs&lt;/li&gt;
+&lt;li&gt;Multiple steps&lt;/li&gt;
+&lt;li&gt;Parallel + conditional flows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need &lt;strong&gt;workflow orchestration&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-copier"&gt;1. Copier&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Duplicate work into multiple queues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use case:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Video → multiple formats (4K, 1080p, GIF)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also improves:&lt;/p&gt;</description></item><item><title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title><link>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link><pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Work queue = batch processing pattern&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Work is:
+&lt;ul&gt;
+&lt;li&gt;Broken into &lt;strong&gt;independent tasks&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Processed by &lt;strong&gt;workers in parallel&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Goal:
+&lt;ul&gt;
+&lt;li&gt;Process all items within acceptable time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="architecture-overview"&gt;Architecture Overview&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Three main components:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Work Queue Manager&lt;/strong&gt; (generic logic)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Source (Ambassador)&lt;/strong&gt; → provides work items&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker&lt;/strong&gt; → processes each item&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Strong separation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Infra = reusable&lt;/li&gt;
+&lt;li&gt;Business logic = pluggable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="two-key-interfaces"&gt;Two Key Interfaces&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-source-interface-http"&gt;1. Source Interface (HTTP)&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;GET http://localhost/api/v1/items
+GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id="response-format"&gt;Response format&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;kind:&lt;/span&gt; &lt;span class="err"&gt;ItemList,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;apiVersion:&lt;/span&gt; &lt;span class="err"&gt;v1,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;items:&lt;/span&gt; &lt;span class="err"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;item-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;Important:&lt;/p&gt;</description></item></channel></rss>

@@ -1,20 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Sidecar Pattern on Aman Goyal</title>
-    <link>http://localhost:1313/blog/sidecar-pattern/</link>
-    <description>Recent content in Sidecar Pattern on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/sidecar-pattern/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>The Sidecar Pattern: Extending Applications Without Modifying Them</title>
-      <link>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</link>
-      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</guid>
-      <description>Core Concept Sidecar pattern = 2 containers in one unit (pod) Main container → core application Sidecar container → adds/extends functionality Both run together on the same node and share: Network (same localhost) Filesystem (shared volumes) Namespaces (PID, hostname, etc.) Why Sidecars Are Powerful 1. Extend apps without modifying them Add features externally instead of changing legacy code Example: Add HTTPS using nginx sidecar Legacy app still runs HTTP internally Huge for legacy systems you can&amp;rsquo;t rebuild</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sidecar Pattern on Aman Goyal</title><link>https://goyal-aman.github.io/blog/sidecar-pattern/</link><description>Recent content in Sidecar Pattern on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/sidecar-pattern/index.xml" rel="self" type="application/rss+xml"/><item><title>The Sidecar Pattern: Extending Applications Without Modifying Them</title><link>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</link><pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</guid><description>&lt;hr&gt;
+&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar pattern = 2 containers in one unit (pod)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Main container&lt;/strong&gt; → core application&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar container&lt;/strong&gt; → adds/extends functionality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both run &lt;strong&gt;together on the same node&lt;/strong&gt; and share:
+&lt;ul&gt;
+&lt;li&gt;Network (same localhost)&lt;/li&gt;
+&lt;li&gt;Filesystem (shared volumes)&lt;/li&gt;
+&lt;li&gt;Namespaces (PID, hostname, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-sidecars-are-powerful"&gt;Why Sidecars Are Powerful&lt;/h2&gt;
+&lt;h3 id="1-extend-apps-without-modifying-them"&gt;1. Extend apps &lt;em&gt;without modifying them&lt;/em&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add features externally instead of changing legacy code&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Add HTTPS using &lt;strong&gt;nginx sidecar&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Legacy app still runs HTTP internally&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Huge for &lt;strong&gt;legacy systems you can&amp;rsquo;t rebuild&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

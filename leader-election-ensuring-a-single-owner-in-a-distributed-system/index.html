@@ -1,532 +1,122 @@
-<!DOCTYPE html>
-<html lang="en-US">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
-
-
-  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
-<title>Leader Election: Ensuring a Single Owner in a Distributed System | Aman Goyal</title>
-<meta name="title" content="Leader Election: Ensuring a Single Owner in a Distributed System" />
-<meta name="description" content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions." />
-<meta name="keywords" content="Distributed Systems,System Design,Leader Election,etcd,Distributed Locks,Consensus," />
-
-
-<meta property="og:title" content="Leader Election: Ensuring a Single Owner in a Distributed System" />
-<meta property="og:description" content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/leader-election-ensuring-a-single-owner-in-a-distributed-system/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2026-02-14T00:00:00+00:00" />
-<meta property="article:modified_time" content="2026-02-14T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
-
-
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="Leader Election: Ensuring a Single Owner in a Distributed System"/>
-<meta name="twitter:description" content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."/>
-
-
-
-<meta itemprop="name" content="Leader Election: Ensuring a Single Owner in a Distributed System">
-<meta itemprop="description" content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."><meta itemprop="datePublished" content="2026-02-14T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2026-02-14T00:00:00+00:00" />
-<meta itemprop="wordCount" content="639"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
-<meta itemprop="keywords" content="Distributed Systems,System Design,Leader Election,etcd,Distributed Locks,Consensus," />
-<meta name="referrer" content="no-referrer-when-downgrade" />
-
-  <style>
-  :root {
-      --width: 720px;
-      --font-main: Verdana, sans-serif;
-      --font-secondary: Verdana, sans-serif;
-      --font-scale: 1em;
-      --background-color: #fff;
-      --heading-color: #222;
-      --text-color: #444;
-      --link-color: #3273dc;
-      --visited-color:  #8b6fcb;
-      --code-background-color: #f2f2f2;
-      --code-color: #222;
-      --blockquote-color: #222;
-  }
-
-  @media (prefers-color-scheme: dark) {
-      :root {
-          --background-color: #01242e;
-          --heading-color: #eee;
-          --text-color: #ddd;
-          --link-color: #8cc2dd;
-          --visited-color:  #8b6fcb;
-          --code-background-color: #000;
-          --code-color: #ddd;
-          --blockquote-color: #ccc;
-      }
-  }
-
-  body {
-      font-family: var(--font-secondary);
-      font-size: var(--font-scale);
-      margin: auto;
-      padding: 20px;
-      max-width: var(--width);
-      text-align: left;
-      background-color: var(--background-color);
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      line-height: 1.5;
-      color: var(--text-color);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-main);
-      color: var(--heading-color);
-  }
-
-  a {
-      color: var(--link-color);
-      cursor: pointer;
-      text-decoration: none;
-  }
-
-  a:hover {
-      text-decoration: underline;
-  }
-
-  nav a {
-      margin-right: 8px;
-  }
-
-  strong, b {
-      color: var(--heading-color);
-  }
-
-  button {
-      margin: 0;
-      cursor: pointer;
-  }
-
-  time {
-   	font-family: monospace;
-    	font-style: normal;
-    	font-size: 15px;
-  }
-
-  main {
-      line-height: 1.6;
-  }
-
-  table {
-      width: 100%;
-  }
-
-  hr {
-      border: 0;
-      border-top: 1px dashed;
-  }
-
-  img {
-      max-width: 100%;
-  }
-
-  code {
-      font-family: monospace;
-      padding: 2px;
-      background-color: var(--code-background-color);
-      color: var(--code-color);
-      border-radius: 3px;
-  }
-
-  blockquote {
-      border-left: 1px solid #999;
-      color: var(--code-color);
-      padding-left: 20px;
-      font-style: italic;
-  }
-
-  footer {
-      padding: 25px 0;
-      text-align: center;
-  }
-
-  .title:hover {
-      text-decoration: none;
-  }
-
-  .title h1 {
-      font-size: 1.5em;
-  }
-
-  .inline {
-      width: auto !important;
-  }
-
-  .highlight, .code {
-      padding: 1px 15px;
-      background-color: var(--code-background-color);
-      color: var(--code-color);
-      border-radius: 3px;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      overflow-x: auto;
-  }
-
-   
-  ul.blog-posts {
-      list-style-type: none;
-      padding: unset;
-  }
-
-  ul.blog-posts li {
-      display: flex;
-  }
-
-  ul.blog-posts li span {
-      flex: 0 0 130px;
-  }
-
-  ul.blog-posts li a:visited {
-      color: var(--visited-color);
-  }
-</style>
-</head>
-
-<body>
-  <header><header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
-    <a href="/" class="title">
-      <h2>Aman Goyal</h2>
-    </a>
-    <div>
-      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
-        <i class="fab fa-github fa-lg"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
-        <i class="fab fa-linkedin fa-lg"></i>
-      </a>
-      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
-        <i class="fab fa-medium fa-lg"></i>
-      </a>
-      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
-        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
-      </a>
-      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
-        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
-      </a>
-      
-        <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
-          <i class="fas fa-envelope fa-lg"></i>
-        </a>
-      
-    </div>
-  </header>
-  <nav>
-
-<a href="/">Home</a>
-
-<a href="/blog/">Blog</a>
-
-<a href="/coaching">Coaching</a>
-
-
-    
-</nav>
-</header>
-  <main>
-
-<h1>Leader Election: Ensuring a Single Owner in a Distributed System</h1>
-<p>
-  <i>
-    <time datetime='2026-02-14'>
-      14 Feb, 2026
-    </time>
-  </i>
-</p>
-
-
-
-
-
-<content>
-  <h2 id="core-concept">Core Concept</h2>
-<ul>
-<li><strong>Ownership / Leader election = only one replica owns a task at a time</strong></li>
-<li>Needed for:
-<ul>
-<li>Scheduling</li>
-<li>Shard ownership</li>
-<li>Background jobs</li>
-</ul>
-</li>
-<li>Implemented via:
-<ul>
-<li><strong>Distributed locks over KV stores (etcd, ZooKeeper, Consul)</strong></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="do-you-even-need-leader-election">Do You Even Need Leader Election?</h2>
-<ul>
-<li><strong>Singleton approach</strong>
-<ul>
-<li>Simple</li>
-<li>Downtime during failures or deploys</li>
-</ul>
-</li>
-</ul>
-<p>Use leader election only when:</p>
-<ul>
-<li>You need <strong>high availability (4+ nines)</strong></li>
-</ul>
-<hr>
-<h2 id="core-primitive-compare-and-swap">Core Primitive: Compare-And-Swap</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">lock</span> <span class="o">:=</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">store</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">nextValue</span><span class="p">,</span> <span class="nx">currentValue</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">bool</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">lock</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="k">defer</span> <span class="nx">lock</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">_</span><span class="p">,</span> <span class="nx">containsKey</span> <span class="o">:=</span> <span class="nx">store</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">!</span><span class="nx">containsKey</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">currentValue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">store</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">nextValue</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="s">&#34;Expected value %s for key %s, but found empty&#34;</span><span class="p">,</span> <span class="nx">currentValue</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">store</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">==</span> <span class="nx">currentValue</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">store</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">nextValue</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Foundation of distributed locking</p>
-<hr>
-<h2 id="basic-lock">Basic Lock</h2>
-<h3 id="acquire">Acquire</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">simpleLock</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// compare and swap &#34;1&#34; for &#34;0&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">locked</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">locked</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="handle-missing-key">Handle missing key</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">simpleLock</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// compare and swap &#34;1&#34; for &#34;0&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">locked</span><span class="p">,</span> <span class="kt">error</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// non-existent
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="kt">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">locked</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">locked</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="blocking-lock">Blocking lock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">lock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">while</span> <span class="p">(!</span><span class="nx">l</span><span class="p">.</span><span class="nf">simpleLock</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="event-based-better">Event-based (better)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">lock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">while</span> <span class="p">(!</span><span class="nx">l</span><span class="p">.</span><span class="nf">simpleLock</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">waitForChanges</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="unlock">Unlock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">unlock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h2 id="problem-crash-while-holding-lock">Problem: Crash While Holding Lock</h2>
-<p>Lock never released → system stuck</p>
-<hr>
-<h2 id="-solution-ttl-based-lock">⏳ Solution: TTL-based Lock</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">simpleLock</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// compare and swap &#34;1&#34; for &#34;0&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">locked</span><span class="p">,</span> <span class="kt">error</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">ttl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// non-existent
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="kt">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">locked</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">ttl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">locked</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Lock auto-expires</p>
-<hr>
-<h2 id="critical-bug-ttl--unlock">Critical Bug (TTL + Unlock)</h2>
-<ul>
-<li>Old owner may unlock <strong>new owner&rsquo;s lock</strong></li>
-</ul>
-<hr>
-<h2 id="fix-resource-version">Fix: Resource Version</h2>
-<h3 id="lock-with-version">Lock with version</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">simpleLock</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// compare and swap &#34;1&#34; for &#34;0&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">locked</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span> <span class="kt">error</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">ttl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// non-existent
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="kt">error</span> <span class="o">!=</span> <span class="nx">null</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">locked</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="nx">null</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">ttl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">locked</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="safe-unlock">Safe unlock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">unlock</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">version</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Prevents unlocking someone else&rsquo;s lock</p>
-<hr>
-<h2 id="renewable-lock-leader-election">Renewable Lock (Leader Election)</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">renew</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">locked</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nf">compareAndSwap</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">lockName</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">version</span><span class="p">,</span> <span class="nx">ttl</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">locked</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h3 id="renewal-loop">Renewal loop</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">!</span><span class="nx">l</span><span class="p">.</span><span class="nf">renew</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">handleLockLost</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">sleep</span><span class="p">(</span><span class="nx">ttl</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Leader keeps renewing lease</p>
-<hr>
-<h2 id="etcd-example">etcd Example</h2>
-<h3 id="create-lock">Create lock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- sh -c <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> set my-lock unlocked&#34;</span>
-</span></span></code></pre></div><hr>
-<h3 id="acquire-lock">Acquire lock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- sh -c <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> \
-</span></span></span><span class="line"><span class="cl"><span class="s2">      set --swap-with-value unlocked my-lock alice&#34;</span>
-</span></span></code></pre></div><hr>
-<h3 id="failed-acquisition">Failed acquisition</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- sh -c <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> \
-</span></span></span><span class="line"><span class="cl"><span class="s2">      set --swap-with-value unlocked my-lock bob&#34;</span>
-</span></span><span class="line"><span class="cl">Error:  101: Compare failed <span class="o">([</span>unlocked !<span class="o">=</span> alice<span class="o">])</span> <span class="o">[</span>6<span class="o">]</span>
-</span></span></code></pre></div><hr>
-<h3 id="release-lock">Release lock</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- sh -c <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> \
-</span></span></span><span class="line"><span class="cl"><span class="s2">      set --swap-with-value alice my-lock unlocked&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="lease-based-lock-etcd">Lease-based Lock (etcd)</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -c <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> \
-</span></span></span><span class="line"><span class="cl"><span class="s2">        --ttl=10 mk my-lock alice&#34;</span>
-</span></span></code></pre></div><hr>
-<h3 id="renew-lease">Renew lease</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> my-etcd-cluster-0000 -- <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -c <span class="s2">&#34;ETCD_API=3 etcdctl --endpoints=</span><span class="si">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="si">}</span><span class="s2"> \
-</span></span></span><span class="line"><span class="cl"><span class="s2">        set --ttl=10 --swap-with-value alice my-lock alice&#34;</span>
-</span></span></code></pre></div><hr>
-<h2 id="advanced-problem-dual-leaders">Advanced Problem: Dual Leaders</h2>
-<p>Temporary overlap can happen</p>
-<hr>
-<h3 id="check-before-acting">Check before acting</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Lock</span> <span class="nx">l</span><span class="p">)</span> <span class="nf">isLocked</span><span class="p">()</span> <span class="nx">boolean</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">l</span><span class="p">.</span><span class="nx">locked</span> <span class="o">&amp;&amp;</span> <span class="nx">l</span><span class="p">.</span><span class="nx">lockTime</span> <span class="o">+</span> <span class="mf">0.75</span> <span class="o">*</span> <span class="nx">l</span><span class="p">.</span><span class="nx">ttl</span> <span class="p">&gt;</span> <span class="nf">now</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><hr>
-<h2 id="final-insights">Final Insights</h2>
-<ul>
-<li>Distributed locks are <strong>hard and subtle</strong></li>
-<li>Always handle:
-<ul>
-<li>Crashes</li>
-<li>Expiry</li>
-<li>Network delays</li>
-</ul>
-</li>
-<li>Always verify:
-<ul>
-<li>Leader identity</li>
-<li>Version</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="final-trade-off">Final Trade-off</h2>
-<ul>
-<li><strong>At-most-once</strong>
-<ul>
-<li>Strong consistency</li>
-<li>Lower availability</li>
-</ul>
-</li>
-<li><strong>At-least-once</strong>
-<ul>
-<li>Higher availability</li>
-<li>Possible duplicates</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="one-line-summary">One-line Summary</h2>
-<blockquote>
-<p><strong>Leader election uses distributed locks (CAS + TTL + versioning) to ensure a single owner in a distributed system while handling failures and race conditions.</strong></p>
-</blockquote>
-
-</content>
-<p>
-  
-  <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>
-  
-  <a href="http://localhost:1313/blog/system-design/">#System Design</a>
-  
-  <a href="http://localhost:1313/blog/leader-election/">#Leader Election</a>
-  
-  <a href="http://localhost:1313/blog/etcd/">#Etcd</a>
-  
-  <a href="http://localhost:1313/blog/distributed-locks/">#Distributed Locks</a>
-  
-  <a href="http://localhost:1313/blog/consensus/">#Consensus</a>
-  
-</p>
-
-  </main>
-  <footer>
-<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
-  <div>
-    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
-      <i class="fab fa-github fa-lg"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
-      <i class="fab fa-linkedin fa-lg"></i>
-    </a>
-    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
-      <i class="fab fa-medium fa-lg"></i>
-    </a>
-    <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
-      <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
-    </a>
-    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
-      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
-    </a>
-    
-      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
-        <i class="fas fa-envelope fa-lg"></i>
-      </a>
-    
-  </div>
-
-    <p>
-      © 2026 Aman Goyal. Built with ❤️ using
-      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
-    </p>
-  </footer>
-  </footer>
-
-    
-</body>
-
-</html>
+<!doctype html><html lang=en-US><head><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.15.4/css/all.css crossorigin=anonymous><meta http-equiv=X-Clacks-Overhead content="GNU Terry Pratchett"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=https://goyal-aman.github.io/images/favicon.ico><title>Leader Election: Ensuring a Single Owner in a Distributed System | Aman Goyal</title><meta name=title content="Leader Election: Ensuring a Single Owner in a Distributed System"><meta name=description content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."><meta name=keywords content="Distributed Systems,System Design,Leader Election,etcd,Distributed Locks,Consensus,"><meta property="og:url" content="https://goyal-aman.github.io/leader-election-ensuring-a-single-owner-in-a-distributed-system/"><meta property="og:site_name" content="Aman Goyal"><meta property="og:title" content="Leader Election: Ensuring a Single Owner in a Distributed System"><meta property="og:description" content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2026-02-14T00:00:00+00:00"><meta property="article:modified_time" content="2026-02-14T00:00:00+00:00"><meta property="article:tag" content="Distributed Systems"><meta property="article:tag" content="System Design"><meta property="article:tag" content="Leader Election"><meta property="article:tag" content="Etcd"><meta property="article:tag" content="Distributed Locks"><meta property="article:tag" content="Consensus"><meta property="og:image" content="https://goyal-aman.github.io/images/share.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://goyal-aman.github.io/images/share.png"><meta name=twitter:title content="Leader Election: Ensuring a Single Owner in a Distributed System"><meta name=twitter:description content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."><meta itemprop=name content="Leader Election: Ensuring a Single Owner in a Distributed System"><meta itemprop=description content="How distributed systems implement leader election and ownership using compare-and-swap, TTL-based locks, and versioning over key-value stores like etcd to safely handle failures and race conditions."><meta itemprop=datePublished content="2026-02-14T00:00:00+00:00"><meta itemprop=dateModified content="2026-02-14T00:00:00+00:00"><meta itemprop=wordCount content="639"><meta itemprop=image content="https://goyal-aman.github.io/images/share.png"><meta itemprop=keywords content="Distributed Systems,System Design,Leader Election,Etcd,Distributed Locks,Consensus"><meta name=referrer content="no-referrer-when-downgrade"><style>:root{--width:720px;--font-main:Verdana, sans-serif;--font-secondary:Verdana, sans-serif;--font-scale:1em;--background-color:#fff;--heading-color:#222;--text-color:#444;--link-color:#3273dc;--visited-color:#8b6fcb;--code-background-color:#f2f2f2;--code-color:#222;--blockquote-color:#222}@media(prefers-color-scheme:dark){:root{--background-color:#01242e;--heading-color:#eee;--text-color:#ddd;--link-color:#8cc2dd;--visited-color:#8b6fcb;--code-background-color:#000;--code-color:#ddd;--blockquote-color:#ccc}}body{font-family:var(--font-secondary);font-size:var(--font-scale);margin:auto;padding:20px;max-width:var(--width);text-align:left;background-color:var(--background-color);word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:var(--text-color)}h1,h2,h3,h4,h5,h6{font-family:var(--font-main);color:var(--heading-color)}a{color:var(--link-color);cursor:pointer;text-decoration:none}a:hover{text-decoration:underline}nav a{margin-right:8px}strong,b{color:var(--heading-color)}button{margin:0;cursor:pointer}time{font-family:monospace;font-style:normal;font-size:15px}main{line-height:1.6}table{width:100%}hr{border:0;border-top:1px dashed}img{max-width:100%}code{font-family:monospace;padding:2px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px}blockquote{border-left:1px solid #999;color:var(--code-color);padding-left:20px;font-style:italic}footer{padding:25px 0;text-align:center}.title:hover{text-decoration:none}.title h1{font-size:1.5em}.inline{width:auto!important}.highlight,.code{padding:1px 15px;background-color:var(--code-background-color);color:var(--code-color);border-radius:3px;margin-block-start:1em;margin-block-end:1em;overflow-x:auto}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:var(--visited-color)}</style></head><body><header><header style="display:flex;justify-content:space-between;align-items:center;padding:1rem 0"><a href=/ class=title><h2>Aman Goyal</h2></a><div><a href=https://github.com/goyal-aman target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-github fa-lg"></i>
+</a><a href=https://www.linkedin.com/in/ln-amangoyal target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-linkedin fa-lg"></i>
+</a><a href=https://aman-goyal.medium.com/ target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-medium fa-lg"></i>
+</a><a href=https://www.topmate.io/amangoyal target=_blank style="margin:0 10px;color:inherit"><img src=/images/topmate-bw.svg alt=LeetCode style=height:20px;vertical-align:middle>
+</a><a href=https://leetcode.com/sichern target=_blank style="margin:0 10px;color:inherit"><img src=/images/leetcode.svg alt=LeetCode style=height:20px;vertical-align:middle>
+</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div></header><nav><a href=/>Home</a>
+<a href=/blog/>Blog</a>
+<a href=/coaching>Coaching</a></nav></header><main><h1>Leader Election: Ensuring a Single Owner in a Distributed System</h1><p><i><time datetime=2026-02-14>14 Feb, 2026</time></i></p><content><h2 id=core-concept>Core Concept</h2><ul><li><strong>Ownership / Leader election = only one replica owns a task at a time</strong></li><li>Needed for:<ul><li>Scheduling</li><li>Shard ownership</li><li>Background jobs</li></ul></li><li>Implemented via:<ul><li><strong>Distributed locks over KV stores (etcd, ZooKeeper, Consul)</strong></li></ul></li></ul><hr><h2 id=do-you-even-need-leader-election>Do You Even Need Leader Election?</h2><ul><li><strong>Singleton approach</strong><ul><li>Simple</li><li>Downtime during failures or deploys</li></ul></li></ul><p>Use leader election only when:</p><ul><li>You need <strong>high availability (4+ nines)</strong></li></ul><hr><h2 id=core-primitive-compare-and-swap>Core Primitive: Compare-And-Swap</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>lock</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>sync</span><span class=p>.</span><span class=nx>Mutex</span><span class=p>{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>store</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>key</span><span class=p>,</span><span class=w> </span><span class=nx>nextValue</span><span class=p>,</span><span class=w> </span><span class=nx>currentValue</span><span class=w> </span><span class=kt>string</span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=kt>bool</span><span class=p>,</span><span class=w> </span><span class=kt>error</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>lock</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>defer</span><span class=w> </span><span class=nx>lock</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>_</span><span class=p>,</span><span class=w> </span><span class=nx>containsKey</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>store</span><span class=p>[</span><span class=nx>key</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=p>!</span><span class=nx>containsKey</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nb>len</span><span class=p>(</span><span class=nx>currentValue</span><span class=p>)</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nx>store</span><span class=p>[</span><span class=nx>key</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>nextValue</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=k>return</span><span class=w> </span><span class=kc>true</span><span class=p>,</span><span class=w> </span><span class=kc>nil</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=kc>false</span><span class=p>,</span><span class=w> </span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=s>&#34;Expected value %s for key %s, but found empty&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>currentValue</span><span class=p>,</span><span class=w> </span><span class=nx>key</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=nx>store</span><span class=p>[</span><span class=nx>key</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=nx>currentValue</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nx>store</span><span class=p>[</span><span class=nx>key</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>nextValue</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=kc>true</span><span class=p>,</span><span class=w> </span><span class=kc>nil</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=kc>false</span><span class=p>,</span><span class=w> </span><span class=kc>nil</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Foundation of distributed locking</p><hr><h2 id=basic-lock>Basic Lock</h2><h3 id=acquire>Acquire</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>simpleLock</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// compare and swap &#34;1&#34; for &#34;0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>locked</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=handle-missing-key>Handle missing key</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>simpleLock</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// compare and swap &#34;1&#34; for &#34;0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// non-existent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=kc>nil</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>locked</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=blocking-lock>Blocking lock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>lock</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nf>while</span><span class=w> </span><span class=p>(!</span><span class=nx>l</span><span class=p>.</span><span class=nf>simpleLock</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nf>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=event-based-better>Event-based (better)</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>lock</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nf>while</span><span class=w> </span><span class=p>(!</span><span class=nx>l</span><span class=p>.</span><span class=nf>simpleLock</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nf>waitForChanges</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=unlock>Unlock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>unlock</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h2 id=problem-crash-while-holding-lock>Problem: Crash While Holding Lock</h2><p>Lock never released → system stuck</p><hr><h2 id=-solution-ttl-based-lock>⏳ Solution: TTL-based Lock</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>simpleLock</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// compare and swap &#34;1&#34; for &#34;0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>ttl</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// non-existent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=kc>nil</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>ttl</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>locked</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Lock auto-expires</p><hr><h2 id=critical-bug-ttl--unlock>Critical Bug (TTL + Unlock)</h2><ul><li>Old owner may unlock <strong>new owner&rsquo;s lock</strong></li></ul><hr><h2 id=fix-resource-version>Fix: Resource Version</h2><h3 id=lock-with-version>Lock with version</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>simpleLock</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// compare and swap &#34;1&#34; for &#34;0&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>version</span><span class=p>,</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>ttl</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// lock doesn&#39;t exist, try to write &#34;1&#34; with a previous value of</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// non-existent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=nx>null</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>version</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>null</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>ttl</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>locked</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=safe-unlock>Safe unlock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>unlock</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;0&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>version</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Prevents unlocking someone else&rsquo;s lock</p><hr><h2 id=renewable-lock-leader-election>Renewable Lock (Leader Election)</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>renew</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nx>locked</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nf>compareAndSwap</span><span class=p>(</span><span class=nx>l</span><span class=p>.</span><span class=nx>lockName</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=s>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>version</span><span class=p>,</span><span class=w> </span><span class=nx>ttl</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>locked</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=renewal-loop>Renewal loop</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=p>!</span><span class=nx>l</span><span class=p>.</span><span class=nf>renew</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nf>handleLockLost</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nf>sleep</span><span class=p>(</span><span class=nx>ttl</span><span class=o>/</span><span class=mi>2</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Leader keeps renewing lease</p><hr><h2 id=etcd-example>etcd Example</h2><h3 id=create-lock>Create lock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- sh -c <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> set my-lock unlocked&#34;</span>
+</span></span></code></pre></div><hr><h3 id=acquire-lock>Acquire lock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- sh -c <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> \
+</span></span></span><span class=line><span class=cl><span class=s2>      set --swap-with-value unlocked my-lock alice&#34;</span>
+</span></span></code></pre></div><hr><h3 id=failed-acquisition>Failed acquisition</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- sh -c <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> \
+</span></span></span><span class=line><span class=cl><span class=s2>      set --swap-with-value unlocked my-lock bob&#34;</span>
+</span></span><span class=line><span class=cl>Error:  101: Compare failed <span class=o>([</span>unlocked !<span class=o>=</span> alice<span class=o>])</span> <span class=o>[</span>6<span class=o>]</span>
+</span></span></code></pre></div><hr><h3 id=release-lock>Release lock</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- sh -c <span class=se>\
+</span></span></span><span class=line><span class=cl>  <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> \
+</span></span></span><span class=line><span class=cl><span class=s2>      set --swap-with-value alice my-lock unlocked&#34;</span>
+</span></span></code></pre></div><hr><h2 id=lease-based-lock-etcd>Lease-based Lock (etcd)</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- <span class=se>\
+</span></span></span><span class=line><span class=cl>    sh -c <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> \
+</span></span></span><span class=line><span class=cl><span class=s2>        --ttl=10 mk my-lock alice&#34;</span>
+</span></span></code></pre></div><hr><h3 id=renew-lease>Renew lease</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl <span class=nb>exec</span> my-etcd-cluster-0000 -- <span class=se>\
+</span></span></span><span class=line><span class=cl>    sh -c <span class=s2>&#34;ETCD_API=3 etcdctl --endpoints=</span><span class=si>${</span><span class=nv>ETCD_ENDPOINTS</span><span class=si>}</span><span class=s2> \
+</span></span></span><span class=line><span class=cl><span class=s2>        set --ttl=10 --swap-with-value alice my-lock alice&#34;</span>
+</span></span></code></pre></div><hr><h2 id=advanced-problem-dual-leaders>Advanced Problem: Dual Leaders</h2><p>Temporary overlap can happen</p><hr><h3 id=check-before-acting>Check before acting</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>Lock</span><span class=w> </span><span class=nx>l</span><span class=p>)</span><span class=w> </span><span class=nf>isLocked</span><span class=p>()</span><span class=w> </span><span class=nx>boolean</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>locked</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>lockTime</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mf>0.75</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nx>ttl</span><span class=w> </span><span class=p>&gt;</span><span class=w> </span><span class=nf>now</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h2 id=final-insights>Final Insights</h2><ul><li>Distributed locks are <strong>hard and subtle</strong></li><li>Always handle:<ul><li>Crashes</li><li>Expiry</li><li>Network delays</li></ul></li><li>Always verify:<ul><li>Leader identity</li><li>Version</li></ul></li></ul><hr><h2 id=final-trade-off>Final Trade-off</h2><ul><li><strong>At-most-once</strong><ul><li>Strong consistency</li><li>Lower availability</li></ul></li><li><strong>At-least-once</strong><ul><li>Higher availability</li><li>Possible duplicates</li></ul></li></ul><hr><h2 id=one-line-summary>One-line Summary</h2><blockquote><p><strong>Leader election uses distributed locks (CAS + TTL + versioning) to ensure a single owner in a distributed system while handling failures and race conditions.</strong></p></blockquote></content><p><a href=https://goyal-aman.github.io/blog/distributed-systems/>#Distributed Systems</a>
+<a href=https://goyal-aman.github.io/blog/system-design/>#System Design</a>
+<a href=https://goyal-aman.github.io/blog/leader-election/>#Leader Election</a>
+<a href=https://goyal-aman.github.io/blog/etcd/>#Etcd</a>
+<a href=https://goyal-aman.github.io/blog/distributed-locks/>#Distributed Locks</a>
+<a href=https://goyal-aman.github.io/blog/consensus/>#Consensus</a></p></main><footer><footer style="text-align:center;padding:1.5rem 0;font-size:.9rem;color:#777"><div><a href=https://github.com/goyal-aman target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-github fa-lg"></i>
+</a><a href=https://www.linkedin.com/in/ln-amangoyal target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-linkedin fa-lg"></i>
+</a><a href=https://aman-goyal.medium.com/ target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-medium fa-lg"></i>
+</a><a href=https://www.topmate.io/amangoyal target=_blank style="margin:0 10px;color:inherit"><img src=/images/topmate-bw.svg alt=LeetCode style=height:20px;vertical-align:middle>
+</a><a href=https://leetcode.com/sichern target=_blank style="margin:0 10px;color:inherit"><img src=/images/leetcode.svg alt=LeetCode style=height:20px;vertical-align:middle>
+</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div><p>© 2026 Aman Goyal. Built with ❤️ using
+<a href=https://gohugo.io target=_blank style=color:inherit;text-decoration:underline>Hugo</a>.</p></footer></footer></body></html>

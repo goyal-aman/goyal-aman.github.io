@@ -1,34 +1,112 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Containers on Aman Goyal</title>
-    <link>http://localhost:1313/blog/containers/</link>
-    <description>Recent content in Containers on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/containers/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>The Adapter Pattern: Standardizing Application Interfaces</title>
-      <link>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</link>
-      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</guid>
-      <description>Core Concept Adapter pattern = modify interface of an application (without changing it) Implemented as a side container that: Transforms outputs/inputs Makes app conform to a standard interface Think:&#xA;&amp;ldquo;Wrap your app so it speaks the standard language&amp;rdquo;&#xA;Why Adapters Are Needed Real systems are heterogeneous: Different languages Different logging formats Different monitoring interfaces But ops needs:&#xA;Unified interfaces for: Monitoring Logging Health checks Key Benefits 1. Standardization Converts different formats → one common format Example: Redis metrics → Prometheus format 2.</description>
-    </item>
-    <item>
-      <title>The Ambassador Pattern: Decoupling Application Logic from Infrastructure</title>
-      <link>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</link>
-      <pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</guid>
-      <description>Core Concept Ambassador pattern = proxy container alongside your app It handles communication between the app and external services The app talks only to localhost, and the ambassador handles the rest Think of it as:&#xA;A smart proxy sitting next to your app&#xA;Main Purpose Decouple application logic from networking/infrastructure complexity App stays simple → ambassador handles: Routing Discovery Failover External communication Key Benefits 1. Separation of concerns App → business logic Ambassador → networking + infra logic Cleaner architecture, easier maintenance</description>
-    </item>
-    <item>
-      <title>The Sidecar Pattern: Extending Applications Without Modifying Them</title>
-      <link>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</link>
-      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</guid>
-      <description>Core Concept Sidecar pattern = 2 containers in one unit (pod) Main container → core application Sidecar container → adds/extends functionality Both run together on the same node and share: Network (same localhost) Filesystem (shared volumes) Namespaces (PID, hostname, etc.) Why Sidecars Are Powerful 1. Extend apps without modifying them Add features externally instead of changing legacy code Example: Add HTTPS using nginx sidecar Legacy app still runs HTTP internally Huge for legacy systems you can&amp;rsquo;t rebuild</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Containers on Aman Goyal</title><link>https://goyal-aman.github.io/blog/containers/</link><description>Recent content in Containers on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/containers/index.xml" rel="self" type="application/rss+xml"/><item><title>The Adapter Pattern: Standardizing Application Interfaces</title><link>https://goyal-aman.github.io/the-adapter-pattern-standardizing-application-interfaces/</link><pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-adapter-pattern-standardizing-application-interfaces/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adapter pattern = modify interface of an application (without changing it)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Implemented as a &lt;strong&gt;side container&lt;/strong&gt; that:
+&lt;ul&gt;
+&lt;li&gt;Transforms outputs/inputs&lt;/li&gt;
+&lt;li&gt;Makes app conform to a &lt;strong&gt;standard interface&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;Wrap your app so it speaks the standard language&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-adapters-are-needed"&gt;Why Adapters Are Needed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Real systems are &lt;strong&gt;heterogeneous&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Different languages&lt;/li&gt;
+&lt;li&gt;Different logging formats&lt;/li&gt;
+&lt;li&gt;Different monitoring interfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But ops needs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unified interfaces&lt;/strong&gt; for:
+&lt;ul&gt;
+&lt;li&gt;Monitoring&lt;/li&gt;
+&lt;li&gt;Logging&lt;/li&gt;
+&lt;li&gt;Health checks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="key-benefits"&gt;Key Benefits&lt;/h2&gt;
+&lt;h3 id="1-standardization"&gt;1. Standardization&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Converts different formats → one common format&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Redis metrics → Prometheus format&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="2-decoupling"&gt;2. Decoupling&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App code remains unchanged&lt;/li&gt;
+&lt;li&gt;Adapter handles integration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No need to modify third-party images&lt;/p&gt;</description></item><item><title>The Ambassador Pattern: Decoupling Application Logic from Infrastructure</title><link>https://goyal-aman.github.io/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</link><pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ambassador pattern = proxy container alongside your app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;It &lt;strong&gt;handles communication between the app and external services&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;The app talks only to &lt;strong&gt;localhost&lt;/strong&gt;, and the ambassador handles the rest&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think of it as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A smart proxy sitting next to your app&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="main-purpose"&gt;Main Purpose&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Decouple application logic from networking/infrastructure complexity&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;App stays simple → ambassador handles:
+&lt;ul&gt;
+&lt;li&gt;Routing&lt;/li&gt;
+&lt;li&gt;Discovery&lt;/li&gt;
+&lt;li&gt;Failover&lt;/li&gt;
+&lt;li&gt;External communication&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="key-benefits"&gt;Key Benefits&lt;/h2&gt;
+&lt;h3 id="1-separation-of-concerns"&gt;1. Separation of concerns&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;App → business logic&lt;/li&gt;
+&lt;li&gt;Ambassador → networking + infra logic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cleaner architecture, easier maintenance&lt;/p&gt;</description></item><item><title>The Sidecar Pattern: Extending Applications Without Modifying Them</title><link>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</link><pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/the-sidecar-pattern-extending-applications-without-modifying-them/</guid><description>&lt;hr&gt;
+&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar pattern = 2 containers in one unit (pod)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Main container&lt;/strong&gt; → core application&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sidecar container&lt;/strong&gt; → adds/extends functionality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Both run &lt;strong&gt;together on the same node&lt;/strong&gt; and share:
+&lt;ul&gt;
+&lt;li&gt;Network (same localhost)&lt;/li&gt;
+&lt;li&gt;Filesystem (shared volumes)&lt;/li&gt;
+&lt;li&gt;Namespaces (PID, hostname, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="why-sidecars-are-powerful"&gt;Why Sidecars Are Powerful&lt;/h2&gt;
+&lt;h3 id="1-extend-apps-without-modifying-them"&gt;1. Extend apps &lt;em&gt;without modifying them&lt;/em&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add features externally instead of changing legacy code&lt;/li&gt;
+&lt;li&gt;Example:
+&lt;ul&gt;
+&lt;li&gt;Add HTTPS using &lt;strong&gt;nginx sidecar&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Legacy app still runs HTTP internally&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Huge for &lt;strong&gt;legacy systems you can&amp;rsquo;t rebuild&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

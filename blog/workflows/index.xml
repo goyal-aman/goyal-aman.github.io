@@ -1,20 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Workflows on Aman Goyal</title>
-    <link>http://localhost:1313/blog/workflows/</link>
-    <description>Recent content in Workflows on Aman Goyal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2025, Aman Goyal.</copyright>
-    <lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/workflows/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title>
-      <link>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</link>
-      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid>
-      <description>Core Concept Extend work queues into workflows (DAGs) Output of one stage → input to next stage Entire system becomes event-driven pipeline Think:&#xA;Multiple work queues connected together by events&#xA;Why This Pattern Exists Work queues (Chapter 11) → 1 input → 1 output Real systems: Multiple outputs Multiple steps Parallel + conditional flows Need workflow orchestration&#xA;Core Patterns 1. Copier Duplicate work into multiple queues Use case:&#xA;Video → multiple formats (4K, 1080p, GIF) Also improves:</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Workflows on Aman Goyal</title><link>https://goyal-aman.github.io/blog/workflows/</link><description>Recent content in Workflows on Aman Goyal</description><generator>Hugo</generator><language>en-US</language><copyright>Copyright © 2025, Aman Goyal.</copyright><lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://goyal-aman.github.io/blog/workflows/index.xml" rel="self" type="application/rss+xml"/><item><title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title><link>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</link><pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate><guid>https://goyal-aman.github.io/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid><description>&lt;h2 id="core-concept"&gt;Core Concept&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Extend work queues into &lt;strong&gt;workflows (DAGs)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Output of one stage → input to next stage&lt;/li&gt;
+&lt;li&gt;Entire system becomes &lt;strong&gt;event-driven pipeline&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Multiple work queues connected together by events&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="why-this-pattern-exists"&gt;Why This Pattern Exists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Work queues (Chapter 11) → 1 input → 1 output&lt;/li&gt;
+&lt;li&gt;Real systems:
+&lt;ul&gt;
+&lt;li&gt;Multiple outputs&lt;/li&gt;
+&lt;li&gt;Multiple steps&lt;/li&gt;
+&lt;li&gt;Parallel + conditional flows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Need &lt;strong&gt;workflow orchestration&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="core-patterns"&gt;Core Patterns&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id="1-copier"&gt;1. Copier&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Duplicate work into multiple queues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use case:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Video → multiple formats (4K, 1080p, GIF)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also improves:&lt;/p&gt;</description></item></channel></rss>
