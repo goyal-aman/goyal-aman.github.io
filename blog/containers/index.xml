@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Containers on Aman Goyal</title>
+    <link>http://localhost:1313/blog/containers/</link>
+    <description>Recent content in Containers on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/containers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Adapter Pattern: Standardizing Application Interfaces</title>
+      <link>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</link>
+      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</guid>
+      <description>Core Concept Adapter pattern = modify interface of an application (without changing it) Implemented as a side container that: Transforms outputs/inputs Makes app conform to a standard interface Think:&#xA;&amp;ldquo;Wrap your app so it speaks the standard language&amp;rdquo;&#xA;Why Adapters Are Needed Real systems are heterogeneous: Different languages Different logging formats Different monitoring interfaces But ops needs:&#xA;Unified interfaces for: Monitoring Logging Health checks Key Benefits 1. Standardization Converts different formats → one common format Example: Redis metrics → Prometheus format 2.</description>
+    </item>
+    <item>
+      <title>The Ambassador Pattern: Decoupling Application Logic from Infrastructure</title>
+      <link>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</link>
+      <pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</guid>
+      <description>Core Concept Ambassador pattern = proxy container alongside your app It handles communication between the app and external services The app talks only to localhost, and the ambassador handles the rest Think of it as:&#xA;A smart proxy sitting next to your app&#xA;Main Purpose Decouple application logic from networking/infrastructure complexity App stays simple → ambassador handles: Routing Discovery Failover External communication Key Benefits 1. Separation of concerns App → business logic Ambassador → networking + infra logic Cleaner architecture, easier maintenance</description>
+    </item>
+    <item>
+      <title>The Sidecar Pattern: Extending Applications Without Modifying Them</title>
+      <link>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</link>
+      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/the-sidecar-pattern-extending-applications-without-modifying-them/</guid>
+      <description>Core Concept Sidecar pattern = 2 containers in one unit (pod) Main container → core application Sidecar container → adds/extends functionality Both run together on the same node and share: Network (same localhost) Filesystem (shared volumes) Namespaces (PID, hostname, etc.) Why Sidecars Are Powerful 1. Extend apps without modifying them Add features externally instead of changing legacy code Example: Add HTTPS using nginx sidecar Legacy app still runs HTTP internally Huge for legacy systems you can&amp;rsquo;t rebuild</description>
+    </item>
+  </channel>
+</rss>

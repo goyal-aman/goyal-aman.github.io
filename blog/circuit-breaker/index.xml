@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Circuit Breaker on Aman Goyal</title>
+    <link>http://localhost:1313/blog/circuit-breaker/</link>
+    <description>Recent content in Circuit Breaker on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/circuit-breaker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Common Failure Patterns in Distributed Systems: What Not to Do</title>
+      <link>http://localhost:1313/common-failure-patterns-in-distributed-systems-what-not-to-do/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/common-failure-patterns-in-distributed-systems-what-not-to-do/</guid>
+      <description>Core Idea This chapter is about what NOT to do Distributed systems fail in predictable patterns Learn them → prevent repeated mistakes Major Failure Patterns 1. Thundering Herd (VERY IMPORTANT) What happens: System overload → failures Clients retry → even more load Load amplifies exponentially Example:&#xA;X requests → fail → retries → 2X → 4X → crash Solutions: Exponential backoff Jitter (random delay) Circuit breaker Gradual recovery (don&amp;rsquo;t flood system) 2.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Architecture on Aman Goyal</title>
+    <link>http://localhost:1313/blog/architecture/</link>
+    <description>Recent content in Architecture on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 10 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/architecture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Monoliths to Microservices: An Introduction to Serving Patterns</title>
+      <link>http://localhost:1313/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</link>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/from-monoliths-to-microservices-an-introduction-to-serving-patterns/</guid>
+      <description>Big Picture Shift Moving from single-node patterns → multi-node distributed systems Systems are now: Loosely coupled Communicating over network APIs Coordinated with parallel + asynchronous calls Monolith vs Microservices Monolith Everything in one application/container Tightly coupled Hard to scale selectively Microservices App split into many small services Each service: Runs independently Communicates via APIs Why Microservices Are Useful 1. Better team ownership Small services → owned by small teams (&amp;ldquo;two-pizza teams&amp;rdquo;) Less coordination overhead 2.</description>
+    </item>
+  </channel>
+</rss>

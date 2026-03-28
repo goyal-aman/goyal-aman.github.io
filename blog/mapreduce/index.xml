@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MapReduce on Aman Goyal</title>
+    <link>http://localhost:1313/blog/mapreduce/</link>
+    <description>Recent content in MapReduce on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/mapreduce/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title>
+      <link>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid>
+      <description>Core Concept Focus: bringing parallel work back together Opposite of earlier chapters (which split work) Used for: Aggregation Synchronization Final results Think:&#xA;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&#xA;Why Coordination Is Needed Previous patterns: Sharding → split work Work queues → process independently But:&#xA;Some tasks need complete dataset Some need aggregation (sum, stats) Need coordination primitives&#xA;Core Patterns 1. Join (Barrier Synchronization) What it does: Waits until ALL parallel work is done Then releases results Example: Video rendering: Need all frames before creating video Key properties: Ensures completeness Blocks until everything finishes Trade-off: Slower (less parallelism) Correct &amp;amp; complete results 2.</description>
+    </item>
+  </channel>
+</rss>

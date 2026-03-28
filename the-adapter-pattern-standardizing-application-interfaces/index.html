@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
+<title>The Adapter Pattern: Standardizing Application Interfaces | Aman Goyal</title>
+<meta name="title" content="The Adapter Pattern: Standardizing Application Interfaces" />
+<meta name="description" content="How the Adapter pattern uses a side container to translate an application&#39;s interface into a standard format, enabling unified monitoring, logging, and health checks without modifying the app." />
+<meta name="keywords" content="Distributed Systems,System Design,Adapter Pattern,Monitoring,Containers," />
+
+
+<meta property="og:title" content="The Adapter Pattern: Standardizing Application Interfaces" />
+<meta property="og:description" content="How the Adapter pattern uses a side container to translate an application&#39;s interface into a standard format, enabling unified monitoring, logging, and health checks without modifying the app." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2026-01-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-01-03T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="The Adapter Pattern: Standardizing Application Interfaces"/>
+<meta name="twitter:description" content="How the Adapter pattern uses a side container to translate an application&#39;s interface into a standard format, enabling unified monitoring, logging, and health checks without modifying the app."/>
+
+
+
+<meta itemprop="name" content="The Adapter Pattern: Standardizing Application Interfaces">
+<meta itemprop="description" content="How the Adapter pattern uses a side container to translate an application&#39;s interface into a standard format, enabling unified monitoring, logging, and health checks without modifying the app."><meta itemprop="datePublished" content="2026-01-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2026-01-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="305"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
+<meta itemprop="keywords" content="Distributed Systems,System Design,Adapter Pattern,Monitoring,Containers," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+</head>
+
+<body>
+  <header><header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+    <a href="/" class="title">
+      <h2>Aman Goyal</h2>
+    </a>
+    <div>
+      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-medium fa-lg"></i>
+      </a>
+      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      
+        <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
+      
+    </div>
+  </header>
+  <nav>
+
+<a href="/">Home</a>
+
+<a href="/blog/">Blog</a>
+
+<a href="/coaching">Coaching</a>
+
+
+    
+</nav>
+</header>
+  <main>
+
+<h1>The Adapter Pattern: Standardizing Application Interfaces</h1>
+<p>
+  <i>
+    <time datetime='2026-01-03'>
+      03 Jan, 2026
+    </time>
+  </i>
+</p>
+
+
+
+
+
+<content>
+  <h2 id="core-concept">Core Concept</h2>
+<ul>
+<li><strong>Adapter pattern = modify interface of an application (without changing it)</strong></li>
+<li>Implemented as a <strong>side container</strong> that:
+<ul>
+<li>Transforms outputs/inputs</li>
+<li>Makes app conform to a <strong>standard interface</strong></li>
+</ul>
+</li>
+</ul>
+<p>Think:</p>
+<blockquote>
+<p><strong>&ldquo;Wrap your app so it speaks the standard language&rdquo;</strong></p>
+</blockquote>
+<hr>
+<h2 id="why-adapters-are-needed">Why Adapters Are Needed</h2>
+<ul>
+<li>Real systems are <strong>heterogeneous</strong>:
+<ul>
+<li>Different languages</li>
+<li>Different logging formats</li>
+<li>Different monitoring interfaces</li>
+</ul>
+</li>
+</ul>
+<p>But ops needs:</p>
+<ul>
+<li><strong>Unified interfaces</strong> for:
+<ul>
+<li>Monitoring</li>
+<li>Logging</li>
+<li>Health checks</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="key-benefits">Key Benefits</h2>
+<h3 id="1-standardization">1. Standardization</h3>
+<ul>
+<li>Converts different formats → one common format</li>
+<li>Example:
+<ul>
+<li>Redis metrics → Prometheus format</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-decoupling">2. Decoupling</h3>
+<ul>
+<li>App code remains unchanged</li>
+<li>Adapter handles integration</li>
+</ul>
+<p>No need to modify third-party images</p>
+<hr>
+<h3 id="3-reusability">3. Reusability</h3>
+<ul>
+<li>Same adapter works across many apps</li>
+<li>Build once → reuse everywhere</li>
+</ul>
+<hr>
+<h3 id="4-independent-lifecycle">4. Independent lifecycle</h3>
+<ul>
+<li>Update adapter without touching app</li>
+<li>Update app without touching adapter</li>
+</ul>
+<hr>
+<h2 id="common-use-cases">Common Use Cases</h2>
+<hr>
+<h3 id="1-monitoring-adaptation">1. Monitoring Adaptation</h3>
+<ul>
+<li>Different apps expose metrics differently</li>
+<li>Adapter converts → standard (e.g., Prometheus)</li>
+</ul>
+<p>Enables centralized monitoring</p>
+<hr>
+<h3 id="2-logging-normalization">2. Logging Normalization</h3>
+<ul>
+<li>Apps log differently:
+<ul>
+<li>Files vs stdout</li>
+<li>Different formats</li>
+</ul>
+</li>
+<li>Adapter:
+<ul>
+<li>Converts logs → structured format</li>
+<li>Sends to logging system</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-health-checks">3. Health Checks</h3>
+<ul>
+<li>Add <strong>custom health logic</strong> without modifying app</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Run DB queries to check health</li>
+<li>Expose HTTP endpoint for orchestrator</li>
+</ul>
+<hr>
+<h2 id="how-it-works">How It Works</h2>
+<pre tabindex="0"><code>[ App Container ] ⇄ [ Adapter Container ] → Standard Interface
+</code></pre><ul>
+<li>Adapter sits alongside app (same pod)</li>
+<li>Shares:
+<ul>
+<li>Network (localhost)</li>
+<li>Filesystem (if needed)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="why-not-modify-the-app">Why Not Modify the App?</h2>
+<ul>
+<li>Often:
+<ul>
+<li>App is third-party / closed source</li>
+<li>Modifying = maintenance burden</li>
+</ul>
+</li>
+</ul>
+<p>Adapter is:</p>
+<ul>
+<li>Easier</li>
+<li>More modular</li>
+<li>More reusable</li>
+</ul>
+<hr>
+<h2 id="mental-model">Mental Model</h2>
+<p>Compare patterns:</p>
+<ul>
+<li><strong>Sidecar</strong> → adds features</li>
+<li><strong>Ambassador</strong> → handles external communication</li>
+<li><strong>Adapter</strong> → changes interface</li>
+</ul>
+<p>Adapter = &ldquo;translator&rdquo;</p>
+<hr>
+<h2 id="trade-offs">Trade-offs</h2>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>No need to change app code</li>
+<li>Clean separation of concerns</li>
+<li>Reusable components</li>
+<li>Better standardization</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Extra container overhead</li>
+<li>Slight complexity increase</li>
+<li>Another component to manage</li>
+</ul>
+<hr>
+<h2 id="one-line-summary">One-line Summary</h2>
+<blockquote>
+<p><strong>Adapter pattern standardizes how applications interact with the system by translating their interfaces into a common format using a side container.</strong></p>
+</blockquote>
+
+</content>
+<p>
+  
+  <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>
+  
+  <a href="http://localhost:1313/blog/system-design/">#System Design</a>
+  
+  <a href="http://localhost:1313/blog/adapter-pattern/">#Adapter Pattern</a>
+  
+  <a href="http://localhost:1313/blog/monitoring/">#Monitoring</a>
+  
+  <a href="http://localhost:1313/blog/containers/">#Containers</a>
+  
+</p>
+
+  </main>
+  <footer>
+<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+
+    <p>
+      © 2026 Aman Goyal. Built with ❤️ using
+      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
+    </p>
+  </footer>
+  </footer>
+
+    
+</body>
+
+</html>

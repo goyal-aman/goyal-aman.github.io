@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>High Availability on Aman Goyal</title>
+    <link>http://localhost:1313/blog/high-availability/</link>
+    <description>Recent content in High Availability on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 17 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/high-availability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Replicated Load-Balanced Services: High Availability Through Horizontal Scaling</title>
+      <link>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</link>
+      <pubDate>Sat, 17 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/replicated-load-balanced-services-high-availability-through-horizontal-scaling/</guid>
+      <description>Core Concept Replicated load-balanced service = multiple identical servers + load balancer Any instance can handle any request Load balancer distributes traffic (round-robin or sticky sessions) Why Replication Matters 1. High availability (HA) Single instance = downtime during: Deployments Crashes Minimum 2 replicas needed for reliability 2. Horizontal scaling Handle more users by adding replicas Scale out instead of scaling up Stateless Services (Ideal Case) No dependency on stored state Any request → any replica Examples: APIs Web servers Middleware Makes load balancing simple and efficient</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Batch Processing on Aman Goyal</title>
+    <link>http://localhost:1313/blog/batch-processing/</link>
+    <description>Recent content in Batch Processing on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/batch-processing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coordinated Batch Processing: Combining Parallel Work with Join and Reduce</title>
+      <link>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/coordinated-batch-processing-combining-parallel-work-with-join-and-reduce/</guid>
+      <description>Core Concept Focus: bringing parallel work back together Opposite of earlier chapters (which split work) Used for: Aggregation Synchronization Final results Think:&#xA;&amp;ldquo;Do work in parallel → then coordinate + combine results&amp;rdquo;&#xA;Why Coordination Is Needed Previous patterns: Sharding → split work Work queues → process independently But:&#xA;Some tasks need complete dataset Some need aggregation (sum, stats) Need coordination primitives&#xA;Core Patterns 1. Join (Barrier Synchronization) What it does: Waits until ALL parallel work is done Then releases results Example: Video rendering: Need all frames before creating video Key properties: Ensures completeness Blocks until everything finishes Trade-off: Slower (less parallelism) Correct &amp;amp; complete results 2.</description>
+    </item>
+    <item>
+      <title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</title>
+      <link>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</link>
+      <pubDate>Sat, 28 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/</guid>
+      <description>Core Concept Extend work queues into workflows (DAGs) Output of one stage → input to next stage Entire system becomes event-driven pipeline Think:&#xA;Multiple work queues connected together by events&#xA;Why This Pattern Exists Work queues (Chapter 11) → 1 input → 1 output Real systems: Multiple outputs Multiple steps Parallel + conditional flows Need workflow orchestration&#xA;Core Patterns 1. Copier Duplicate work into multiple queues Use case:&#xA;Video → multiple formats (4K, 1080p, GIF) Also improves:</description>
+    </item>
+    <item>
+      <title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title>
+      <link>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid>
+      <description>Core Concept Work queue = batch processing pattern Work is: Broken into independent tasks Processed by workers in parallel Goal: Process all items within acceptable time Architecture Overview Three main components: Work Queue Manager (generic logic) Source (Ambassador) → provides work items Worker → processes each item Strong separation:&#xA;Infra = reusable Business logic = pluggable Two Key Interfaces 1. Source Interface (HTTP) GET http://localhost/api/v1/items GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt; Response format { kind: ItemList, apiVersion: v1, items: [ &amp;#34;item-1&amp;#34;, &amp;#34;item-2&amp;#34; ] } Important:</description>
+    </item>
+  </channel>
+</rss>

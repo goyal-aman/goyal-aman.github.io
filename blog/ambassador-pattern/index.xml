@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ambassador Pattern on Aman Goyal</title>
+    <link>http://localhost:1313/blog/ambassador-pattern/</link>
+    <description>Recent content in Ambassador Pattern on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 27 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/ambassador-pattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Ambassador Pattern: Decoupling Application Logic from Infrastructure</title>
+      <link>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</link>
+      <pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/the-ambassador-pattern-decoupling-application-logic-from-infrastructure/</guid>
+      <description>Core Concept Ambassador pattern = proxy container alongside your app It handles communication between the app and external services The app talks only to localhost, and the ambassador handles the rest Think of it as:&#xA;A smart proxy sitting next to your app&#xA;Main Purpose Decouple application logic from networking/infrastructure complexity App stays simple → ambassador handles: Routing Discovery Failover External communication Key Benefits 1. Separation of concerns App → business logic Ambassador → networking + infra logic Cleaner architecture, easier maintenance</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
+<title>From Monoliths to Microservices: An Introduction to Serving Patterns | Aman Goyal</title>
+<meta name="title" content="From Monoliths to Microservices: An Introduction to Serving Patterns" />
+<meta name="description" content="A conceptual overview of how distributed systems shift from monolithic architectures to loosely-coupled microservices communicating over network APIs, and why design patterns matter." />
+<meta name="keywords" content="Distributed Systems,System Design,Microservices,Architecture," />
+
+
+<meta property="og:title" content="From Monoliths to Microservices: An Introduction to Serving Patterns" />
+<meta property="og:description" content="A conceptual overview of how distributed systems shift from monolithic architectures to loosely-coupled microservices communicating over network APIs, and why design patterns matter." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/from-monoliths-to-microservices-an-introduction-to-serving-patterns/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2026-01-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-01-10T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="From Monoliths to Microservices: An Introduction to Serving Patterns"/>
+<meta name="twitter:description" content="A conceptual overview of how distributed systems shift from monolithic architectures to loosely-coupled microservices communicating over network APIs, and why design patterns matter."/>
+
+
+
+<meta itemprop="name" content="From Monoliths to Microservices: An Introduction to Serving Patterns">
+<meta itemprop="description" content="A conceptual overview of how distributed systems shift from monolithic architectures to loosely-coupled microservices communicating over network APIs, and why design patterns matter."><meta itemprop="datePublished" content="2026-01-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2026-01-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="282"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
+<meta itemprop="keywords" content="Distributed Systems,System Design,Microservices,Architecture," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+</head>
+
+<body>
+  <header><header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+    <a href="/" class="title">
+      <h2>Aman Goyal</h2>
+    </a>
+    <div>
+      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-medium fa-lg"></i>
+      </a>
+      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      
+        <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
+      
+    </div>
+  </header>
+  <nav>
+
+<a href="/">Home</a>
+
+<a href="/blog/">Blog</a>
+
+<a href="/coaching">Coaching</a>
+
+
+    
+</nav>
+</header>
+  <main>
+
+<h1>From Monoliths to Microservices: An Introduction to Serving Patterns</h1>
+<p>
+  <i>
+    <time datetime='2026-01-10'>
+      10 Jan, 2026
+    </time>
+  </i>
+</p>
+
+
+
+
+
+<content>
+  <h2 id="big-picture-shift">Big Picture Shift</h2>
+<ul>
+<li>Moving from <strong>single-node patterns</strong> → <strong>multi-node distributed systems</strong></li>
+<li>Systems are now:
+<ul>
+<li><strong>Loosely coupled</strong></li>
+<li>Communicating over <strong>network APIs</strong></li>
+<li>Coordinated with <strong>parallel + asynchronous calls</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="monolith-vs-microservices">Monolith vs Microservices</h2>
+<h3 id="monolith">Monolith</h3>
+<ul>
+<li>Everything in <strong>one application/container</strong></li>
+<li>Tightly coupled</li>
+<li>Hard to scale selectively</li>
+</ul>
+<h3 id="microservices">Microservices</h3>
+<ul>
+<li>App split into <strong>many small services</strong></li>
+<li>Each service:
+<ul>
+<li>Runs independently</li>
+<li>Communicates via APIs</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="why-microservices-are-useful">Why Microservices Are Useful</h2>
+<h3 id="1-better-team-ownership">1. Better team ownership</h3>
+<ul>
+<li>Small services → owned by small teams (&ldquo;two-pizza teams&rdquo;)</li>
+<li>Less coordination overhead</li>
+</ul>
+<hr>
+<h3 id="2-decoupling-via-apis">2. Decoupling via APIs</h3>
+<ul>
+<li>Services interact through <strong>stable contracts</strong></li>
+<li>Teams can:
+<ul>
+<li>Develop independently</li>
+<li>Deploy independently</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-abstraction--encapsulation">3. Abstraction + Encapsulation</h3>
+<ul>
+<li><strong>Abstraction</strong>
+<ul>
+<li>Use a service without knowing how it works</li>
+</ul>
+</li>
+<li><strong>Encapsulation</strong>
+<ul>
+<li>Hide implementation details</li>
+</ul>
+</li>
+</ul>
+<p>Together:</p>
+<ul>
+<li>Reduce complexity</li>
+<li>Improve developer productivity</li>
+</ul>
+<hr>
+<h3 id="4-independent-scaling">4. Independent scaling</h3>
+<ul>
+<li>Each service scales differently:
+<ul>
+<li>Stateless → horizontal scaling</li>
+<li>Stateful → sharding, etc.</li>
+</ul>
+</li>
+</ul>
+<p>Much more efficient than scaling a full monolith</p>
+<hr>
+<h2 id="downsides-of-microservices">Downsides of Microservices</h2>
+<h3 id="1-debugging-is-harder">1. Debugging is harder</h3>
+<ul>
+<li>Failures span <strong>multiple services &amp; machines</strong></li>
+<li>No single place to inspect</li>
+</ul>
+<hr>
+<h3 id="2-higher-system-complexity">2. Higher system complexity</h3>
+<ul>
+<li>Many:
+<ul>
+<li>Communication patterns (sync, async, messaging)</li>
+<li>Coordination mechanisms</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-risk-of-over-fragmentation">3. Risk of over-fragmentation</h3>
+<ul>
+<li>
+<p>Too many small services =  bad</p>
+</li>
+<li>
+<p>Rule of thumb:</p>
+<blockquote>
+<p>If services &gt; engineers → probably overdoing it</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="4-performance--cost-overhead">4. Performance &amp; cost overhead</h3>
+<ul>
+<li>Network calls instead of in-process calls</li>
+<li>Each service has CPU/memory overhead</li>
+</ul>
+<hr>
+<h2 id="why-patterns-matter">Why Patterns Matter</h2>
+<ul>
+<li>Distributed systems are complex → patterns help:
+<ul>
+<li>Standardize design</li>
+<li>Improve debuggability</li>
+<li>Reuse proven solutions</li>
+</ul>
+</li>
+</ul>
+<p>Patterns = <strong>shortcuts to good architecture</strong></p>
+<hr>
+<h2 id="mental-model">Mental Model</h2>
+<pre tabindex="0"><code>Monolith:
+[ All features in one app ]
+
+Microservices:
+[ Service A ] ↔ [ Service B ] ↔ [ Service C ]
+        (API communication over network)
+</code></pre><hr>
+<h2 id="one-line-summary">One-line Summary</h2>
+<blockquote>
+<p><strong>Microservices break applications into independently deployable services that communicate over APIs, improving scalability and team autonomy—but at the cost of higher system complexity and debugging difficulty.</strong></p>
+</blockquote>
+
+</content>
+<p>
+  
+  <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>
+  
+  <a href="http://localhost:1313/blog/system-design/">#System Design</a>
+  
+  <a href="http://localhost:1313/blog/microservices/">#Microservices</a>
+  
+  <a href="http://localhost:1313/blog/architecture/">#Architecture</a>
+  
+</p>
+
+  </main>
+  <footer>
+<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+
+    <p>
+      © 2026 Aman Goyal. Built with ❤️ using
+      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
+    </p>
+  </footer>
+  </footer>
+
+    
+</body>
+
+</html>

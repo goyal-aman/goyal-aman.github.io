@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Work Queues on Aman Goyal</title>
+    <link>http://localhost:1313/blog/work-queues/</link>
+    <description>Recent content in Work Queues on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/work-queues/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Work Queue Systems: Scalable Batch Processing with Independent Tasks</title>
+      <link>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work-queue-systems-scalable-batch-processing-with-independent-tasks/</guid>
+      <description>Core Concept Work queue = batch processing pattern Work is: Broken into independent tasks Processed by workers in parallel Goal: Process all items within acceptable time Architecture Overview Three main components: Work Queue Manager (generic logic) Source (Ambassador) → provides work items Worker → processes each item Strong separation:&#xA;Infra = reusable Business logic = pluggable Two Key Interfaces 1. Source Interface (HTTP) GET http://localhost/api/v1/items GET http://localhost/api/v1/items/&amp;lt;item-name&amp;gt; Response format { kind: ItemList, apiVersion: v1, items: [ &amp;#34;item-1&amp;#34;, &amp;#34;item-2&amp;#34; ] } Important:</description>
+    </item>
+  </channel>
+</rss>

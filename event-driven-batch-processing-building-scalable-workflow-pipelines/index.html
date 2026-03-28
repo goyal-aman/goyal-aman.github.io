@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
+<title>Event-Driven Batch Processing: Building Scalable Workflow Pipelines | Aman Goyal</title>
+<meta name="title" content="Event-Driven Batch Processing: Building Scalable Workflow Pipelines" />
+<meta name="description" content="How to extend work queues into full event-driven DAG workflows using patterns like copier, filter, splitter, sharder, and merger, connected through pub/sub systems like Kafka." />
+<meta name="keywords" content="Distributed Systems,System Design,Event-Driven,Batch Processing,Kafka,Workflows," />
+
+
+<meta property="og:title" content="Event-Driven Batch Processing: Building Scalable Workflow Pipelines" />
+<meta property="og:description" content="How to extend work queues into full event-driven DAG workflows using patterns like copier, filter, splitter, sharder, and merger, connected through pub/sub systems like Kafka." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/event-driven-batch-processing-building-scalable-workflow-pipelines/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-02-28T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="Event-Driven Batch Processing: Building Scalable Workflow Pipelines"/>
+<meta name="twitter:description" content="How to extend work queues into full event-driven DAG workflows using patterns like copier, filter, splitter, sharder, and merger, connected through pub/sub systems like Kafka."/>
+
+
+
+<meta itemprop="name" content="Event-Driven Batch Processing: Building Scalable Workflow Pipelines">
+<meta itemprop="description" content="How to extend work queues into full event-driven DAG workflows using patterns like copier, filter, splitter, sharder, and merger, connected through pub/sub systems like Kafka."><meta itemprop="datePublished" content="2026-02-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2026-02-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="422"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
+<meta itemprop="keywords" content="Distributed Systems,System Design,Event-Driven,Batch Processing,Kafka,Workflows," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+</head>
+
+<body>
+  <header><header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+    <a href="/" class="title">
+      <h2>Aman Goyal</h2>
+    </a>
+    <div>
+      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-medium fa-lg"></i>
+      </a>
+      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      
+        <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
+      
+    </div>
+  </header>
+  <nav>
+
+<a href="/">Home</a>
+
+<a href="/blog/">Blog</a>
+
+<a href="/coaching">Coaching</a>
+
+
+    
+</nav>
+</header>
+  <main>
+
+<h1>Event-Driven Batch Processing: Building Scalable Workflow Pipelines</h1>
+<p>
+  <i>
+    <time datetime='2026-02-28'>
+      28 Feb, 2026
+    </time>
+  </i>
+</p>
+
+
+
+
+
+<content>
+  <h2 id="core-concept">Core Concept</h2>
+<ul>
+<li>Extend work queues into <strong>workflows (DAGs)</strong></li>
+<li>Output of one stage → input to next stage</li>
+<li>Entire system becomes <strong>event-driven pipeline</strong></li>
+</ul>
+<p>Think:</p>
+<blockquote>
+<p><strong>Multiple work queues connected together by events</strong></p>
+</blockquote>
+<hr>
+<h2 id="why-this-pattern-exists">Why This Pattern Exists</h2>
+<ul>
+<li>Work queues (Chapter 11) → 1 input → 1 output</li>
+<li>Real systems:
+<ul>
+<li>Multiple outputs</li>
+<li>Multiple steps</li>
+<li>Parallel + conditional flows</li>
+</ul>
+</li>
+</ul>
+<p>Need <strong>workflow orchestration</strong></p>
+<hr>
+<h2 id="core-patterns">Core Patterns</h2>
+<hr>
+<h3 id="1-copier">1. Copier</h3>
+<ul>
+<li>Duplicate work into multiple queues</li>
+</ul>
+<p>Use case:</p>
+<ul>
+<li>Video → multiple formats (4K, 1080p, GIF)</li>
+</ul>
+<p>Also improves:</p>
+<ul>
+<li>Reliability (run twice)</li>
+<li>Latency (take fastest result)</li>
+</ul>
+<hr>
+<h3 id="2-filter">2. Filter</h3>
+<ul>
+<li>Remove unwanted items</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Only users who opted for email</li>
+</ul>
+<p>Implemented as:</p>
+<ul>
+<li>Adapter over source</li>
+</ul>
+<hr>
+<h3 id="3-splitter">3. Splitter</h3>
+<ul>
+<li>Route items to different queues (no loss)</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Email vs SMS notifications</li>
+</ul>
+<p>Like:</p>
+<ul>
+<li>Conditional routing</li>
+</ul>
+<hr>
+<h3 id="4-sharder">4. Sharder</h3>
+<ul>
+<li>Distribute work evenly across queues</li>
+</ul>
+<p>Benefits:</p>
+<ul>
+<li>Scalability</li>
+<li>Fault isolation</li>
+<li>Multi-region distribution</li>
+</ul>
+<p>Same idea as service sharding</p>
+<hr>
+<h3 id="5-merger">5. Merger</h3>
+<ul>
+<li>Combine multiple queues → one queue</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Multiple repos → single build pipeline</li>
+</ul>
+<p>Opposite of copier</p>
+<hr>
+<h2 id="workflow-mental-model">Workflow Mental Model</h2>
+<pre tabindex="0"><code>Input → [Copy] → [Parallel queues] → [Filter/Split] → [Merge] → Output
+</code></pre><p>DAG (Directed Acyclic Graph)</p>
+<hr>
+<h2 id="pubsub-is-the-backbone">Pub/Sub is the Backbone</h2>
+<ul>
+<li>Use systems like:
+<ul>
+<li>Kafka</li>
+<li>SQS</li>
+<li>EventGrid</li>
+</ul>
+</li>
+</ul>
+<p>Provides:</p>
+<ul>
+<li>Reliable message delivery</li>
+<li>Decoupling between stages</li>
+</ul>
+<hr>
+<h2 id="kafka-setup-exact-commands">Kafka Setup (Exact Commands)</h2>
+<h3 id="create-topics">Create topics</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> x in <span class="m">0</span> <span class="m">1</span> 2<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  kubectl run kafka --image<span class="o">=</span>solsson/kafka:0.11.0.0 --rm --attach --command -- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ./bin/kafka-topics.sh --create --zookeeper kafka-service-zookeeper:2181 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      --replication-factor <span class="m">3</span> --partitions <span class="m">10</span> --topic photos-<span class="nv">$x</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><hr>
+<h3 id="produce-messages">Produce messages</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run kafka-producer --image<span class="o">=</span>solsson/kafka:0.11.0.0 --rm -it --command -- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ./bin/kafka-console-producer.sh --broker-list kafka-service-kafka:9092 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --topic photos-1
+</span></span></code></pre></div><hr>
+<h3 id="consume-messages">Consume messages</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run kafka-consumer --image<span class="o">=</span>solsson/kafka:0.11.0.0 --rm -it --command -- <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ./bin/kafka-console-consumer.sh --bootstrap-server kafka-service-kafka:9092<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --topic photos-1 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        --from-beginning
+</span></span></code></pre></div><hr>
+<h2 id="real-example-user-signup-workflow">Real Example: User Signup Workflow</h2>
+<p>Flow:</p>
+<ol>
+<li>User signup → verification email</li>
+<li>After verification:
+<ul>
+<li>Copier → welcome email + notifications</li>
+</ul>
+</li>
+<li>Notifications:
+<ul>
+<li>Filter → email/SMS preferences</li>
+</ul>
+</li>
+</ol>
+<p>Combines:</p>
+<ul>
+<li>Copier</li>
+<li>Filter</li>
+<li>Sharder</li>
+</ul>
+<hr>
+<h2 id="real-world-problems">Real-World Problems</h2>
+<hr>
+<h3 id="1-uneven-work-stragglers">1. Uneven Work (Stragglers)</h3>
+<p>Solution: <strong>Work Stealing</strong></p>
+<ul>
+<li>Idle worker → steals from longest queue</li>
+</ul>
+<hr>
+<h3 id="2-worker-failures">2. Worker Failures</h3>
+<ul>
+<li>Work is retried automatically</li>
+</ul>
+<p>Must ensure:</p>
+<ul>
+<li><strong>Idempotent processing</strong></li>
+</ul>
+<hr>
+<h3 id="3-poison-messages">3. Poison Messages</h3>
+<ul>
+<li>Some tasks always fail → crash workers</li>
+</ul>
+<p>Solution:</p>
+<ul>
+<li>Retry count</li>
+<li>Exponential backoff</li>
+<li>Eventually drop task</li>
+</ul>
+<hr>
+<h3 id="4-backlog-problem">4. Backlog Problem</h3>
+<ul>
+<li>Old tasks pile up → new tasks delayed</li>
+</ul>
+<p>Solution: <strong>Priority queues</strong></p>
+<ul>
+<li>New work → high priority</li>
+<li>Retry work → lower priority</li>
+</ul>
+<hr>
+<h2 id="key-insights">Key Insights</h2>
+<ul>
+<li>Workflows = <strong>composition of simple patterns</strong></li>
+<li>Pub/Sub = <strong>decoupling glue</strong></li>
+<li>System must handle:
+<ul>
+<li>Failures</li>
+<li>Slow tasks</li>
+<li>Backlogs</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="trade-offs">Trade-offs</h2>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>Highly scalable</li>
+<li>Modular</li>
+<li>Flexible workflows</li>
+<li>Fault tolerant</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Complex to reason about</li>
+<li>Debugging is hard</li>
+<li>Requires strong monitoring</li>
+</ul>
+<hr>
+<h2 id="one-line-summary">One-line Summary</h2>
+<blockquote>
+<p><strong>Event-driven batch systems connect multiple work queues into workflows using patterns like copier, filter, splitter, sharder, and merger, enabling scalable and reliable data processing pipelines.</strong></p>
+</blockquote>
+
+</content>
+<p>
+  
+  <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>
+  
+  <a href="http://localhost:1313/blog/system-design/">#System Design</a>
+  
+  <a href="http://localhost:1313/blog/event-driven/">#Event-Driven</a>
+  
+  <a href="http://localhost:1313/blog/batch-processing/">#Batch Processing</a>
+  
+  <a href="http://localhost:1313/blog/kafka/">#Kafka</a>
+  
+  <a href="http://localhost:1313/blog/workflows/">#Workflows</a>
+  
+</p>
+
+  </main>
+  <footer>
+<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+
+    <p>
+      © 2026 Aman Goyal. Built with ❤️ using
+      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
+    </p>
+  </footer>
+  </footer>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+
+
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
+<title>AI Inference and Serving: Integrating Machine Learning into Distributed Systems | Aman Goyal</title>
+<meta name="title" content="AI Inference and Serving: Integrating Machine Learning into Distributed Systems" />
+<meta name="description" content="How to serve AI models in production using prompt engineering, RAG, safe rollouts, and efficient hosting—treating inference as just another distributed system component with unique latency and cost constraints." />
+<meta name="keywords" content="Distributed Systems,System Design,AI,Machine Learning,Inference,RAG,Serverless," />
+
+
+<meta property="og:title" content="AI Inference and Serving: Integrating Machine Learning into Distributed Systems" />
+<meta property="og:description" content="How to serve AI models in production using prompt engineering, RAG, safe rollouts, and efficient hosting—treating inference as just another distributed system component with unique latency and cost constraints." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/" /><meta property="og:image" content="http://localhost:1313/images/share.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2026-03-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-03-21T00:00:00+00:00" /><meta property="og:site_name" content="Aman Goyal" />
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/images/share.png" /><meta name="twitter:title" content="AI Inference and Serving: Integrating Machine Learning into Distributed Systems"/>
+<meta name="twitter:description" content="How to serve AI models in production using prompt engineering, RAG, safe rollouts, and efficient hosting—treating inference as just another distributed system component with unique latency and cost constraints."/>
+
+
+
+<meta itemprop="name" content="AI Inference and Serving: Integrating Machine Learning into Distributed Systems">
+<meta itemprop="description" content="How to serve AI models in production using prompt engineering, RAG, safe rollouts, and efficient hosting—treating inference as just another distributed system component with unique latency and cost constraints."><meta itemprop="datePublished" content="2026-03-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2026-03-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="387"><meta itemprop="image" content="http://localhost:1313/images/share.png" />
+<meta itemprop="keywords" content="Distributed Systems,System Design,AI,Machine Learning,Inference,RAG,Serverless," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+</head>
+
+<body>
+  <header><header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0rem;">
+    <a href="/" class="title">
+      <h2>Aman Goyal</h2>
+    </a>
+    <div>
+      <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+      <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+        <i class="fab fa-medium fa-lg"></i>
+      </a>
+      <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+        <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+      </a>
+      
+        <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
+      
+    </div>
+  </header>
+  <nav>
+
+<a href="/">Home</a>
+
+<a href="/blog/">Blog</a>
+
+<a href="/coaching">Coaching</a>
+
+
+    
+</nav>
+</header>
+  <main>
+
+<h1>AI Inference and Serving: Integrating Machine Learning into Distributed Systems</h1>
+<p>
+  <i>
+    <time datetime='2026-03-21'>
+      21 Mar, 2026
+    </time>
+  </i>
+</p>
+
+
+
+
+
+<content>
+  <h2 id="core-concept">Core Concept</h2>
+<ul>
+<li>AI systems revolve around:
+<ul>
+<li><strong>Model (trained weights)</strong></li>
+<li><strong>Inference (runtime prediction)</strong></li>
+</ul>
+</li>
+<li>Inference is typically exposed as a <strong>REST API</strong></li>
+</ul>
+<p>Think:</p>
+<blockquote>
+<p><strong>Model = learned function, Inference = using it in production</strong></p>
+</blockquote>
+<hr>
+<h2 id="key-building-blocks">Key Building Blocks</h2>
+<hr>
+<h3 id="1-model-vs-training-vs-inference">1. Model vs Training vs Inference</h3>
+<ul>
+<li><strong>Training</strong>
+<ul>
+<li>Learn from data (expensive, offline)</li>
+</ul>
+</li>
+<li><strong>Fine-tuning</strong>
+<ul>
+<li>Adapt existing model (cheaper)</li>
+</ul>
+</li>
+<li><strong>Inference</strong>
+<ul>
+<li>Run model on real user input (online)</li>
+</ul>
+</li>
+</ul>
+<p>Most systems:</p>
+<ul>
+<li>Don&rsquo;t train → just use pretrained models</li>
+</ul>
+<hr>
+<h3 id="2-prompt-engineering-very-important">2. Prompt Engineering (VERY IMPORTANT)</h3>
+<ul>
+<li>Input is wrapped inside a <strong>prompt</strong></li>
+<li>Prompt adds:
+<ul>
+<li>Context</li>
+<li>Instructions</li>
+<li>Personalization</li>
+</ul>
+</li>
+</ul>
+<p>Better prompt → better output</p>
+<hr>
+<h2 id="hosting-models">Hosting Models</h2>
+<hr>
+<h3 id="key-constraints">Key constraints:</h3>
+<ul>
+<li><strong>Latency</strong>
+<ul>
+<li>Users notice &gt;250ms</li>
+</ul>
+</li>
+<li><strong>Compute</strong>
+<ul>
+<li>Requires GPUs (expensive)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="deployment-options">Deployment options:</h3>
+<h4 id="1-cloud-inference-easy">1. Cloud inference (easy)</h4>
+<ul>
+<li>Managed APIs</li>
+<li>Faster to start</li>
+</ul>
+<h4 id="2-self-hosted-control">2. Self-hosted (control)</h4>
+<ul>
+<li>Needed for:
+<ul>
+<li>Privacy</li>
+<li>Security</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="small-language-models-slms">Small Language Models (SLMs)</h3>
+<ul>
+<li>Smaller, cheaper, faster</li>
+<li>Can run on:
+<ul>
+<li>Mobile devices</li>
+</ul>
+</li>
+</ul>
+<p>Trade-off:</p>
+<ul>
+<li>Less accuracy vs lower cost</li>
+</ul>
+<hr>
+<h2 id="model-distribution">Model Distribution</h2>
+<hr>
+<h3 id="use-standard-format">Use standard format:</h3>
+<ul>
+<li><strong>ONNX (recommended)</strong></li>
+</ul>
+<p>Framework-independent</p>
+<hr>
+<h3 id="use-model-hubs">Use model hubs:</h3>
+<ul>
+<li>Example:
+<ul>
+<li>Hugging Face</li>
+</ul>
+</li>
+</ul>
+<p>Easy access to pretrained models</p>
+<hr>
+<h3 id="optimization">Optimization:</h3>
+<ul>
+<li><strong>Cache models locally</strong>
+<ul>
+<li>Avoid repeated downloads</li>
+<li>Faster startup</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="safe-deployment-very-important">Safe deployment (VERY IMPORTANT)</h3>
+<ul>
+<li>Roll out models gradually:
+<ul>
+<li>Start small %</li>
+<li>Expand over time</li>
+</ul>
+</li>
+</ul>
+<p>Same as canary deployments</p>
+<hr>
+<h2 id="development-strategy">Development Strategy</h2>
+<hr>
+<h3 id="problem">Problem:</h3>
+<ul>
+<li>Inference is expensive</li>
+</ul>
+<hr>
+<h3 id="solution">Solution:</h3>
+<ul>
+<li>Use <strong>different models per environment</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dev/Test</td>
+<td>Small/cheap</td>
+</tr>
+<tr>
+<td>Prod</td>
+<td>Full model</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Use abstraction:</p>
+<ul>
+<li>REST API layer hides model details</li>
+</ul>
+<hr>
+<h2 id="retrieval-augmented-generation-rag">Retrieval-Augmented Generation (RAG)</h2>
+<hr>
+<h3 id="problem-1">Problem:</h3>
+<ul>
+<li>Models are:
+<ul>
+<li>Static</li>
+<li>Generic</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="solution-rag">Solution: RAG</h3>
+<ul>
+<li>Combine:
+<ul>
+<li>User prompt</li>
+<li>External data (DB, APIs)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="flow">Flow:</h3>
+<pre tabindex="0"><code>User Query
+   ↓
+Fetch external data
+   ↓
+Augment prompt
+   ↓
+Send to model
+</code></pre><hr>
+<p>Benefits:</p>
+<ul>
+<li>Personalized responses</li>
+<li>Up-to-date information</li>
+<li>Better accuracy</li>
+<li>Privacy-safe</li>
+</ul>
+<hr>
+<h2 id="testing-ai-systems-very-different">Testing AI Systems (VERY DIFFERENT)</h2>
+<hr>
+<h3 id="traditional-testing">Traditional testing:</h3>
+<ul>
+<li>Exact match (A == B)</li>
+</ul>
+<hr>
+<h3 id="ai-testing">AI testing:</h3>
+<ul>
+<li><strong>&ldquo;Good enough&rdquo; quality</strong></li>
+<li>Evaluate across:
+<ul>
+<li>Many inputs</li>
+<li>Statistical performance</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="key-idea">Key idea:</h3>
+<blockquote>
+<p>Measure <strong>overall quality</strong>, not single output</p>
+</blockquote>
+<hr>
+<h3 id="trick">Trick:</h3>
+<ul>
+<li>Use AI itself to evaluate responses</li>
+</ul>
+<hr>
+<h2 id="deployment--evaluation">Deployment &amp; Evaluation</h2>
+<hr>
+<h3 id="must-track">Must track:</h3>
+<ul>
+<li>User satisfaction</li>
+<li>Output quality</li>
+</ul>
+<hr>
+<p>Not just:</p>
+<ul>
+<li>Latency</li>
+<li>Errors</li>
+</ul>
+<hr>
+<h3 id="safe-rollout">Safe rollout:</h3>
+<ul>
+<li>Monitor:
+<ul>
+<li>Feedback</li>
+<li>Quality metrics</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="key-insights">Key Insights</h2>
+<ul>
+<li>AI = just another <strong>distributed system component</strong></li>
+<li>Cost &amp; latency are critical constraints</li>
+<li>Prompt + data (RAG) often matter more than model</li>
+<li>Testing is <strong>probabilistic, not deterministic</strong></li>
+</ul>
+<hr>
+<h2 id="trade-offs">Trade-offs</h2>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>Powerful capabilities</li>
+<li>Flexible interfaces</li>
+<li>Rapid development via pretrained models</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Expensive inference</li>
+<li>Non-deterministic outputs</li>
+<li>Harder testing &amp; debugging</li>
+<li>Latency constraints</li>
+</ul>
+<hr>
+<h2 id="one-line-summary">One-line Summary</h2>
+<blockquote>
+<p><strong>AI inference systems serve trained models via APIs, where prompt engineering, efficient model hosting, and techniques like RAG are key to delivering accurate, scalable, and cost-effective intelligent applications.</strong></p>
+</blockquote>
+
+</content>
+<p>
+  
+  <a href="http://localhost:1313/blog/distributed-systems/">#Distributed Systems</a>
+  
+  <a href="http://localhost:1313/blog/system-design/">#System Design</a>
+  
+  <a href="http://localhost:1313/blog/ai/">#AI</a>
+  
+  <a href="http://localhost:1313/blog/machine-learning/">#Machine Learning</a>
+  
+  <a href="http://localhost:1313/blog/inference/">#Inference</a>
+  
+  <a href="http://localhost:1313/blog/rag/">#RAG</a>
+  
+  <a href="http://localhost:1313/blog/serverless/">#Serverless</a>
+  
+</p>
+
+  </main>
+  <footer>
+<footer style="text-align: center; padding: 1.5rem 0; font-size: 0.9rem; color: #777;">
+  <div>
+    <a href="https://github.com/goyal-aman" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-github fa-lg"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/ln-amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-linkedin fa-lg"></i>
+    </a>
+    <a href="https://aman-goyal.medium.com/" target="_blank" style="margin: 0 10px; color: inherit;">
+      <i class="fab fa-medium fa-lg"></i>
+    </a>
+    <a href="https://www.topmate.io/amangoyal" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/topmate-bw.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    <a href="https://leetcode.com/sichern" target="_blank" style="margin: 0 10px; color: inherit;">
+      <img src="/images/leetcode.svg" alt="LeetCode" style="height: 20px; vertical-align: middle;">
+    </a>
+    
+      <a href="mailto:amangoyal8110@gmail.com" style="margin: 0 10px; color: inherit;" title="Email">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+    
+  </div>
+
+    <p>
+      © 2026 Aman Goyal. Built with ❤️ using
+      <a href="https://gohugo.io" target="_blank" style="color: inherit; text-decoration: underline;">Hugo</a>.
+    </p>
+  </footer>
+  </footer>
+
+    
+</body>
+
+</html>

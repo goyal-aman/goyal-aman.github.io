@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitoring on Aman Goyal</title>
+    <link>http://localhost:1313/blog/monitoring/</link>
+    <description>Recent content in Monitoring on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 14 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monitoring and Observability: Logs, Metrics, Alerts, and Tracing</title>
+      <link>http://localhost:1313/monitoring-and-observability-logs-metrics-alerts-and-tracing/</link>
+      <pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/monitoring-and-observability-logs-metrics-alerts-and-tracing/</guid>
+      <description>Core Concept Distributed systems run 24/7 → failures are inevitable You must: Detect problems before users Understand system behavior quickly Observability = ability to debug from outside&#xA;Four Pillars (VERY IMPORTANT) 1. Logging Records individual events Helps debug specific requests Key practices: Include: Timestamp Request ID / user ID Use log levels: Debug, Info, Warning, Error, Fatal Insight:&#xA;Log errors + unusual behavior, not everything 2. Metrics Aggregate view of system over time Stored as time series data Types: Counts → total requests Rates → requests/sec Histograms → latency distribution Values → CPU, memory Most important metrics:</description>
+    </item>
+    <item>
+      <title>The Adapter Pattern: Standardizing Application Interfaces</title>
+      <link>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</link>
+      <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/the-adapter-pattern-standardizing-application-interfaces/</guid>
+      <description>Core Concept Adapter pattern = modify interface of an application (without changing it) Implemented as a side container that: Transforms outputs/inputs Makes app conform to a standard interface Think:&#xA;&amp;ldquo;Wrap your app so it speaks the standard language&amp;rdquo;&#xA;Why Adapters Are Needed Real systems are heterogeneous: Different languages Different logging formats Different monitoring interfaces But ops needs:&#xA;Unified interfaces for: Monitoring Logging Health checks Key Benefits 1. Standardization Converts different formats → one common format Example: Redis metrics → Prometheus format 2.</description>
+    </item>
+  </channel>
+</rss>

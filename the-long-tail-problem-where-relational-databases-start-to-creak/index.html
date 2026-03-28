@@ -8,7 +8,7 @@
 <a href=/coaching>Coaching</a></nav></header><main><h1>The Long-Tail Problem: Where Relational Databases Start to Creak</h1><p><i><time datetime=2025-11-10>10 Nov, 2025</time></i></p><img class=cover src=/images/long_tail_diagram.svg alt>
 <content><hr><h3 id=why-relational-databases-struggle-with-long-tail-data>Why Relational Databases Struggle with Long-Tail Data?</h3><p>Most systems have a few popular records that get accessed all the time — and millions of others that are rarely touched. This pattern is called the <strong>long tail</strong>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Popularity
 </span></span><span class=line><span class=cl>│<span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>│ <span class=p>|</span>  
+</span></span></span><span class=line><span class=cl>│ <span class=p>|</span>  
 </span></span><span class=line><span class=cl>│ <span class=p>|</span>  
 </span></span><span class=line><span class=cl>│ <span class=p>|</span>____________________
 </span></span><span class=line><span class=cl>│
@@ -16,8 +16,8 @@
 </span></span><span class=line><span class=cl>Head <span class=o>(</span>popular<span class=o>)</span>          Tail <span class=o>(</span>rare<span class=o>)</span>
 </span></span></code></pre></div><p>Relational databases (like MySQL or PostgreSQL) use <strong>B-tree indexes</strong> to find rows quickly.<br>They work great when most queries hit the same small set of data — the “head.”<br>But when the dataset grows huge and queries become random, indexes get so large that they no longer fit in memory.</p><p>Once that happens, each query must perform <strong>random disk reads</strong>, which are slow.<br>The result: latency increases, caches miss more often, and performance drops sharply.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Query Speed <span class=o>(</span>Y-axis<span class=o>)</span>
 </span></span><span class=line><span class=cl>│<span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>│ <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>│  <span class=se>\_</span>
+</span></span></span><span class=line><span class=cl>│ <span class=se>\
+</span></span></span><span class=line><span class=cl>│  <span class=se>\_</span>
 </span></span><span class=line><span class=cl>│    <span class=se>\_</span>________
 </span></span><span class=line><span class=cl>│
 </span></span><span class=line><span class=cl>└────────────────▶
@@ -41,5 +41,5 @@
 </a><a href=https://aman-goyal.medium.com/ target=_blank style="margin:0 10px;color:inherit"><i class="fab fa-medium fa-lg"></i>
 </a><a href=https://www.topmate.io/amangoyal target=_blank style="margin:0 10px;color:inherit"><img src=/images/topmate-bw.svg alt=LeetCode style=height:20px;vertical-align:middle>
 </a><a href=https://leetcode.com/sichern target=_blank style="margin:0 10px;color:inherit"><img src=/images/leetcode.svg alt=LeetCode style=height:20px;vertical-align:middle>
-</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div><p>© 2025 Aman Goyal. Built with ❤️ using
+</a><a href=mailto:amangoyal8110@gmail.com style="margin:0 10px;color:inherit" title=Email><i class="fas fa-envelope fa-lg"></i></a></div><p>© 2026 Aman Goyal. Built with ❤️ using
 <a href=https://gohugo.io target=_blank style=color:inherit;text-decoration:underline>Hugo</a>.</p></footer></footer></body></html>

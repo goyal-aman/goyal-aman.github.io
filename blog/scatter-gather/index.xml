@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scatter Gather on Aman Goyal</title>
+    <link>http://localhost:1313/blog/scatter-gather/</link>
+    <description>Recent content in Scatter Gather on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 31 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/scatter-gather/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scatter/Gather: Reducing Latency with Parallel Distributed Processing</title>
+      <link>http://localhost:1313/scatter/gather-reducing-latency-with-parallel-distributed-processing/</link>
+      <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/scatter/gather-reducing-latency-with-parallel-distributed-processing/</guid>
+      <description>Core Concept Scatter/Gather = parallel processing pattern Request is: Scattered → sent to multiple nodes Gathered → results combined into one response Goal: reduce latency (faster responses) What It Solves Previous patterns: Replication → scale requests Sharding → scale data Scatter/Gather → scale computation speed (time) How It Works [ Client ] ↓ [ Root / Coordinator ] ↓↓↓ [ Leaf 1 ] [ Leaf 2 ] [ Leaf 3 ] ↓↓↓ [ Partial results ] ↓ [ Root combines → Final result ] Each leaf does partial work Root merges results and returns response When to Use Problems that are: Independent Parallelizable Example: Search queries Data aggregation Analytics Also called &amp;ldquo;embarrassingly parallel&amp;rdquo; problems</description>
+    </item>
+  </channel>
+</rss>

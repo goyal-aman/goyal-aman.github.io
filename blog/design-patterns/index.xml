@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design Patterns on Aman Goyal</title>
+    <link>http://localhost:1313/blog/design-patterns/</link>
+    <description>Recent content in Design Patterns on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/design-patterns/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sidecar Pattern</title>
+      <link>http://localhost:1313/sidecar-pattern/</link>
+      <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/sidecar-pattern/</guid>
+      <description>Core Concept Sidecar pattern = two containers in one pod Main container → core logic Sidecar → supporting functionality Shared: Network (localhost) Filesystem Namespaces Why It Matters Extend without modifying Add features externally Ideal for legacy systems Enable cloud-native behavior Dynamic config Runtime updates Reusability Logging, monitoring, proxy sidecars Separation of concerns App → business logic Sidecar → infra concerns Design Principles Parameterize via env vars Maintain stable interfaces Document clearly Trade-offs Pros Modular Reusable No code changes Cons Extra overhead More moving parts One-line Summary Sidecars extend application capabilities by attaching helper containers without modifying the main app.</description>
+    </item>
+  </channel>
+</rss>

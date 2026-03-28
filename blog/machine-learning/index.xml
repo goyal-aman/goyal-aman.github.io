@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Aman Goyal</title>
+    <link>http://localhost:1313/blog/machine-learning/</link>
+    <description>Recent content in Machine Learning on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Inference and Serving: Integrating Machine Learning into Distributed Systems</title>
+      <link>http://localhost:1313/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</link>
+      <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/ai-inference-and-serving-integrating-machine-learning-into-distributed-systems/</guid>
+      <description>Core Concept AI systems revolve around: Model (trained weights) Inference (runtime prediction) Inference is typically exposed as a REST API Think:&#xA;Model = learned function, Inference = using it in production&#xA;Key Building Blocks 1. Model vs Training vs Inference Training Learn from data (expensive, offline) Fine-tuning Adapt existing model (cheaper) Inference Run model on real user input (online) Most systems:&#xA;Don&amp;rsquo;t train → just use pretrained models 2. Prompt Engineering (VERY IMPORTANT) Input is wrapped inside a prompt Prompt adds: Context Instructions Personalization Better prompt → better output</description>
+    </item>
+  </channel>
+</rss>

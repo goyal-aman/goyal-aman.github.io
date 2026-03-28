@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leader Election on Aman Goyal</title>
+    <link>http://localhost:1313/blog/leader-election/</link>
+    <description>Recent content in Leader Election on Aman Goyal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Aman Goyal.</copyright>
+    <lastBuildDate>Sat, 14 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/leader-election/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leader Election: Ensuring a Single Owner in a Distributed System</title>
+      <link>http://localhost:1313/leader-election-ensuring-a-single-owner-in-a-distributed-system/</link>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/leader-election-ensuring-a-single-owner-in-a-distributed-system/</guid>
+      <description>Core Concept Ownership / Leader election = only one replica owns a task at a time Needed for: Scheduling Shard ownership Background jobs Implemented via: Distributed locks over KV stores (etcd, ZooKeeper, Consul) Do You Even Need Leader Election? Singleton approach Simple Downtime during failures or deploys Use leader election only when:&#xA;You need high availability (4+ nines) Core Primitive: Compare-And-Swap lock := sync.Mutex{} store := map[string]string{} func compareAndSwap(key, nextValue, currentValue string) (bool, error) { lock.</description>
+    </item>
+  </channel>
+</rss>
